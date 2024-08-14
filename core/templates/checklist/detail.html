@@ -1,0 +1,194 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+            <!-- Operatore card-->
+        <div class="col-sm-6">
+            <div class="col-12 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{checklist.operatore.avatar.url}}"></span></div>
+                            <div class="d-sm-none">
+                                <h2 class="h5">{{checklist.operatore.username}}</h2>
+                                <h3 class="mb-1">{{checklist.get_squadra_display}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-7 px-xl-0">
+                            <div class="d-none d-sm-block">
+                                <h6 class="mb-1">{{checklist.operatore.username}}</h6>
+                            </div>
+                            <small>{{checklist.operatore.get_squadra_display}}</small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- / fine operatore card -->
+    </div>
+      <!-- CheckList-->
+    <div class="py-4">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card card-body shadow-sm bg-white border-gray-300 p-0 p-md-4">
+                    <div class="card-header border-bottom p-3">
+                        <h2 class="h2">Checklist</h2><span class="fw-bold">{{ checklist.turno }}</span> Turno
+                    </div>
+                    <div class="card-body px-0 py-0">
+                        <ul class="list-group">
+                            <li class="list-group-item border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Creato
+                                        </h3>
+                                       <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{checklist.creato}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Modificato
+                                        </h3>
+                                       <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{checklist.aggiornato}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive py-4">
+                    <table id="checklist" class="table table-flush  rounded">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="border-0 rounded-start">Controllo</th>
+                                <th class="border-0 rounded-end">Esito</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in checklist.controlli_set.all %}
+
+                            <!-- Ratings -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <div class="row d-block d-md-flex align-items-center">
+                                            <div class="col-12 col-md-5">
+                                                <h2 class="h5 mb-1">{{obj.id_mezzo}}</h2>
+                                                <h3 class="h1 mb-1">{{obj.get_num_controlli}}</h3>
+                                                <span class="small">Based on <span class="fw-bold text-dark">{{obj.get_num_controlli}}</span> controlli</span>
+                                            </div>
+                                            <div class="col-12 col-md-7 mt-3 mt-md-0">
+                                                <div class="col-12">
+                                                    <div class="row d-flex align-items-center mb-1">
+                                                        <div class="col-2 text-gray fw-bold px-0 small">
+                                                            {{obj.get_ok}}<span class="fas fa-star ms-1"></span>
+                                                        </div>
+                                                        <div class="col-10 px-0">
+                                                            <div class="progress progress-lg rounded mb-0">
+                                                                <div class="progress-bar bg-success rounded" role="progressbar" aria-valuenow="{{obj.percentuale_ok}}" aria-valuemin="0" aria-valuemax="{{obj.get_num_controlli}}" style="width: {{obj.percentuale_ok}}%;">{{obj.percentuale_ok}}%</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!-- end row -->
+                                                    <div class="row d-flex align-items-center mb-1">
+                                                        <div class="col-2 text-gray fw-bold px-0 small">
+                                                            {{obj.get_ko}}<span class="fas fa-star ms-1"></span>
+                                                        </div>
+                                                        <div class="col-10 px-0">
+                                                            <div class="progress progress-lg rounded mb-0">
+                                                                <div class="progress-bar bg-danger rounded" role="progressbar" aria-valuenow="{{obj.percentuale_ko}}" aria-valuemin="0" aria-valuemax="{{obj.get_num_controlli}}" style="width: {{obj.percentuale_ko}}%;">{{obj.percentuale_ko}}%</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!-- end row -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- Fine Ratings-->
+                                {% for fld, val in obj.get_fields_and_values %}
+                                    <tr>
+                                        <td>{{ fld|title }}</td>
+                                        {% if val == 'OK' %}
+                                            <th><i class="fa-solid fa-thumbs-up" style="color: #37ff0f;"><span class="px-2">{{val}}</span></i></th>
+                                        {% elif val == 'KO' %}
+                                            <th><i class="fa-solid fa-thumbs-down" style="color: #ff2450;"><span class="px-2">{{val}}</span></i></th>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      <!-- /fine checklist -->
+
+      <!-- Anomalie -->
+        <div class="row">
+            <div class="col-sm">
+                <h3 class="h2 mb-1">Anomalie</h3>
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="small mb-3">
+                            {% if checklist.controlli_set.get.anomalie %}
+                                {{ checklist.controlli_set.get.anomalie }}
+                            {% else %}
+                                Nessuna Anomalia Segnalata
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /fine Anomalie-->
+
+        <!-- Tasti Modifica Esci-->
+            <div class="row">
+                <div class="col-sm py-4">
+                    <a href="{% url 'checklist:checklist_update' checklist.pk %}" class="btn btn-warning">Modifica</a>
+                    <a href="{% url 'checklist:checklist_list'%}" class="btn btn-primary">Esci</a>
+                </div>
+            </div>
+        <!-- /fine tasti modifica esci -->       
+        </div>
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+
+{% comment %} 
+{% for obj in checklist.controlli_set.all %}
+<tr>
+    {% for fld, val in obj.get_fields_and_values %}
+        <td>{{ fld|title }} : {{ val }}</td>
+    {% endfor %}
+</tr>
+{% endfor %} {% endcomment %}

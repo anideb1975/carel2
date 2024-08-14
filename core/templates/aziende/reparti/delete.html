@@ -1,0 +1,37 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+  <div clas='py-4'>
+    <div class="card border-0 shadow mb-4">
+      <div class="row g-0">
+        <div class="col-md-8">
+          <div class="card-body">
+            <h2>{{ object.descrizione}}</h2>
+            <h4 class="text-danger-50 text-danger">Sei sicuro di cancellare {{object.descrizione}}?</h4>
+
+            <form action="" method="POST">
+              {% csrf_token %}
+              <button href="{% url 'aziende:stabilimenti_delete' object.id %}" class="btn btn-danger rounded-1">
+                Yes, Delete
+              </button>
+              <a href="{% url 'aziende:stabilimenti_list' %}" class="btn btn-light rounded-1">
+                Cancel
+              </a>
+            </form>
+            <p class="mt-2">Attenzione l'operazione sarà irreversibile</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+

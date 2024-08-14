@@ -1,0 +1,69 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+      <!-- Mezzo Card  -->
+        <div class="col-6">
+            <div class="col-12 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{object.immagine.url}}"></span></div>
+                        </div>
+                        <div class="col-12 col-xl-7 px-xl-0">
+                            <div class="d-none d-sm-block">
+                                <h6 class="mb-1">{{object.descrizione}}</h6>
+                            </div>
+                            <small>{{object.email}}</small>
+                            <div class="small mt-1">
+                                <span class="fw-bold">{{object}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+      <!-- fine mezzi  card -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2>CheckList</h2>
+                <h4 class="text-danger-50 text-danger">Sei sicuro di cancellare  {{object}}?</h4>
+                <form action="{% url 'aziende:stabilimenti_delete' object.id %}" method="POST">
+                    {% csrf_token %}
+                    <button href="{% url 'aziende:stabilimenti_delete' object.id %}" class="btn btn-danger">
+                        Yes, Delete
+                    </button>
+                    <a href="{% url 'aziende:stabilimenti_list' %}" class="btn btn-primary">
+                        Cancel
+                    </a>
+                </form>
+                <p class="mt-2">Attenzione l'operazione sarà irreversibile</p>
+                <p class="card-text">
+                    <small class="text-muted">Creato il {{ object.creato }}</small>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

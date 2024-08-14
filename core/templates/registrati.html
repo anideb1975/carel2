@@ -1,0 +1,124 @@
+{% extends "layouts/base-auth.html" %}
+
+{% load i18n %}
+
+{% block title %} Registrazione {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    {% load static %}
+    <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center form-bg-image">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="text-center text-md-center mb-4 mt-md-0">
+                            <h1 class="mb-0 h3">
+                                Registrati
+                            </h1>
+                            <div class='py-2'>
+                                <a href="{% url 'index' %}" class="d-flex align-items-center justify-content-center">
+                                    <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                                    Back to index
+                                </a>
+                            </div>
+                            <br />
+                            <p>
+                                {% if msg %}
+                                    {{ msg | safe }}
+                                {% endif %}
+                            </p>
+                        </div>
+                                <!-- Card Operatore-->
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <div class="row d-block d-xl-flex align-items-center">
+                                    <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                        <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                            <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><a href="{% url 'accounts:operatore_create' %}"><img src="{% static 'img/operatore.jpg' %}" alt='Operatore' ></a></div>
+                                        </div>
+                                        <div class="d-sm-none">
+                                            <h2 class="fw-extrabold h5">Registrati</h2>
+                                            <h3 class="mb-1">Operatore</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-7 px-xl-0">
+                                        <div class="d-none d-sm-block">
+                                            <h2 class="h6 text-gray-400 mb-0">Registrati</h2>
+                                            <h3 class="fw-extrabold mb-2">Operatore</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/fine Card Operatore-->
+
+
+                        <!-- Card Responsabile-->
+                        <div class="row py-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
+                                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><a href="{%  url 'accounts:responsabile_create' %}"><img src="{% static 'img/responsabile.jpg' %}" alt='Responsabile'></a></div>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">Registrati</h2>
+                                                <h3 class="mb-1">Responsabile</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">Registrati</h2>
+                                                <h3 class="fw-extrabold mb-2">Responsabile</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <!--/ fine  Card Operatore-->
+
+                        <!-- Card Manutenzione-->
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <div class="row d-block d-xl-flex align-items-center">
+                                    <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                        <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                            <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><a href="{% url 'accounts:assistenza_create' %}"><img src="{% static 'img/manutenzione.jpg' %}" alt='Manutenzione'></a></div>
+                                        </div>
+                                        <div class="d-sm-none">
+                                            <h2 class="fw-extrabold h5">Registrati</h2>
+                                            <h3 class="mb-1">Assistenza</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-7 px-xl-0">
+                                        <div class="d-none d-sm-block">
+                                            <h2 class="h6 text-gray-400 mb-0">Registrati</h2>
+                                            <h3 class="fw-extrabold mb-2">Assistenza</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/fine Card Manutenzione-->
+                        <br />
+                        <div class="d-flex justify-content-center align-items-center mt-4">
+                            <span class="fw-normal">
+                                {% trans 'Sei già registrato' %}
+                                <a href="{% url 'login' %}" class="fw-bold">{% trans 'Login' %}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

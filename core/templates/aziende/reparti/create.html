@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="py-4">
+        <form action="" method="POST" class="w-75 border border-1 py-2 px-3" enctype='multipart/form-data'>
+            <h1>{{titolo}}</h1>
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
+    </div>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

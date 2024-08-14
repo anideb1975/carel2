@@ -1,0 +1,103 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+            <!-- Stabilimenti card-->
+        <div class="col-sm-6">
+            <div class="col-12 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{object.immagine.url}}"></span></div>
+                            <div class="d-sm-none">
+                                <h2 class="h5">{{object}}</h2>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-7 px-xl-0">
+                            <div class="d-none d-sm-block">
+                                <h6 class="mb-1">{{object}}</h6>
+                            </div>
+                            <small>{{object.id_reparto}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- / fine stabilimenti card -->
+
+    <div class="row py-4">
+        <div class="col-sm-12">
+            <div class="card border-0 shadow mb-4 ">
+                <div class="card-body">
+                    <div class="table-responsive py-4">
+                        <table id="mytable" class="table table-flush  rounded">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="border-0 rounded-start">Categorie</th>
+                                    <th class="border-0 rounded">Interno</th>
+                                    <th class="border-0 rounded">Mezzi</th>
+                                    <th class="border-0 rounded">Matricola</th>
+                                    <th class="border-0 rounded">Creato</th>
+                                    <th class="border-0 rounded">Aggiornato</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <!-- Item -->
+                                {% for obj in object.mezzi_set.all %}
+                                    <tr>
+                                        <td class="fw-bold align-items-center">
+                                            {{object.descrizione|capfirst}}
+                                        </td>
+                                        <td class="fw-bold align-items-center">
+                                            {{obj.interno|capfirst}}
+                                        </td>
+                                        <td class="fw-bold align-items-center">
+                                            {{obj.descrizione|capfirst}}
+                                        </td>
+                                        <td class="fw-bold align-items-center">
+                                            {{obj.matricola}}
+                                        </td>
+                                        <td class="fw-bold align-items-center">
+                                            {{obj.creato}}
+                                        </td>
+                                        <td class="fw-bold align-items-center">
+                                            {{obj.aggiornato}}
+                                        </td>
+                                {% empty %}
+                                    <td colspan="4" class='bg-warning'>
+                                        Nessun dato da Mostrare
+                                    </td>
+                                    </tr>
+
+                        <!-- End of Item -->
+                                {%  endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasti Modifica Esci-->
+    <div class="row">
+        <div class="col-4">
+            <a href="{% url 'flotta:categorie_list'%}" class="btn btn-primary">Esci</a>
+        </div>
+    </div>
+    <!-- /fine tasti modifica esci -->       
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+    <head>
+        {% include 'includes/head.html' %}
+    </head>
+
+    <body>
+        <header class="header-global">
+            <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
+                <div class="container position-relative">
+                    <div class="navbar-collapse collapse me-auto" id="navbar_global">
+                        <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item me-2">
+                                    <a href="{% url 'home'%}" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item me-2">
+                                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item me-2">
+                                <a href="{% url 'register' %}" class="nav-link">Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+
+     <!-- Hero -->
+            <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="bootstrap-big-icon d-none d-lg-block">
+                                <img src="/static/assets/img/mmarelli5.jpeg"  width="700" height="622" class="d-block my-1" viewBox="0 0 118 94" role="img" alt="Mockup presentation">
+                            </div>
+                            <h1 class="fw-bolder">Magneti Marelli</h1>
+                            <h2 class="lead fw-normal text-muted mb-5">
+                                Project
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="home-pattern" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4"><path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path></svg></figure>
+            </section>
+            <div class="section pt-0">
+                <div class="container mt-n10 mt-lg-n12 z-2">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <img src="/static/assets/img/mockup-presentation4.png" alt="Magneti Marelli">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer py-6 bg-primary text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-6 col-md-2 mb-5 mb-lg-0">
+
+                    </div>
+                    <div class="col-6 col-md-2 mb-5 mb-lg-0">
+
+                    </div>
+                    <div class="col-12 col-md-4 mb-5 mb-lg-0">
+
+                        <p class="text-muted font-small m-0">Carels2</p>
+                    </div>
+                </div>
+                <hr class="bg-gray my-5">
+                <div class="row">
+                    <div class="col mb-md-0">
+
+                        <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
+                            <p class="font-weight-normal font-small mb-0">
+                                &copy; <span class="current-year">2024</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+  <!-- Scripts -->
+        {% include 'includes/scripts.html' %}
+  <!-- End Scripts -->
+
+    </body>
+
+</html>

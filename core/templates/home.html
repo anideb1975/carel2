@@ -1,0 +1,55 @@
+
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <div class="py-4">
+            <div class="row">
+                <h1>Applicazioni</h1>
+                <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+                            <div class="row d-block d-xl-flex align-items-center">
+                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                    <div class="icon-shape-tertiary rounded me-4 me-sm-0">
+                                        <a href="{%  url 'checklist:checklist_list' %}"><img src="{% static 'assets/img/logistica.jpg' %}"></a>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-xl-7 px-xl-0">
+                                    <div class="d-none d-sm-block">
+                                        <h2 class="h6 text-gray-400 mb-0">LCS</h2>
+                                    </div>
+                                    <div class="d-none d-sm-block">
+                                        <h2 class="h6 text-gray-400 mb-0">Logistic Customer Services</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        {% include 'noaccess.html' %}
+    {% endif %}
+
+{% endblock %}
+
+ <!-- Specific Page JS goes HERE  -->
+
+
+{% block javascripts %}
+
+{% endblock javascripts %}

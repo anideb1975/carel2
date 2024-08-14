@@ -1,0 +1,117 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}Profile{% endblock %}
+
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    {% load static %}
+    <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="row">
+            <div class="col-12 col-xl-8">
+                <div class="card card-body border-0 shadow mb-4">
+                    <h2 class="h5 mb-4">Informazioni</h2>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="first_name">Nome</label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        {{profile.first_name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="last_name">Cognome</label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        {{profile.last_name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-3">
+                            <label>Ruolo</label>
+                            <div class="card">
+                                <div class="card-body">
+                                    {{profile.role}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Data Registrazione</label>
+                            <div class="card">
+                                <div class="card-body">
+                                    {{profile.date_joined}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="active">Attivo</label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        {% if profile.is_active == True %}
+                                            <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>                                        {% elif profile.is_active == False %}
+                                        {% elif profile.is_active == False %}
+                                            <i class="fa-solid fa-circle-check" style="color: #e10e2e;"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label>Squadra</label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        {{profile.get_squadra_display}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'accounts:user_update' request.user.pk %}" class="btn btn-primary">Modifica</a>
+                        <a href="{% url 'home'%}" class="btn btn-secondary">Esci</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-4">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="card shadow border-0 text-center p-0">
+                            <div class="profile-cover rounded-top" data-background="/static/assets/img/profile-cover.jpg"></div>
+                            <div class="card-body pb-5">
+                                <img src="{{profile.avatar.url}}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
+                                <h4 class="h3">
+                                    {{profile.first_name }} {{profile.last_name }}
+                                </h4>
+                                <h5 class="fw-normal">
+                                    {{ profile.username }}
+                                </h5>
+                                <p class="text-gray mb-4">
+                                    {{ profile.last_login }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

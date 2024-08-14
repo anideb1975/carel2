@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="h4 mb-0">Processo Completato</h2>
+                    <a href="{% url 'aziende:stabilimenti_list' %}" class="btn btn-outline-gray"> Aziende</a>
+                </div>
+                <div class="card-body">
+
+                    <a class="btn btn-primary" href="{% url 'aziende:stabilimenti_list' %}">Inizio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

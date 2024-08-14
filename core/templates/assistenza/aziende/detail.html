@@ -1,0 +1,104 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+            <!-- Stabilimenti card-->
+        <div class="col-sm-6">
+            <div class="col-12 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{object.immagine.url}}"></span></div>
+                            <div class="d-sm-none">
+                                <h2 class="h5">{{object.descrizione}}</h2>
+                                <h3 class="mb-1">{{object.telefono}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-7 px-xl-0">
+                            <div class="d-none d-sm-block">
+                                <h6 class="mb-1">{{object.descrizione}}</h6>
+                            </div>
+                            <small>{{object.email}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- / fine stabilimenti card -->
+       <!-- CheckList-->
+    <div class="py-4">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card card-body shadow-sm bg-white border-gray-300 p-0 p-md-4">
+                    <div class="card-header border-bottom p-3">
+                        <h2 class="h2">{{titolo}}</h2><span class="fw-bold">{{object}}</span>
+                    </div>
+                    <div class="card-body px-0 py-0">
+                        <ul class="list-group">
+                            <li class="list-group-item border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Telefono
+                                        </h3>
+                                           <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{object.telefono}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Creato
+                                        </h3>
+                                           <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{object.creato}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item ">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Modificato
+                                        </h3>
+                                           <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{object.aggiornato}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        <!-- Tasti Modifica Esci-->
+            <div class="row">
+                <div class="col-sm py-4">
+                    <a href="{% url 'assistenza:aziende_update' object.pk %}" class="btn btn-warning">Modifica</a>
+                    <a href="{% url 'assistenza:aziende_list'%}" class="btn btn-primary">Esci</a>
+                </div>
+            </div>
+        <!-- /fine tasti modifica esci -->       
+        </div>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

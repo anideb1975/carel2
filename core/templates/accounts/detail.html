@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{titolo}}{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+  <div class='py4'>
+    <div class="row align-items-start">
+      <div class="col">
+        <div class="card border-0 shadow mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ categoria|upper }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Reparto: {{categoria.id_reparto}}</li>
+            {% comment %} <li class="list-group-item">Ute: {{checklist.id_ute}}</li>
+            <li class="list-group-item">Reparto: {{checklist.id_reparto}}</li>
+            <li class="list-group-item">Creato il: {{ checklist.creato }}</li> {% endcomment %}
+          </ul>
+          {% comment %} <div class="card-body">
+            <a href="{% url 'lcs:checklist_update' checklist.pk %}" class="card-link">Modifica</a>
+            <a href="{% url 'lcs:checklist_list'%}" class="card-link">Esci</a>
+          </div> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
