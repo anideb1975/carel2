@@ -203,6 +203,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE=True # Invalid session
 
 LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
