@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
+
 from django.urls import reverse
 
 from flotta.models import  Mezzi
 from django_utils.choices import Choice, Choices
-User  = get_user_model()
+from django.conf import settings
 
 
 CONTROLLI = [ 'CONTROLLO LUCI LAMPEGGIANTE',
@@ -24,7 +24,7 @@ class CheckList(models.Model):
         TERZO = 'TERZO', _('Terzo')
         CENTRALE = 'CENTRALE',_('Centrale')
         
-    operatore = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name='Operatore')
+    operatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,verbose_name='Operatore')
     turno = models.CharField(max_length=100,choices=Turni.choices,default=Turni.PRIMO)
     #id_stabilimento = models.ForeignKey(Stabilimenti, on_delete=models.CASCADE,verbose_name='Stabilimento')
     #id_ute = ChainedForeignKey(Ute,chained_field="id_stabilimento",auto_choose=True, chained_model_field="id_stabilimento", on_delete=models.CASCADE,verbose_name='Ute')
@@ -68,10 +68,13 @@ class Controlli(models.Model):
     controllo_forche = models.CharField('Controllo forche',max_length=2,choices=STATUS.choices,default=STATUS.OK,help_text=CONTROLLI[5])
     sostituzione_batteria = models.CharField('Sostituzione Batteria',max_length=2,choices=STATUS.choices,default=STATUS.OK,help_text=CONTROLLI[6])
     anomalie = models.TextField(null=True, blank = True)
+    creato = models.DateTimeField(auto_now_add=True)
+    aggiornato = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'Controllo'
         verbose_name_plural = 'Controlli'
+        ordering = ['creato']
         
         
     def __str__(self):
@@ -87,7 +90,7 @@ class Controlli(models.Model):
         return reverse('checklist:controlli_delete', args=[self.pk])
     
     def get_fields_and_values(self):
-        return [(field.name.replace("_"," "), field.value_to_string(self)) for field in Controlli._meta.fields if field.name not in ['id','id_checklist','id_mezzo','controlli_ptr','anomalie'] ]
+        return [(field.name.replace("_"," "), field.value_to_string(self)) for field in Controlli._meta.fields if field.name not in ['id','id_checklist','id_mezzo','controlli_ptr','anomalie','creato','aggiornato'] ]
 
     def get_num_controlli(self):
         value = 0
@@ -117,4 +120,5 @@ class Controlli(models.Model):
     
     def percentuale_ko(self):
         return int(self.get_ko() * 100 / self.get_num_controlli())
-           
+      
+        

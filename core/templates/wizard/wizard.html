@@ -12,10 +12,17 @@
 {% block content %}
     <div class='container'>
         <div class='row'>
-            <div class='col-sm'>
-                <div class="card shadow-sm mt-5">
+            <div class='col-sm py-5'>
+
+                <div class="card shadow-sm  bg-secondary">
                     <div class="card-body">
+                        <h2 class="h5">Step Install</h2>
                         <p>Step <span  class="display-3">{{ wizard.steps.step1 }}</span> of <span  class="display-4">{{ wizard.steps.count }}</span></p>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mt-5 ">
+                    <div class="card-body" >
                         <form action="" method="post" enctype='multipart/form-data'>
                             {% csrf_token %}
                             <table  class="table table-centered table-nowrap mb-0 rounded">

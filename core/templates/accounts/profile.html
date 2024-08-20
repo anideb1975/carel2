@@ -82,8 +82,40 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="active">Azienda</label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        {% if profile.role == "ASSISTENZA" %}
+                                        {{profile.assistenzaprofile.azienda}}
+                                        {% else %}
+                                        {{profile.userprofile.azienda}}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="mt-3">
-                        <a href="{% url 'accounts:user_update' request.user.pk %}" class="btn btn-primary">Modifica</a>
+
+                        {% if request.user.role == "ASSISTENZA" %}
+                        <a class="btn btn-primary" href="{% url 'accounts:assistenza_update' request.user.pk %}">Modifica</a>
+                        {% elif request.user.role == "ADMIN" %}
+                        <a class="btn btn-primary" href="{% url 'accounts:admin_update' request.user.pk %}">Modifica</a>
+                        {% elif request.user.role == "OPERATORE" %}
+                        <a class="btn btn-primary" href="{% url 'accounts:operatore_update' request.user.pk %}">Modifica</a>
+                        {% elif request.user.role == "RESPONSABILE" %}
+                        <a class="btn btn-primary" href="{% url 'accounts:responsabile_update' request.user.pk %}">Modifica</a>
+                        {% else %}
+                        <a class="btn btn-primary" href="{% url 'accounts:user_update' request.user.pk %}">Modifica</a>
+                        {% endif %}
+
                         <a href="{% url 'home'%}" class="btn btn-secondary">Esci</a>
                     </div>
                 </div>

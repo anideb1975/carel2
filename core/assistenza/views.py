@@ -4,11 +4,18 @@ from django.views.generic import CreateView,UpdateView,ListView,DeleteView,Detai
 from django.contrib.auth.mixins import  LoginRequiredMixin,UserPassesTestMixin
 from .forms import (AziendeForm,
                     InterventiForm,
+                    UpdateInterventiForm,
                     )
 from .models import (Aziende,
                      Interventi,
                      )
 
+from django.views.generic.dates import (YearArchiveView,
+                                        ArchiveIndexView,
+                                        MonthArchiveView,
+                                        WeekArchiveView,
+                                        TodayArchiveView,
+                                        )
 
 from view_breadcrumbs import (DetailBreadcrumbMixin, 
                               ListBreadcrumbMixin, 
@@ -20,8 +27,8 @@ from view_breadcrumbs import (DetailBreadcrumbMixin,
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from flotta.models import (Mezzi)
-
+from checklist.models import Controlli
+from assistenza.models import Interventi
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
 import datetime
 
@@ -117,22 +124,23 @@ class InterventiCreateView(SuccessMessageMixin, UserPassesTestMixin,BaseBreadcru
     crumbs = [("Crea Interventi", reverse_lazy("assistenza:interventi_create"))]
 
     def test_func(self):
-        return  self.request.user.role == 'ASSISTENZA' or self.request.user.is_superuser or self.request.role == "ADMIN"
+        return  self.request.user.role == 'ASSISTENZA' or self.request.user.is_superuser or self.request.user.role == "ADMIN"
 
     def handle_no_permission(self):
         messages.warning(self.request, "Not Authorized")
-        return redirect('assistenza:interventi_list')
+        return redirect('checklist:controlli_list')
 
 
     def get_context_data(self, **kwargs):
         context = super(InterventiCreateView, self).get_context_data(**kwargs)
         context["titolo"] = "Intervento"
-        context['mezzo'] = Mezzi.objects.get(pk=self.kwargs.get('pk'))
+        context['controllo'] = Controlli.objects.get(pk=self.kwargs.get('pk'))
         return context 
     
     def form_valid(self, form, **kwargs):
-        form.instance.id_mezzo = Mezzi.objects.get(pk=self.kwargs.get('pk'))
+        form.instance.id_controllo = Controlli.objects.get(pk=self.kwargs.get('pk'))
         form.instance.operatore = self.request.user
+        form.instance.modificato = self.request.user
         return super().form_valid(form)    
     
 
@@ -157,7 +165,7 @@ class InterventiViewDetail(LoginRequiredMixin, DetailBreadcrumbMixin, DetailView
 
 class InterventiUpdateView(SuccessMessageMixin,UserPassesTestMixin,LoginRequiredMixin,UpdateBreadcrumbMixin,UpdateView):
     model = Interventi
-    form_class = InterventiForm
+    form_class = UpdateInterventiForm
     template_name = "assistenza/interventi/update.html"
     #success_url = reverse_lazy('assistenza:interventi_list')
     success_message = "Update successfully"
@@ -166,7 +174,7 @@ class InterventiUpdateView(SuccessMessageMixin,UserPassesTestMixin,LoginRequired
         return reverse_lazy('assistenza:interventi_detail', kwargs={'pk': self.object.pk})
     
     def test_func(self):
-        return self.get_object().operatore == self.request.user or self.request.user.role == 'ADMIN'  or self.request.user.is_superuser  or  self.request.user.role == 'ASSISTENZA'
+        return self.request.user.role == "ASSISTENZA" or self.request.user.role == 'ADMIN'  or self.request.user.is_superuser 
 
     def handle_no_permission(self):
         messages.warning(self.request, "Not Authorized")
@@ -176,7 +184,13 @@ class InterventiUpdateView(SuccessMessageMixin,UserPassesTestMixin,LoginRequired
     def get_context_data(self, **kwargs):
         context = super(InterventiUpdateView, self).get_context_data(**kwargs)
         context["titolo"] = "Update Interventi"
+        context['controllo'] = self.object.id_controllo.id_mezzo
+        context['turno'] = self.object.id_controllo.id_checklist.turno
         return context
+    
+    def form_valid(self, form, **kwargs):
+        form.instance.modificato = self.request.user
+        return super().form_valid(form) 
 
 class InterventiViewDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteBreadcrumbMixin, DeleteView):
     model = Interventi
@@ -199,3 +213,41 @@ class InterventiViewDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteBreadcr
 
 
 #### fine sezione Interventi ####
+
+
+# Vista Giornaliera
+
+class InterventiTodayArchiveView(LoginRequiredMixin,BaseBreadcrumbMixin,TodayArchiveView):
+    model = Interventi
+    queryset = Interventi.objects.all()
+    date_field = "creato"
+    allow_future = True
+    allow_empty = True
+    template_name = 'assistenza/interventi/giornaliero.html'
+    crumbs = [("Giornaliero", reverse_lazy("assistenza:interventi_giornaliero"))]
+    
+    def get_context_data(self, **kwargs):
+        context = super(InterventiTodayArchiveView, self).get_context_data(**kwargs)
+        context["titolo"] = "Giornaliero"
+        context["segment"] = "checklist_list"
+        return context
+
+
+### Archivio ###
+
+class InterventiArchivioView(LoginRequiredMixin,BaseBreadcrumbMixin,ArchiveIndexView):
+    model = Interventi
+    queryset = Interventi.objects.all()
+    date_field = 'creato'
+    allow_future = True
+    allow_empty = True
+    template_name = 'assistenza/interventi/archivio.html'
+    crumbs = [("Archivio", reverse_lazy("assistenza:interventi_archivio"))]
+    
+    def get_context_data(self, **kwargs):
+        context = super(InterventiArchivioView, self).get_context_data(**kwargs)
+        context["titolo"] = "Archivio"
+        context["segment"] = "checklist_list"
+        return context
+
+### VIsta Settimanale ###

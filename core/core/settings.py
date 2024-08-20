@@ -31,8 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dal',
-    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,21 +46,24 @@ INSTALLED_APPS = [
     'wizard',
     'extra_views',
     'formtools',
+    'betterforms',
     "view_breadcrumbs",
+    'import_export',
     'clean',
     'django_static_fontawesome',
     "crispy_forms",
     "crispy_bootstrap5", 
     "admin_model_list_order", # django-admin-model-list-order https://github.com/Vikrant-Arya/django-admin-model-list-order
-    "awesome_avatar",
     "imagekit",
-    "phonenumber_field", # https://django-phonenumber-field.readthedocs.io/en/latest/reference.html
+    'sweetify',
+    
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,8 +78,11 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 ROOT_URLCONF = 'core.urls'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 TEMPLATES = [
     {
@@ -107,6 +111,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        "OPTIONS": {
+            "timeout": 20,  # 5 seconds is the default, but we can increase it to, e.g., 20s
+        },
     }
 }
 

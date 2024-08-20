@@ -6,6 +6,8 @@ from .models import (User,
                      Operatore,
                      Responsabile,
                      Assistenza,
+                     AssistenzaProfile,
+                     UserProfile,
                      )
 
 from crispy_forms.helper import FormHelper
@@ -13,8 +15,11 @@ from crispy_forms.layout import Layout, Submit, Row, Column,Fieldset,Button, But
 from crispy_forms.bootstrap import InlineRadios 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from betterforms.multiform import MultiModelForm
 
-from .models import (User, Operatore, Responsabile, Assistenza)
+from .models import (User, Admin, Operatore, Responsabile, Assistenza)
+
+from .models import Squadra
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -60,7 +65,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['first_name','last_name','avatar']
+        fields = ['first_name','last_name','squadra','avatar']
 
 class CustomAdminCreationForm(UserCreationForm):
 
@@ -68,48 +73,55 @@ class CustomAdminCreationForm(UserCreationForm):
         model = Admin
         fields = ['username','squadra','first_name','last_name','avatar']
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.helper = FormHelper()
-            self.helper.layout = Layout(
-                Row(
-                    Column('username', css_class='form-group col-md-6 mb-0'),
-                    Column('squadra', css_class='form-group col-md-6 mb-0'),
-                    css_class='form-row '
-                ),
-            
-                Row(
-                    Column('first_name', css_class='form-group col-md-6 mb-0'),
-                    Column('last_name', css_class='form-group col-md-6 mb-0'),
-                    
-                    css_class='form-row'
-                ),
-
-                Row(
-                    Column('password1', css_class='form-group col-md-6 mb-0'),
-                    Column('password2', css_class='form-group col-md-6 mb-0'),
-                    css_class='form-row'
-                ),
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['squadra'].choices = Squadra.choices[5:6]
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('username', css_class='form-group col-md-6 mb-0'),
+                Column('squadra', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row '
+            ),
+        
+            Row(
+                Column('first_name', css_class='form-group col-md-6 mb-0'),
+                Column('last_name', css_class='form-group col-md-6 mb-0'),
                 
-                Row (
-                    Column(
-                        ButtonHolder(
-                            Submit('Save', 'Registrati', css_class='btn btn-gray-800'),
-                            css_class='d-grid'
-                        ),
-            )        
-        )
-    )        
+                css_class='form-row'
+            ),
+
+            Row(
+                Column('password1', css_class='form-group col-md-6 mb-0'),
+                Column('password2', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            
+            Row (
+                Column(
+                    ButtonHolder(
+                        Submit('Save', 'Registrati', css_class='btn btn-gray-800'),
+                        css_class='d-grid'
+                    ),
+        )        
+    )
+)        
 
 class CustomAdminChangeForm(UserChangeForm):
     password = None
 
     class Meta:
         model = Admin
-        fields = ['first_name','last_name','avatar']
+        fields = ['first_name','last_name','squadra','avatar']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['squadra'].choices = Squadra.choices[5:6]    
 
 
 class OperatoreCreationForm(UserCreationForm):
+    
            
     class Meta:
         model = Operatore
@@ -117,6 +129,7 @@ class OperatoreCreationForm(UserCreationForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['squadra'].choices = Squadra.choices[0:4]
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -154,7 +167,12 @@ class OperatoreChangeForm(UserChangeForm):
 
     class Meta:
         model = Operatore
-        fields = ['squadra','first_name','last_name','avatar']
+        fields = ['first_name','last_name','squadra','avatar']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['squadra'].choices = Squadra.choices[0:4]
                 
 
 class ResponsabileCreationForm(UserCreationForm):
@@ -165,6 +183,7 @@ class ResponsabileCreationForm(UserCreationForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['squadra'].choices = Squadra.choices[0:4]
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -200,22 +219,28 @@ class ResponsabileChangeForm(UserChangeForm):
 
     class Meta:
         model = Responsabile
-        fields = ['squadra','first_name','last_name','avatar']        
+        fields = ['first_name','last_name','squadra','avatar']        
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
+        self.fields['squadra'].choices = Squadra.choices[0:4]
 
 
 class AssistenzaCreationForm(UserCreationForm):
            
     class Meta:
         model = Assistenza
-        fields = ['username','first_name','last_name']
+        fields = ['username','first_name','last_name','squadra']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['squadra'].choices = Squadra.choices[4:5]
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
                 Column('username', css_class='form-group col-md-6 mb-0'),
+                Column('squadra', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row '
             ),
            
@@ -246,8 +271,83 @@ class AssistenzaChangeForm(UserChangeForm):
     
     class Meta:
         model = Assistenza
-        fields = ['first_name','last_name','avatar'] 
+        fields = ['first_name','last_name','squadra','avatar'] 
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['squadra'].choices = Squadra.choices[4:5]
+
+class AssistenzaProfiliForm(forms.ModelForm):
+    class Meta:
+        model = AssistenzaProfile
+        fields  = ['azienda'] 
+
+class UserProfiliForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields  = ('azienda',)
+
+
+class AssistenzaCreationMultiForm(MultiModelForm):
+    form_classes = {
+        'user': AssistenzaCreationForm,
+        'profile': AssistenzaProfiliForm,
+    }
+
+class UserCreationMultiForm(MultiModelForm):
+    form_classes = {
+        'user': CustomUserCreationForm,
+        'profile': UserProfiliForm,
+    }
+
+class AdminCreationMultiForm(MultiModelForm):
+    form_classes = {
+        'user': CustomAdminCreationForm,
+        'profile': UserProfiliForm,
+    }
+
+class OperatoreCreationMultiForm(MultiModelForm):
+    form_classes = {
+        'user': OperatoreCreationForm,
+        'profile': UserProfiliForm,
+    }
+
+class ResponsabileCreationMultiForm(MultiModelForm):
+    form_classes = {
+        'user': ResponsabileCreationForm,
+        'profile': UserProfiliForm,
+    }
+
+
+class UserEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': UserChangeForm,
+        'profile': UserProfiliForm,
+    }
+
+class AdminEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': CustomAdminChangeForm,
+        'profile': UserProfiliForm,
+    }
+
+class OperatoreEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': OperatoreChangeForm,
+        'profile': UserProfiliForm,
+    }
+
+class ResponsabileEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': ResponsabileChangeForm,
+        'profile': UserProfiliForm,
+    }
+
+class AssistenzaEditMultiForm(MultiModelForm):
+    form_classes = {
+        'user': AssistenzaChangeForm,
+        'profile': AssistenzaProfiliForm,
+    }
 
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput())

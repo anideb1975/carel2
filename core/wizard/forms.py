@@ -2,7 +2,7 @@ from django import forms
 from aziende.models import (Stabilimenti,Ute,Reparti)
 from assistenza.models import Aziende
 from flotta.models import (Categorie, Mezzi)
-from phonenumber_field.formfields import PhoneNumberField
+
 
 class StabilimentoWizard(forms.ModelForm):
     
@@ -57,11 +57,10 @@ class MezziWizard(forms.ModelForm):
         }         
 
 class AssistenzaWizard(forms.ModelForm):
-    #telefono = PhoneNumberField(region="IT"),
     
     class Meta:
         model = Aziende
-        fields =  ('descrizione','telefono','email')
+        fields =  ('descrizione','email')
 
         widgets = {
             'descrizione': forms.TextInput(attrs={'placeholder': 'Azienda Assistenza'}),

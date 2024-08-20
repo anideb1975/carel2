@@ -14,12 +14,27 @@ class AziendeForm(forms.ModelForm):
 
 class InterventiForm(forms.ModelForm):
 
+
     class Meta:
         model = Interventi
-        fields = ['id_azienda','intervento','ore','evasa']  # Non includere ' id_mezzo', perché lo stai impostando nella view
+        fields = ['intervento','ore','evasa']  # Non includere ' id_controllo', perché lo stai impostando nella view   
 
         widgets = {
-            "id_azienda":forms.Select(attrs={'id':'azienda','required':'required'}),
-            'intervento': forms.Textarea(attrs={'rows': 4}),
+            'intervento': forms.Textarea(attrs={'rows': 8}),
             'evasa': forms.RadioSelect(),
         } 
+
+class UpdateInterventiForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Interventi
+        fields = ['intervento','ore','evasa']  # Non includere ' id_controllo', perché lo stai impostando nella view   
+
+        widgets = {
+            #"id_azienda":forms.Select(attrs={'id':'azienda','required':'required'}),
+            'intervento': forms.Textarea(attrs={'rows': 6}),
+            'evasa': forms.RadioSelect(),
+        } 
+
+    

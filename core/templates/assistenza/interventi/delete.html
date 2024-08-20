@@ -16,15 +16,15 @@
                     <div class="card-body">
                         <div class="row d-block d-xl-flex align-items-center">
                             <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{object.id_mezzo.immagine.url}}"></span></div>
+                                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{object.id_controllo.id_mezzo.immagine.url}}"></span></div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
                                 <h6 class="mb-1">{{object.operatore}}</h6>
                             </div>
-                            <small>{{object}}</small>
+                            <small>{{object.id_azienda}}</small>
                             <div class="small mt-1">
-                                <span class="fw-bold">{{object.intervento}}</span>
+                                <span class="fw-bold">{{object.id_controllo.id_mezzo.descrizione}}</span>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h2>CheckList</h2>
-                <h4 class="text-danger-50 text-danger">Sei sicuro di cancellare {{object}}?</h4>
+                <h4 class="text-danger-50 text-danger">Sei sicuro di cancellare {{object.id_controllo.id_mezzo}}?</h4>
                 <form action="{% url 'assistenza:interventi_delete' object.id %}" method="POST">
                     {% csrf_token %}
                     <button href="{% url 'assistenza:interventi_delete' object.id %}" class="btn btn-danger">

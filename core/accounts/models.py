@@ -9,6 +9,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from assistenza.models import Aziende
+from aziende.models import Stabilimenti
+
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -21,6 +23,7 @@ class Squadra(models.IntegerChoices):
         SQUADRA_C =  3, "SQUADRA C"
         BITURNISTA =  4, "BITURNISTA"
         ASSISTENZA =  5, "ASSISTENZA"
+        ADMIN = 6,"ADMIN"
 
 class User(AbstractUser):
     class Role(models.TextChoices):
@@ -32,7 +35,7 @@ class User(AbstractUser):
     base_role = Role.ADMIN
     first_name = models.CharField(max_length=100, verbose_name='Nome')
     last_name= models.CharField(max_length=100,verbose_name='Cognome')
-    squadra = models.PositiveSmallIntegerField(choices=Squadra.choices,default=Squadra.SQUADRA_A,verbose_name='Squadra')
+    squadra = models.PositiveSmallIntegerField(choices=Squadra.choices,verbose_name='Squadra',default=Squadra.ADMIN)
     role = models.CharField(max_length=50, choices=Role.choices,verbose_name='Ruolo')
     avatar = models.ImageField(upload_to=user_directory_path ,default='avatar/img/operatore/operatore.png', null=True, blank=True)
     avatar_thumbnail = ImageSpecField(source='avatar',
@@ -66,9 +69,10 @@ class User(AbstractUser):
     
     def save(self, *args, **kwargs):
         if not self.pk or self.role == None:
-            self.role = self.base_role
+            self.role = self.base_role    
         return super().save(*args, **kwargs)
 
+    
 
 
 class AdminManager(BaseUserManager):
@@ -79,6 +83,7 @@ class AdminManager(BaseUserManager):
 class Admin(User):
 
     base_role = User.Role.ADMIN
+    base_squadra = Squadra.ADMIN
 
     objects = AdminManager()
 
@@ -90,6 +95,7 @@ class Admin(User):
     def save(self, *args, **kwargs):
         if not self.pk or self.role == None:
             self.role = self.base_role
+        self.squadra = self.base_squadra
         return super().save(*args, **kwargs)    
 
 
@@ -150,6 +156,7 @@ class AssistenzaManager(BaseUserManager):
 class Assistenza(User):
 
     base_role = User.Role.ASSISTENZA
+    base_squadra = Squadra.ASSISTENZA
 
     objects = AssistenzaManager()
 
@@ -161,9 +168,31 @@ class Assistenza(User):
     def save(self, *args, **kwargs):
         if not self.pk or self.role == None:
             self.role = self.base_role
-            self.squadra = self.squadra.ASSISTENZA
+        self.squadra = self.base_squadra    
         return super().save(*args, **kwargs)    
 
+class AssistenzaProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Operatore Manutenzione')
+    azienda = models.ForeignKey(Aziende, on_delete=models.CASCADE, null=True,verbose_name='Azienda')
+    
+    class Meta:
+        verbose_name = 'Profilo Operatore Manutenzione'
+        verbose_name_plural = 'Profilo Operatore Manutenzione'
+    
+    def __str__(self):
+        return self.user.username
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Operatore')
+    azienda = models.ForeignKey(Stabilimenti, on_delete=models.CASCADE, null=True,verbose_name='Stabilimento')
+    
+    class Meta:
+        verbose_name = 'Profilo Utente'
+        verbose_name_plural = 'Profili Utenti'
+    
+    def __str__(self):
+        return self.user.username        
+    
 
 """ class OperatoreProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

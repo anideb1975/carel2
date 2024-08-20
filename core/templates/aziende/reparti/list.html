@@ -12,17 +12,7 @@
 
 
     <div class="py-4">
-   {% comment %}  <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-                <a href="#">
-                    <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                </a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">Tables</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
-        </ol>
-    </nav> {% endcomment %}
+   
         <div class="card shadow-sm">
             <div class="card-body">
                 <h3 class="h2 mb-1">{{titolo}}</h3>
@@ -36,6 +26,7 @@
                 </a>
             </div>
             <div>
+            {% comment %}     <!-- report -->
                 <button type="button" class="btn btn-gray-800 d-inline-flex align-items-center me-2">
                     <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                 </button>
@@ -67,9 +58,9 @@
                         All Reports
                     </a>
                 </div>
-            </div>
+                <!-- fine report --> {% endcomment %}
         </div>
-
+    </div>
         <div class="card border-0 shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive py-4">

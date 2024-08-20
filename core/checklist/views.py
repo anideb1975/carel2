@@ -39,7 +39,7 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineForm
 import datetime
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-
+from django.db.models.functions import ExtractYear,ExtractMonth, ExtractDay, ExtractWeek, ExtractIsoYear
 
 ### Crud Checklist ####
 
@@ -98,12 +98,13 @@ class CheckListLista(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
     
     def get_context_data(self, **kwargs):
         context = super(CheckListLista, self).get_context_data(**kwargs)
-        context["titolo"] = "Lista CheckLists"
+        context["titolo"] = "CheckLists"
         context['segment'] = "checklist_list"
-        context['week'] = datetime.datetime.now()
-        context['data_points'] =  [5, 4, 3, 7, 5, 10, 3]
-        context['data_points2'] = [3, 2, 9, 5, 4, 6, 4]
-
+        context['anni'] = CheckList.objects.annotate(year=ExtractYear('creato')).values('year').order_by('-year').distinct()
+        context['mesi'] = CheckList.objects.annotate(month=ExtractMonth('creato')).values('month').order_by('-month').distinct()
+        context['settimane'] = CheckList.objects.annotate(week=ExtractWeek('creato')).values('week').order_by('-week').distinct()
+        context['anni_mesi'] = zip(context['anni'],context['mesi'])
+        context['anni_settimane'] = zip(context['anni'],context['settimane'])
         return context
     
 
@@ -150,7 +151,6 @@ class CheckListDelete(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin
     model = CheckList
     template_name = "checklist/delete.html"
     context_object_name = 'checklist'
-    success_message = 'Checklist cancellata'
     success_url = reverse_lazy('checklist:checklist_list')
     success_message = "Delete successfully"
     
@@ -167,6 +167,7 @@ class CheckListDelete(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin
         context["titolo"] = "Cancella Cheklist"
         return context
 
+
 ### Fine crud checklist ###
 
 ###  Anomalie ###
@@ -177,11 +178,11 @@ class AnomalieListView(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
     context_object_name = 'anomalie'
 
     def get_queryset(self):
-        return Controlli.objects.exclude(anomalie='').exclude(anomalie=None).all()
+        return Controlli.objects.exclude(anomalie='').exclude(anomalie=None).all().order_by('-creato')
     
     def get_context_data(self, **kwargs):
         context = super(AnomalieListView, self).get_context_data(**kwargs)
-        context["titolo"] = "Anomalie"
+        context["titolo"] = "Controlli Anomalie"
         context['segment'] = "assistenza"
         return context
 
@@ -211,14 +212,104 @@ class AnomalieUpdateView(SuccessMessageMixin,LoginRequiredMixin, UserPassesTestM
     def get_context_data(self, **kwargs):
         context = super(AnomalieUpdateView, self).get_context_data(**kwargs)
         context["titolo"] = "Dettagli Anomalie"
-        return context    
+        return context
 
+    def form_valid(self, form):
+        form.instance.operatore = self.request.user
+        return super().form_valid(form)    
+
+class AnomalieDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,DeleteBreadcrumbMixin,DeleteView):
+    model = Controlli
+    form_class = AnomalieControlliForm
+    template_name = "checklist/delete_anomalia.html"
+    context_object_name = 'checklist'
+    success_url = reverse_lazy('checklist:controlli_anomalie')
+    success_message = "Delete successfully"
+    
+    
+    def test_func(self):
+        return self.get_object().operatore == self.request.user or self.request.user.role == 'ADMIN'
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Not Authorized")
+        return redirect('checklist:controlli_anomalia')  
+    
+    def get_context_data(self, **kwargs):
+        context = super(AnomalieDeleteView, self).get_context_data(**kwargs)
+        context["titolo"] = "Cancella Anomalia"
+        return context
 
 ### Fine  anomalie ###
 
+
+###  Controlli ###
+
+class ControlliListView(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
+    model = Controlli
+    template_name = 'checklist/controlli/list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ControlliListView, self).get_context_data(**kwargs)
+        context["titolo"] = "Controlli"
+        context['segment'] = "checklist_list"
+        return context
+
+class ControlliDetailView(LoginRequiredMixin, DetailBreadcrumbMixin, DeleteView):
+    model = Controlli
+    template_name = 'checklist/controlli/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ControlliDetailView, self).get_context_data(**kwargs)
+        context["titolo"] = "Dettagli Controlli"
+        return context
+
+class ControlliUpdateView(SuccessMessageMixin,LoginRequiredMixin, UserPassesTestMixin,UpdateBreadcrumbMixin, UpdateView):
+    model = Controlli
+    form_class = ControlliForm
+    success_url = reverse_lazy('checklist:controlli_list')
+    template_name = 'checklist/controlli/update.html'
+    success_message = "Update successfully"
+
+    def test_func(self):
+        return self.get_object().id_checklist.operatore== self.request.user or self.request.user.role == 'ADMIN'
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Not Authorized")
+        return redirect('checklist:controlli_list')
+
+    def get_context_data(self, **kwargs):
+        context = super(ControlliUpdateView, self).get_context_data(**kwargs)
+        context["titolo"] = "Dettagli Controllo"
+        return context
+    def form_valid(self, form):
+        form.instance.id_checklist.operatore = self.request.user
+        return super().form_valid(form)        
+
+class ControlliDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,DeleteBreadcrumbMixin,DeleteView):
+    model = Controlli
+    template_name = "checklist/controlli/delete.html"
+    success_url = reverse_lazy('checklist:controlli_list')
+    success_message = "Delete successfully"
+    
+    
+    def test_func(self):
+        return self.get_object().id_checklist.operatore == self.request.user or self.request.user.role == 'ADMIN'
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Not Authorized")
+        return redirect('checklist:controlli_list')  
+    
+    def get_context_data(self, **kwargs):
+        context = super(ControlliDeleteView, self).get_context_data(**kwargs)
+        context["titolo"] = "Cancella Controllo"
+        return context
+
+
+### Fine  controlli ###
+
 # Vista Giornaliera
 
-class CheckListTodayArchiveView(LoginRequiredMixin,BaseBreadcrumbMixin,TodayArchiveView):
+class CheckListTodayArchiveView(LoginRequiredMixin,ListBreadcrumbMixin,TodayArchiveView):
     model = CheckList
     queryset = CheckList.objects.all()
     date_field = "creato"
@@ -226,7 +317,6 @@ class CheckListTodayArchiveView(LoginRequiredMixin,BaseBreadcrumbMixin,TodayArch
     allow_empty = True
     template_name = 'checklist/giornaliero.html'
     context_object_name = 'checklists'
-    crumbs = [("Giornaliero", reverse_lazy("checklist_giornaliero"))]
     
     def get_context_data(self, **kwargs):
         context = super(CheckListTodayArchiveView, self).get_context_data(**kwargs)
@@ -237,7 +327,7 @@ class CheckListTodayArchiveView(LoginRequiredMixin,BaseBreadcrumbMixin,TodayArch
 
 ### Archivio ###
 
-class CheckListArchivioView(LoginRequiredMixin,BaseBreadcrumbMixin,ArchiveIndexView):
+class CheckListArchivioView(LoginRequiredMixin,ListBreadcrumbMixin,ArchiveIndexView):
     model = CheckList
     queryset = CheckList.objects.all()
     date_field = 'creato'
@@ -245,7 +335,6 @@ class CheckListArchivioView(LoginRequiredMixin,BaseBreadcrumbMixin,ArchiveIndexV
     allow_empty = True
     template_name = 'checklist/archivio.html'
     context_object_name = 'checklists'
-    crumbs = [("Archivio", reverse_lazy("checklist_archivio"))]
     
     def get_context_data(self, **kwargs):
         context = super(CheckListArchivioView, self).get_context_data(**kwargs)
@@ -256,21 +345,26 @@ class CheckListArchivioView(LoginRequiredMixin,BaseBreadcrumbMixin,ArchiveIndexV
 ### VIsta Settimanale ###
 
 
-class CheckListWeekArchiveView(WeekArchiveView):
+class CheckListWeekArchiveView(LoginRequiredMixin,ListBreadcrumbMixin,WeekArchiveView):
+    model = CheckList
     queryset = CheckList.objects.all()
     date_field = "creato"
     week_format = "%W"
     allow_future = True
     allow_empty  = True
-    context_object_name = 'checklists'
-    template_name = 'lcs/list.html'
-    crumbs = [("checklist settimana", reverse_lazy("checklist_settimana"))]
+    template_name = 'checklist/lista_settimana.html'
+    #crumbs = [("checklist settimana", reverse_lazy("checklist:checklist:checklist_settimana"))]
     context_object_name = 'checklists'
     
     def get_context_data(self, **kwargs):
-        context = super(CheckListYearArchiveView, self).get_context_data(**kwargs)
+        context = super(CheckListWeekArchiveView, self).get_context_data(**kwargs)
         context["titolo"] = "Vista Settimana"
         context["segment"] = "checklist_list"
+        context['anni'] = CheckList.objects.dates('creato', 'year').annotate()
+        context['mesi'] = CheckList.objects.dates('creato', 'month').annotate()
+        context['settimane'] = CheckList.objects.dates('creato', 'week').annotate()
+        context['anni_mesi'] = zip(context['anni'],context['mesi'])
+        context['anni_settimane'] = zip(context['anni'],context['settimane'])
         return context
 
 
@@ -278,42 +372,53 @@ class CheckListWeekArchiveView(WeekArchiveView):
 ## Vista Annuale ###
 
 
-class CheckListYearArchiveView(LoginRequiredMixin,YearArchiveView):
+class CheckListYearArchiveView(LoginRequiredMixin,ListBreadcrumbMixin,YearArchiveView):
     model = CheckList
     queryset = CheckList.objects.all()
     date_field = "creato"
     make_object_list = True
     allow_future = True
     allow_empty  = True
-    template_name = 'lcs/list.html'
-    crumbs = [("checklist anno", reverse_lazy("checklist_anno"))]
+    template_name = 'checklist/lista_anno.html'
     context_object_name = 'checklists'
     
     def get_context_data(self, **kwargs):
         context = super(CheckListYearArchiveView, self).get_context_data(**kwargs)
-        context["titolo"] = "Vista Annuale"
+        context["titolo"] = "Vista Anno"
         context["segment"] = "checklist_list"
+        context['week'] = datetime.datetime.now()
+        context['anni'] = CheckList.objects.dates('creato', 'year').annotate()
+        context['mesi'] = CheckList.objects.dates('creato', 'month').annotate()
+        context['settimane'] = CheckList.objects.dates('creato', 'week').annotate()
+        context['anni_mesi'] = zip(context['anni'],context['mesi'])
+        context['anni_settimane'] = zip(context['anni'],context['settimane'])
         return context
 
 ### Vista Mensile ###
 
-class CheckListMonthsArchiveView(LoginRequiredMixin,MonthArchiveView):
+class CheckListMonthsArchiveView(LoginRequiredMixin,ListBreadcrumbMixin,MonthArchiveView):
     model = CheckList
     queryset = CheckList.objects.all()
     date_field = "creato"
     make_object_list = True
     allow_future = True
     allow_empty  = True
-    template_name = 'lcs/list_mese.html'
-    crumbs = [("checklist mese", reverse_lazy("checklist_mese"))]
+    template_name = 'checklist/lista_mese.html'
     context_object_name = 'checklists'
     
     def get_context_data(self, **kwargs):
         context = super(CheckListMonthsArchiveView, self).get_context_data(**kwargs)
         context["titolo"] = "Vista Mensile"
         context["segment"] = "checklist_list"
+        context['anni'] = CheckList.objects.dates('creato', 'year').annotate()
+        context['mesi'] = CheckList.objects.dates('creato', 'month').annotate()
+        context['settimane'] = CheckList.objects.dates('creato', 'week').annotate()
+        context['anni_mesi'] = zip(context['anni'],context['mesi'])
+        context['anni_settimane'] = zip(context['anni'],context['settimane'])
         return context    
     
+
+
 
 
 """ class CheckListModifica(SweetifySuccessMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateView):

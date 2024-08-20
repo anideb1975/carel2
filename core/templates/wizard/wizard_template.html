@@ -1,88 +1,239 @@
-<div class="outer-container">
-    <div id="wizard" class="aiia-wizard" style="display: none;">
+{% extends "layouts/base-wizard.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
 
-        <div class="aiia-wizard-step">
-            <h1>Introduction</h1>
-            <div class="step-content">
-                <p>
-                    Oh... I know you'll probably say..."Why would you make a plugin that already exists?". :) Well, why not? It's true, there are some great plugins out there that do just that. In fact this plugin was inspired by the excellent "jQuery Steps" plugin, created by Rafael Staib. And I am sure that if you Google you'll find more of them...
-                </p>
-                <p>
-                    However I decided to do one myself as an experiment and because for some reason Rafael's plugin was mising some things that I needed at the moment and there was also a bug when initializing other jQuery plugins within the Steps plugin. For example the Google maps plugin would not initialize for some reason.
-                </p>
-                <p>
-                    With your comments and perhaps your contributions maybe I can make things better and take it to another level, so please, feel free to give your thoughts - positive and negative. I'll be very grateful.
-                </p>
+{% block head %}
+    {{ wizard.form.media }}
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->    
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <style>
+        #signUpForm {
+            max-width: 500px;
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 40px;
+            box-shadow: 0px 6px 18px rgb(0 0 0 / 9%);
+            border-radius: 12px;
+        }
+        #signUpForm .form-header {
+            gap: 5px;
+            text-align: center;
+            font-size: .9em;
+        }
+        #signUpForm .form-header .stepIndicator {
+            position: relative;
+            flex: 1;
+            padding-bottom: 30px;
+        }
+        #signUpForm .form-header .stepIndicator.active {
+            font-weight: 600;
+        }
+        #signUpForm .form-header .stepIndicator.finish {
+            font-weight: 600;
+            color: #009688;
+        }
+        #signUpForm .form-header .stepIndicator::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            z-index: 9;
+            width: 20px;
+            height: 20px;
+            background-color: #d5efed;
+            border-radius: 50%;
+            border: 3px solid #ecf5f4;
+        }
+        #signUpForm .form-header .stepIndicator.active::before {
+            background-color: #a7ede8;
+            border: 3px solid #d5f9f6;
+        }
+        #signUpForm .form-header .stepIndicator.finish::before {
+            background-color: #009688;
+            border: 3px solid #b7e1dd;
+        }
+        #signUpForm .form-header .stepIndicator::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 8px;
+            width: 100%;
+            height: 3px;
+            background-color: #f3f3f3;
+        }
+        #signUpForm .form-header .stepIndicator.active::after {
+            background-color: #a7ede8;
+        }
+        #signUpForm .form-header .stepIndicator.finish::after {
+            background-color: #009688;
+        }
+        #signUpForm .form-header .stepIndicator:last-child:after {
+            display: none;
+        }
+        #signUpForm input {
+            padding: 15px 20px;
+            width: 100%;
+            font-size: 1em;
+            border: 1px solid #e3e3e3;
+            border-radius: 5px;
+        }
+        #signUpForm input:focus {
+            border: 1px solid #009688;
+            outline: 0;
+        }
+        #signUpForm input.invalid {
+            border: 1px solid #ffaba5;
+        }
+        #signUpForm .step {
+            display: none;
+        }
+        #signUpForm .form-footer{
+            overflow:auto;
+            gap: 20px;
+        }
+        #signUpForm .form-footer button{
+            background-color: #009688;
+            border: 1px solid #009688 !important;
+            color: #ffffff;
+            border: none;
+            padding: 13px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            flex: 1;
+            margin-top: 5px;
+        }
+        #signUpForm .form-footer button:hover {
+            opacity: 0.8;
+        }
+
+        #signUpForm .form-footer #prevBtn {
+            background-color: #fff;
+            color: #009688;
+        }
+    </style>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm py-5'>
+                <h1 class="text-center fs-4">Form Wizard - Multi Step Form</h1>
+                <form id="signUpForm" action="" method="post" enctype='multipart/form-data'>
+                    <!-- start step indicators -->
+                    {% csrf_token %}
+                    <div class="form-header d-flex mb-4">
+                        {% for i in  "x"|ljust:wizard.steps.count %}
+                            <span class="stepIndicator">{{ wizard.steps.step1 }} of {{ wizard.steps.count }}</span>
+                        {% endfor %}
+                    </div>
+                    <!-- end step indicators -->
+
+                    <!-- step -->
+                    <div class="step">
+                        <table  class="table table-centered table-nowrap mb-0 rounded">
+                            {{ wizard.management_form }}
+                            {% if wizard.form.forms %}
+                                {{ wizard.form.management_form }}
+                                {% for form in wizard.form.forms %}
+                                    {{ form|crispy }}
+                                {% endfor %}
+                            {% else %}
+                                {{ wizard.form|crispy }}
+                            {% endif %}
+                        </table>
+                    </div>
+                    <!-- start previous / next buttons -->
+                    <div class="form-footer d-flex">
+                        {% if wizard.steps.prev %}
+                            <button class="btn btn-secondary rounded-1" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
+                            <button class="btn btn-tertiary rounded-1" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary rounded-1">Salva</button>
+                    </div>
+                    <!-- end previous / next buttons -->
+                </form>
             </div>
-        </div>
 
-        <div class="aiia-wizard-step">
-            <h1>Responsive</h1>
-            <div class="step-content">
-                The aiiaWizard plugin is Twitter Bootstrap 3.x oriented, thus responsive. It takes your input form elements (or any other HTML element for that matter) and breaks them down into as many steps as you set them to. In fact, in some way the result is very similar to the "Twitter Bootstrap tab plugin, but instead of tabs and corresponding content panels, you have progress buttons and steps. Steps are the elements that hold your form / HTML content.
-            </div>
-        </div>
+            <script>
+                var currentTab = 0; // Current tab is set to be the first tab (0)
+                showTab(currentTab); // Display the current tab
 
-        <div class="aiia-wizard-step">
-            <h1>Not a carousel</h1>
-            <div class="step-content">
-                You can also compare this plugin to a carousel, but then again it is not a carousel. Well, maybe I'll update the plugin so that it will have different modes (tabs, slider, carousel...). But right now it serves for one purpose only and that is creating a Wizard with steps, plain and simple. The aiiaPlugin may as well be a hybrid between the Tabs Twitter Bootstrap and the carousel plugin if you like.
-            </div>
-        </div>
+                function showTab(n) {
+          // This function will display the specified tab of the form...
+                    var x = document.getElementsByClassName("step");
+                    x[n].style.display = "block";
+          //... and fix the Previous/Next buttons:
+                    if (n == 0) {
+                        document.getElementById("prevBtn").style.display = "none";
+                    } else {
+                        document.getElementById("prevBtn").style.display = "inline";
+                    }
+                    if (n == (x.length - 1)) {
+                        document.getElementById("nextBtn").innerHTML = "Submit";
+                    } else {
+                        document.getElementById("nextBtn").innerHTML = "Next";
+                    }
+          //... and run a function that will display the correct step indicator:
+                    fixStepIndicator(n)
+                }
 
-        <div class="aiia-wizard-step">
-            <h1>Methods</h1>
-            <div class="step-content">
-                This plugin allows you to interract with it or to retrieve some information from. The following methods are available:
-                <ul>
-                    <li>isFinalElementShown,</li>
-                    <li>previous,</li>
-                    <li>next,</li>
-                    <li>first,</li>
-                    <li>getActiveStep</li>
-                </ul>
-            </div>
-        </div>
+                function nextPrev(n) {
+          // This function will figure out which tab to display
+                    var x = document.getElementsByClassName("step");
+          // Exit the function if any field in the current tab is invalid:
+                    if (n == 1 && !validateForm()) return false;
+          // Hide the current tab:
+                    x[currentTab].style.display = "none";
+          // Increase or decrease the current tab by 1:
+                    currentTab = currentTab + n;
+          // if you have reached the end of the form...
+                    if (currentTab >= x.length) {
+            // ... the form gets submitted:
+                        document.getElementById("signUpForm").submit();
+                        return false;
+                    }
+          // Otherwise, display the correct tab:
+                    showTab(currentTab);
+                }
 
-        <div class="aiia-wizard-step">
-            <h1>Callbacks</h1>
-            <div class="step-content">
-                As any good plugin, this one allows you to run your code when the plugin does something. This is a list of currently available  callbacks:
+                function validateForm() {
+          // This function deals with validation of the form fields
+                    var x, y, i, valid = true;
+                    x = document.getElementsByClassName("step");
+                    y = x[currentTab].getElementsByTagName("input");
+          // A loop that checks every input field in the current tab:
+                    for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+                        if (y[i].value == "") {
+              // add an "invalid" class to the field:
+                            y[i].className += " invalid";
+              // and set the current valid status to false
+                            valid = false;
+                        }
+                    }
+          // If the valid status is true, mark the step as finished and valid:
+                    if (valid) {
+                        document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
+                    }
+                    return valid; // return the valid status
+                }
 
+                function fixStepIndicator(n) {
+          // This function removes the "active" class of all steps...
+                    var i, x = document.getElementsByClassName("stepIndicator");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].className = x[i].className.replace(" active", "");
+                    }
+          //... and adds the "active" class on the current step:
+                    x[n].className += " active";
+                }
+            </script>
+{% endblock %}
 
-                <pre>
-$("#wizard").aiiaWizard({
-    onInitSuccess: function () {
-        //alert("init success");
-    },
-    onSlideLeftLimitReached: function () {
-        //alert("onSlideLeftLimitReached success");
-    },
-    onSlideLeftFinished: function () {
-        //alert("onSlideLeftFinished success");
-    },
-    onSlideRightLimitReached: function () {
-        //alert("onSlideRightLimitReached success");
-    },
-    onSlideRightFinished: function () {
-        //alert("onSlideRightFinished success");
-    },
-    onButtonPreviousClick: function () {
-        // Instead of just sliding to the previous step when clicking the "previous" button, you can override this functionality instead.
-        // By doing that you must then explixitly call the "previous" plugin method as shown below if you want to slide to the previous step.
-        alert("onButtonPreviousClick");
-        $("#wizard").aiiaWizard('previous');
-    },
-    onButtonNextClick: function () {
-        // Instead of just sliding to the next step when clicking the "next" button, you can override this functionality instead.
-        // By doing that you must then explixitly call the "next" plugin method as shown below if you want to slide to the next step.
-        alert("onButtonNextClick");
-        $("#wizard").aiiaWizard('next');
-    }
-});               
-                </pre>
-            </div>
-        </div>
+ <!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
 
-    </div>
-</div>
+{% endblock javascripts %}

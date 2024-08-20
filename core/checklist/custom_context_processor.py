@@ -1,7 +1,7 @@
 from .models import Controlli, CheckList
 
 def fanomalie(request):
-    anomalie = Controlli.objects.exclude(anomalie='').exclude(anomalie=None).all()[:4]
+    anomalie = Controlli.objects.exclude(anomalie='').exclude(anomalie=None).order_by('-creato')[:4]
     context = {'anomalie':anomalie}
     return(context)
 

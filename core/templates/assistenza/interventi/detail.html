@@ -19,14 +19,14 @@
                                 <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><img src="{{object.operatore.avatar.url}}"></span></div>
                             <div class="d-sm-none">
                                 <h2 class="h5">{{object.operatore}}</h2>
-                                <h3 class="mb-1">{{object.id_azienda}}</h3>
+                                <h3 class="mb-1">{{object.operatore.id_squadra}}</h3>
                             </div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
                                 <h6 class="mb-1">{{object.operatore}}</h6>
                             </div>
-                            <small>{{object.id_azienda}}</small>
+                            <small>{{object.operatore.id_squadra}}</small>
                         </div>
                     </div>
                 </div>
@@ -44,6 +44,34 @@
                     </div>
                     <div class="card-body px-0 py-0">
                         <ul class="list-group">
+                            <li class="list-group-item border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Mezzo
+                                        </h3>
+                                           <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{object.id_controllo.id_mezzo}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
+                                            Modificato da
+                                        </h3>
+                                           <!-- Text -->
+                                        <small class="text-gray-700">
+                                            <img class="avatar rounded" src="{{object.modificato.avatar_thumbnail.url}}">
+                                            {{object.modificato}}
+                                            {{object.aggiornato}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
                             <li class="list-group-item border-bottom">
                                 <div class="row align-items-center">
                                     <div class="col">
@@ -66,9 +94,9 @@
                                            <!-- Text -->
                                         <small class="text-gray-700">
                                             {% if object.evasa == True %}
-                                                <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
+                                                <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>Completata
                                             {% else %}
-                                                <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                                <i class="fa-solid fa-circle-check" style="color: #FFD43B;"></i>Sospesa
                                             {% endif %}
                                         </small>
                                     </div>

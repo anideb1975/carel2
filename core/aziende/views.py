@@ -181,25 +181,6 @@ class UteViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,U
         return context
 
 
-class UteViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateBreadcrumbMixin, UpdateView):
-    form_class = UteForm
-    model = Ute
-    success_url = reverse_lazy('aziende:ute_list')
-    template_name = 'aziende/ute/update.html'
-    success_message = "Update successfully"
-    
-    def test_func(self):
-        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        messages.warning(self.request, "Not Authorized")
-        return redirect('aziende:ute_list')
-    
-    def get_context_data(self, **kwargs):
-        context = super(UteViewUpdate, self).get_context_data(**kwargs)
-        context["titolo"] = "Aggiorna Ute"
-        return context    
-    
 class UteViewList(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
     model = Ute
     template_name = 'aziende/ute/list.html'
@@ -382,3 +363,25 @@ class RepartiViewDetail(LoginRequiredMixin, DetailBreadcrumbMixin, DetailView):
         context = super(UteViewCreate, self).get_context_data(**kwargs)
         context["titolo"] = "Crea Ute"
         return context """
+"""
+
+class UteViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateBreadcrumbMixin, UpdateView):
+    form_class = UteForm
+    model = Ute
+    success_url = reverse_lazy('aziende:ute_list')
+    template_name = 'aziende/ute/update.html'
+    success_message = "Update successfully"
+    
+    def test_func(self):
+        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Not Authorized")
+        return redirect('aziende:ute_list')
+    
+    def get_context_data(self, **kwargs):
+        context = super(UteViewUpdate, self).get_context_data(**kwargs)
+        context["titolo"] = "Aggiorna Ute"
+        return context    
+    
+"""

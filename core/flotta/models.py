@@ -38,7 +38,7 @@ class Categorie(models.Model):
         return mark_safe('<img src="%s" width="40" height="40" />' % self.get_immagine())    
     
     def __str__(self):
-        return f"{self.descrizione} {self.id_reparto.descrizione}"
+        return f"{self.descrizione} {self.id_reparto}"
     
     def get_absolute_url(self):
         return reverse('flotta:categorie_detail', args=[self.pk])

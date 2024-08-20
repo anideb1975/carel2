@@ -24,7 +24,16 @@ from .forms import (CustomUserCreationForm,
                     AssistenzaChangeForm,
                     CustomAdminCreationForm,
                     CustomAdminChangeForm,
-                    ChangePasswordForm,
+                    AssistenzaCreationMultiForm,
+                    AdminCreationMultiForm,
+                    OperatoreCreationMultiForm,
+                    ResponsabileCreationMultiForm,
+                    UserCreationMultiForm,
+                    UserEditMultiForm,
+                    AdminEditMultiForm,
+                    OperatoreEditMultiForm,
+                    ResponsabileEditMultiForm,
+                    AssistenzaEditMultiForm
                     )
 
 from view_breadcrumbs import (DetailBreadcrumbMixin, 
@@ -76,10 +85,11 @@ class SignUpAdmin(SuccessMessageMixin,CreateView):
         context = super(SignUpAdmin, self).get_context_data(**kwargs)
         context["titolo"] = "Crea Admin"
         return context
+    
 
 
 class SignUpOperatore(SuccessMessageMixin,CreateView):
-    form_class  = OperatoreCreationForm
+    form_class  = OperatoreCreationMultiForm
     success_url = reverse_lazy('login')
     template_name = 'accounts/create.html'
     success_message = "Created successfully"
@@ -90,9 +100,16 @@ class SignUpOperatore(SuccessMessageMixin,CreateView):
         context["titolo"] = "Crea Operatore"
         return context
     
+    def form_valid(self, form):
+        user = form['user'].save()
+        profile = form['profile'].save(commit=False)
+        profile.user = user
+        profile.save()
+        return super().form_valid(form)
+    
 
 class SignUpResponsabile(SuccessMessageMixin,CreateView):
-    form_class = ResponsabileCreationForm
+    form_class = ResponsabileCreationMultiForm
     success_url = reverse_lazy('login')
     template_name = 'accounts/create.html'
     success_message = "Created successfully"
@@ -102,8 +119,15 @@ class SignUpResponsabile(SuccessMessageMixin,CreateView):
         context["titolo"] = "Crea Responsabile"
         return context
     
+    def form_valid(self, form):
+        user = form['user'].save()
+        profile = form['profile'].save(commit=False)
+        profile.user = user
+        profile.save()
+        return super().form_valid(form)
+    
 class SignUpAssistenza(SuccessMessageMixin,CreateView):
-    form_class = AssistenzaCreationForm
+    form_class = AssistenzaCreationMultiForm
     success_url = reverse_lazy('login')
     template_name = 'accounts/create.html'
     success_message = "Created successfully"
@@ -113,6 +137,13 @@ class SignUpAssistenza(SuccessMessageMixin,CreateView):
         context = super(SignUpAssistenza, self).get_context_data(**kwargs)
         context["titolo"] = "Crea Assistenza"
         return context
+    
+    def form_valid(self, form):
+        user = form['user'].save()
+        profile = form['profile'].save(commit=False)
+        profile.user = user
+        profile.save()
+        return super().form_valid(form)
         
 #### Lista ####
 
@@ -245,7 +276,15 @@ class UserUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrumbMixi
     def get_context_data(self, **kwargs):
         context = super(UserUpdateView, self).get_context_data(**kwargs)
         context["titolo"] = "User"
-        return context 
+        return context
+    
+    def get_form_kwargs(self):
+        kwargs = super(UserUpdateView, self).get_form_kwargs()
+        kwargs.update(instance={
+            'user': self.object,
+            'profile': self.object.profile,
+        })
+        return kwargs 
 
 class AdminUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrumbMixin, UpdateView):
     model = Admin
@@ -259,11 +298,13 @@ class AdminUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrumbMix
     def get_context_data(self, **kwargs):
         context = super(AdminUpdateView, self).get_context_data(**kwargs)
         context["titolo"] = "Admin"
-        return context 
+        return context
+
+    
 
 class OperatoreUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrumbMixin, UpdateView):
     model = Operatore
-    form_class = OperatoreChangeForm
+    form_class = OperatoreEditMultiForm
     template_name = 'accounts/update.html'
     success_url = reverse_lazy('accounts:user_list')
     context_object_name = "profile"
@@ -272,11 +313,19 @@ class OperatoreUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrum
     def get_context_data(self, **kwargs):
         context = super(OperatoreUpdateView, self).get_context_data(**kwargs)
         context["titolo"] = "Operatore"
-        return context 
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(OperatoreUpdateView, self).get_form_kwargs()
+        kwargs.update(instance={
+            'user': self.object,
+            'profile': self.object.userprofile,
+        })
+        return kwargs  
 
 class ResponsabileUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrumbMixin, UpdateView):
     model = Responsabile
-    form_class = ResponsabileChangeForm
+    form_class = ResponsabileEditMultiForm
     template_name = 'accounts/update.html'
     success_url = reverse_lazy('accounts:user_list')
     context_object_name = "profile"
@@ -285,20 +334,39 @@ class ResponsabileUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadc
     def get_context_data(self, **kwargs):
         context = super(ResponsabileUpdateView, self).get_context_data(**kwargs)
         context["titolo"] = "Responsabile"
-        return context 
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(ResponsabileUpdateView, self).get_form_kwargs()
+        kwargs.update(instance={
+            'user': self.object,
+            'profile': self.object.userprofile,
+        })
+        return kwargs   
 
 class AssistenzaUpdateView(SuccessMessageMixin,LoginRequiredMixin,UpdateBreadcrumbMixin, UpdateView):
-    model = Assistenza
-    form_class = AssistenzaChangeForm
+    model = User
+    form_class = AssistenzaEditMultiForm
     template_name = 'accounts/update.html'
     success_url = reverse_lazy('accounts:user_list')
     context_object_name = "profile"
     success_message = "Update successfully"
 
+    def get_form_kwargs(self):
+        kwargs = super(AssistenzaUpdateView, self).get_form_kwargs()
+        kwargs.update(instance={
+            'user': self.object,
+            'profile': self.object.assistenzaprofile,
+            
+        })
+        return kwargs  
+
     def get_context_data(self, **kwargs):
         context = super(AssistenzaUpdateView, self).get_context_data(**kwargs)
         context["titolo"] ="Assistenza"
-        return context 
+        return context
+
+    
 
 ### fine Update ####
 

@@ -16,7 +16,6 @@ from view_breadcrumbs import (DetailBreadcrumbMixin,
 from django.contrib import messages   
 from django.contrib.messages.views import SuccessMessageMixin  
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
-import datetime
 
 
 ### Inline Ute ###
@@ -35,7 +34,7 @@ class MezziInlineView(InlineFormSetFactory):
 ### Fine ###
 
 
-### Crud Categorie Flotta ###
+### Crud Categorie  ###
 
 class CategorieViewCreate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,CreateBreadcrumbMixin,CreateWithInlinesView):
     form_class = CategorieForm
@@ -63,7 +62,7 @@ class CategorieViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestM
     form_class = CategorieForm
     model = Categorie
     success_url = reverse_lazy('flotta:categorie_list')
-    template_name = 'flotta/categorie/create.html'
+    template_name = 'flotta/categorie/update.html'
     success_message = "Created successfully"
     inlines = [MezziInlineView]
 
@@ -80,49 +79,6 @@ class CategorieViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestM
         context["titolo"] = "Aggiorna Categorie"
         return context 
 
-
-
-
-""" 
-class CategorieViewCreate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,CreateBreadcrumbMixin,CreateView):
-    form_class = CategorieForm
-    model = Categorie
-    success_url = reverse_lazy('flotta:categorie_list')
-    template_name = 'flotta/categorie/create.html'
-    success_message = "Created successfully"
-    
-    def test_func(self):
-        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        messages.warning(self.request, "Not Authorized")
-        return redirect('flotta:categorie_list')
-    
-    
-    def get_context_data(self, **kwargs):
-        context = super(CategorieViewCreate, self).get_context_data(**kwargs)
-        context["titolo"] = "Categorie"
-        return context
-
-class CategorieViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateBreadcrumbMixin,UpdateView):
-    form_class = CategorieForm
-    model = Categorie
-    success_url = reverse_lazy('flotta:categorie_list')
-    template_name = 'flotta/categorie/update.html'
-    success_message = "Update successfully"
-    
-    def test_func(self):
-        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        messages.warning(self.request, "Not Authorized")
-        return redirect('flotta:categorie_list')
-    
-    def get_context_data(self, **kwargs):
-        context = super(CategorieViewUpdate, self).get_context_data(**kwargs)
-        context["titolo"] = "Aggiorna Categorie"
-        return context    
-"""
 
 class CategorieViewList(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
     model = Categorie
@@ -161,7 +117,7 @@ class CategorieViewDetail(LoginRequiredMixin, DetailBreadcrumbMixin, DetailView)
         context["titolo"] = "Dettagli Categorie"
         return context 
 
-### Fine crud flotta  ###          
+### Fine crud categorie  ###          
 
 
 ## Crud Mezzi ####
@@ -247,3 +203,43 @@ class MezziViewDetail(LoginRequiredMixin, DetailBreadcrumbMixin,DetailView):
 ### Fine Crud Mezzi ###
 
 
+""" 
+class CategorieViewCreate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,CreateBreadcrumbMixin,CreateView):
+    form_class = CategorieForm
+    model = Categorie
+    success_url = reverse_lazy('flotta:categorie_list')
+    template_name = 'flotta/categorie/create.html'
+    success_message = "Created successfully"
+    
+    def test_func(self):
+        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Not Authorized")
+        return redirect('flotta:categorie_list')
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super(CategorieViewCreate, self).get_context_data(**kwargs)
+        context["titolo"] = "Categorie"
+        return context
+
+class CategorieViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateBreadcrumbMixin,UpdateView):
+    form_class = CategorieForm
+    model = Categorie
+    success_url = reverse_lazy('flotta:categorie_list')
+    template_name = 'flotta/categorie/update.html'
+    success_message = "Update successfully"
+    
+    def test_func(self):
+        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Not Authorized")
+        return redirect('flotta:categorie_list')
+    
+    def get_context_data(self, **kwargs):
+        context = super(CategorieViewUpdate, self).get_context_data(**kwargs)
+        context["titolo"] = "Aggiorna Categorie"
+        return context    
+"""

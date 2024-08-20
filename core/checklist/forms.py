@@ -20,6 +20,7 @@ class ControlliForm(forms.ModelForm):
     class Meta:
         model = Controlli
         fields = '__all__'
+        exclude = ['id_checklist']
     
         widgets = {
             'controllo_luci_lampeggiante': forms.RadioSelect,
@@ -29,7 +30,7 @@ class ControlliForm(forms.ModelForm):
             'controllo_batteria': forms.RadioSelect,
             'controllo_forche': forms.RadioSelect,
             'sostituzione_batteria': forms.RadioSelect,
-            'anomalie': forms.Textarea(attrs={'rows': 3}),
+            'anomalie': forms.Textarea(attrs={'rows': 8}),
             "id_mezzo":forms.Select(attrs={'id':'mezzi','required':'required'}),
 
         }    

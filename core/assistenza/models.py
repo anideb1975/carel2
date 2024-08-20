@@ -2,10 +2,10 @@ from django.db import models
 from django.urls import reverse
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
-from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from flotta.models import Mezzi
+from checklist.models import Controlli
 from django_utils.choices import Choice, Choices
 from django.utils.translation import gettext_lazy as _
 
@@ -21,7 +21,6 @@ class Aziende(models.Model):
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
                                       options={'quality': 60})
-    telefono = PhoneNumberField(blank=True, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     creato = models.DateTimeField(auto_now_add=True)
     aggiornato = models.DateTimeField(auto_now=True)
@@ -29,6 +28,11 @@ class Aziende(models.Model):
     class Meta:
         verbose_name = 'Azienda Assistenza'
         verbose_name_plural = 'Aziende Assistenza'
+
+    # Salvo campo email lettere minuscole
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        super().save(*args, **kwargs)    
 
     def __str__(self):
         return self.descrizione
@@ -51,25 +55,20 @@ class Aziende(models.Model):
         return mark_safe('<img src="%s" width="40" height="40" />' % self.get_immagine())
           
 
-class Manutenzione(models.Model):
-    operatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Operatore', help_text='Operatore')
-    id_azienda = models.ForeignKey(Aziende, on_delete=models.CASCADE, verbose_name='Azienda',help_text='Azienda')
-    id_mezzo = models.ForeignKey(Mezzi, on_delete=models.CASCADE, verbose_name='Mezzo')
-    creato = models.DateTimeField(auto_now_add=True)
-    aggiornato = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        abstract = True
 
-
-class Interventi(Manutenzione):
+class Interventi(models.Model):
     class STATUS(Choices):
        SI = Choice(True, _('SI'))
-       NO = Choice(False, _('NO'))
-
+       NO = Choice(False, _('Salva e riprendi più tardi'))
+    operatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Operatore', help_text='Operatore')
+    modificato = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='operatore',verbose_name='Operatore', help_text='Operatore')
+    id_controllo = models.ForeignKey(Controlli, on_delete=models.CASCADE, verbose_name='Controllo')
     intervento =  models.TextField(verbose_name='Intervento', help_text='Specificare gli interventi effettuati') 
     ore = models.PositiveIntegerField(verbose_name='Ore',default=0, help_text='Lettura ore di lavoro Mezzo')
     evasa = models.BooleanField(choices=STATUS.choices,default=STATUS.NO)
+    creato = models.DateTimeField(auto_now_add=True)
+    aggiornato = models.DateTimeField(auto_now=True)
+    
 
     class Meta:
         verbose_name = 'Intevento'
@@ -77,7 +76,7 @@ class Interventi(Manutenzione):
         ordering = ["-creato"]
 
     def __str__(self):
-        return f"{self.id_mezzo.descrizione} {self.id_azienda.descrizione}"
+        return f"{self.id_controllo}"
     
     def get_absolute_url(self):
         return reverse('assistenza:interventi_detail', args=[self.pk])
@@ -87,3 +86,5 @@ class Interventi(Manutenzione):
     
     def get_delete_url(self):
         return reverse('assistenza:interventi_delete', args=[self.pk])
+
+    

@@ -11,13 +11,12 @@
 {% block content %}
 
     <div class="py-4">
-
         <div class="card shadow-sm">
             <div class="card-body">
                 <h3 class="h2 mb-1">{{titolo}}</h3>
             </div>
         </div>
-        {%include 'includes/grafici.html'  %}
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
             <div>
                 <a href="{% url 'checklist:checklist_create' %}" class="btn btn-secondary d-inline-flex align-items-center me-2">
@@ -25,6 +24,7 @@
                     {{titolo}}
                 </a>
             </div>
+           {% comment %}  <!-- REports-->
             <button class="btn btn-gray-800 d-inline-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
                 Reports
@@ -53,6 +53,7 @@
                     All Reports
                 </a>
             </div>
+            <!--  FIne reports--> {% endcomment %}
         </div>
     </div>
 
@@ -80,17 +81,17 @@
                                     {{checklist.operatore}}
                                 </td>
                                 <td>
-                                    {{checklist.turno}}
+                                    <div class="small fw-bold">{{checklist.turno}}</div>
                                 </td>
                                 <td>
-                                    {{checklist.controlli_set.get.id_mezzo.interno}}
+                                    <div class="small fw-bold">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
                                 </td>
                                 <td class="text-center">
-                                    {{checklist.creato|date:'W'}}
+                                    <div class="small fw-bold">{{checklist.creato|date:'W'}}</div>
                                 </td>
 
                                 <td>
-                                    {{checklist.creato}}
+                                    <div class="small fw-bold">{{checklist.creato}}</div>
                                 </td>
                                 <td>
                                     <div class="small fw-bold">{{checklist.aggiornato}}</div>
@@ -129,31 +130,5 @@
  <!-- Specific Page JS goes HERE  -->
 
 {% block extra_js %}
-{{ block.super }}
-
-<script>
-    new Chartist.Bar('.bar-chart', {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        series: [
-            {{data_points}},
-            {{data_points2}}
-        ]
-        }, {
-        low: 0,
-        showArea: true,
-        plugins: [
-            Chartist.plugins.tooltip()
-        ],
-        axisX: {
-            // On the x-axis start means top and end means bottom
-            position: 'end'
-        },
-        axisY: {
-            // On the y-axis start means left and end means right
-            showGrid: false,
-            showLabel: false,
-            offset: 0
-        }
-    });
-</script>
+    {{ block.super }}
 {% endblock extra_js %}

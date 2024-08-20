@@ -50,6 +50,19 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="h6 mb-1">
+                                            Azienda
+                                        </h3>
+                                       <!-- Text -->
+                                        <small class="text-gray-700">
+                                            {{checklist.operatore.userprofile.azienda}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h3 class="h6 mb-1">
                                             Creato
                                         </h3>
                                        <!-- Text -->
@@ -142,6 +155,22 @@
                                         {% endif %}
                                     </tr>
                                 {% endfor %}
+                                {% if checklist.controlli_set.get.anomalie %}
+                                    <tr>
+                                        <td>Evasa</td>
+
+                                        {% if obj.interventi_set.get.evasa == True %}
+                                            <td>
+                                                <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                            </td>
+                                        {% endif %}
+
+                                    </tr>
+                                {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

@@ -42,13 +42,13 @@
              id="utenti" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:admin_list' %}">
-                <span class="sidebar-text">Admin</span>
+              <a class="nav-link" href="{% url 'accounts:user_list' %}">
+                <span class="sidebar-text">Utenti</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:user_list' %}">
-                <span class="sidebar-text">Utenti</span>
+              <a class="nav-link" href="{% url 'accounts:admin_list' %}">
+                <span class="sidebar-text">Admin</span>
               </a>
             </li>
             <li class="nav-item">
@@ -161,7 +161,7 @@
              id="assistenza" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'checklist:controlli_list' %}">
+              <a class="nav-link" href="{% url 'checklist:controlli_anomalie' %}">
                 <span class="sidebar-text">Anomalie</span>
               </a>
             </li>
@@ -212,9 +212,34 @@
           <ul class="flex-column nav">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'checklist:checklist_list' %}">
-                <span class="sidebar-text">Lista</span>
+                <span class="sidebar-text">Checklist</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'checklist:controlli_list' %}">
+                <span class="sidebar-text">Controlli</span>
+              </a>
+            </li>
+
+            <li class="nav-item ">
+              {% now 'Y' as anno %}
+              <a class="nav-link" href="{% url 'checklist:checklist_anno' anno %}">
+                <span class="sidebar-text">Anno</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              {% now 'm' as mese %}
+              <a class="nav-link" href="{% url 'checklist:checklist_mese' anno mese %}">
+                <span class="sidebar-text">Mese</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              {% now 'W' as settimana %}
+              <a class="nav-link" href="{% url 'checklist:checklist_settimana' anno settimana %}">
+                <span class="sidebar-text">Settimana</span>
+              </a>
+            </li>
+
             <li class="nav-item ">
               <a class="nav-link" href="{% url 'checklist:checklist_giornaliero' %}">
                 <span class="sidebar-text">Giornaliero</span>

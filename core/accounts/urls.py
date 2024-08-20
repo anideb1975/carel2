@@ -20,7 +20,7 @@ urlpatterns += [
     path('admin-update/<int:pk>/', views.AdminUpdateView.as_view(), name='admin_update'),
     path('operatore-update/<int:pk>/', views.OperatoreUpdateView.as_view(), name='operatore_update'),
     path('responsabile-update/<int:pk>/', views.ResponsabileUpdateView.as_view(), name='responsabile_update'),
-    path('manutenzione-update/<int:pk>/', views.AssistenzaUpdateView.as_view(), name='assistenza_update'),
+    path('assistenza-update/<int:pk>/', views.AssistenzaUpdateView.as_view(), name='assistenza_update'),
 ]
 
 ### Detail ###
@@ -29,7 +29,7 @@ urlpatterns += [
     path('admin-detail/<int:pk>/', views.AdminDetailView.as_view(), name='admin_detail'),
     path('operatore-detail/<int:pk>/', views.OperatoreDetailView.as_view(), name='operatore_detail'),
     path('responsabile-detail/<int:pk>/', views.ResponsabileDetailView.as_view(), name='responsabile_detail'),
-    path('manutenzione-detail/<int:pk>/', views.AssistenzaDetailView.as_view(), name='assistenza_detail'),
+    path('assistenza-detail/<int:pk>/', views.AssistenzaDetailView.as_view(), name='assistenza_detail'),
 ]
 
 ### List ###
