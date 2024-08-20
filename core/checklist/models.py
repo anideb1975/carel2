@@ -26,11 +26,6 @@ class CheckList(models.Model):
         
     operatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,verbose_name='Operatore')
     turno = models.CharField(max_length=100,choices=Turni.choices,default=Turni.PRIMO)
-    #id_stabilimento = models.ForeignKey(Stabilimenti, on_delete=models.CASCADE,verbose_name='Stabilimento')
-    #id_ute = ChainedForeignKey(Ute,chained_field="id_stabilimento",auto_choose=True, chained_model_field="id_stabilimento", on_delete=models.CASCADE,verbose_name='Ute')
-    #id_reparto = ChainedForeignKey(Reparti, chained_field="id_ute", auto_choose=True,chained_model_field="id_ute", on_delete=models.CASCADE,verbose_name='Reparto')
-    #id_categoria = ChainedForeignKey(Categorie,chained_field="id_reparto", auto_choose=True, chained_model_field="id_reparto" ,on_delete=models.CASCADE,verbose_name='Categoria')
-    #id_mezzo = ChainedForeignKey(Mezzi,chained_field="id_categoria", auto_choose=True, chained_model_field="id_categoria" ,on_delete=models.CASCADE,verbose_name='Mezzo')
     creato = models.DateTimeField(auto_now_add=True)
     aggiornato = models.DateTimeField(auto_now=True) 
     

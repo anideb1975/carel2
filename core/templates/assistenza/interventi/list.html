@@ -49,93 +49,97 @@
                     </a>
                 </div>
                 <!-- fine report --> {% endcomment %}
-            </div>
         </div>
+    </div>
 
-        <div class="card border-0 shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive py-4">
-                    <table id="mytable" class="table table-flush  rounded">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="border-0 rounded-start">Operatore</th>
-                                <th class="border-0">Azienda</th>
-                                <th class="border-0">Mezzo</th>
-                                <th class="border-0">Ore</th>
-                                <th class="border-0">Evasa</th>
-                                <th class="border-0">Creato</th>
-                                <th class="border-0">Aggiornato</th>
-                                <th class="border-0 rounded-end">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    <div class="card border-0 shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive py-4">
+                <table id="mytable" class="table table-flush  rounded">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-0 rounded-start">#</th>
+                            <th class="border-0">Operatore</th>
+                            <th class="border-0">Azienda</th>
+                            <th class="border-0">Mezzo</th>
+                            <th class="border-0">Ore</th>
+                            <th class="border-0">Evasa</th>
+                            <th class="border-0">Creato</th>
+                            <th class="border-0">Aggiornato</th>
+                            <th class="border-0 rounded-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                             <!-- Item -->
-                            {% for object in object_list %}
-                                <tr>
-                                    <td class="fw-bold align-items-center">
-                                        <img class="avatar rounded-circle" src="{{object.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
-                                        {{object.operatore}}
-                                    </td>
-                                    {%if object.operatore.assistenzaprofile.azienda %}
+                        {% for object in object_list %}
+                            <tr>
+                                <td class="fw-bold align-items-center">
+                                    {{object.id}}
+                                </td>
+                                <td class="fw-bold align-items-center">
+                                    <img class="avatar rounded-circle" src="{{object.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
+                                    {{object.operatore}}
+                                </td>
+                                {%if object.operatore.assistenzaprofile.azienda %}
                                     <td class="fw-bold align-items-center">
                                         {{object.operatore.assistenzaprofile.azienda}}
-                                    </td>    
-                                        {%else%}
-                                    <td class="fw-bold align-items-center">    
+                                    </td>
+                                {%else%}
+                                    <td class="fw-bold align-items-center">
                                         None
                                     </td>
-                                        {% endif %}
-                                    <td class="fw-bold align-items-center">
-                                        {{object.id_controllo.id_mezzo.interno}}
-                                    </td>
-                                    <td class="fw-bold align-items-center">
-                                        {{object.ore}}
-                                    </td>
-                                    {% if object.evasa == True %}
-                                        <td>
-                                            <i class="fa-solid fa-circle-check" style="color: #63E6BE;"data-bs-toggle="tooltip" data-bs-placement="top" title="Evasa"></i>
-                                        </td>
-                                    {% else %}
-                                        <td>
-                                            <i class="fa-solid fa-circle-check" style="color: #FFD43B;"data-bs-toggle="tooltip" data-bs-placement="top" title="Sospesa"></i>
-                                        </td>
-                                    {% endif %}
+                                {% endif %}
+                                <td class="fw-bold align-items-center">
+                                    {{object.id_controllo.id_mezzo.interno}}
                                 </td>
                                 <td class="fw-bold align-items-center">
-                                    {{object.creato|naturalday}}
+                                    {{object.ore}}
                                 </td>
-                                <td class="fw-bold align-items-center">
-                                    {{object.aggiornato|naturalday}}
-                                </td>
+                                {% if object.evasa == True %}
+                                    <td>
+                                        <i class="fa-solid fa-circle-check" style="color: #63E6BE;"data-bs-toggle="tooltip" data-bs-placement="top" title="Evasa"></i>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        <i class="fa-solid fa-circle-check" style="color: #FFD43B;"data-bs-toggle="tooltip" data-bs-placement="top" title="Sospesa"></i>
+                                    </td>
+                                {% endif %}
+                            </td>
+                            <td class="fw-bold align-items-center">
+                                {{object.creato|naturalday}}
+                            </td>
+                            <td class="fw-bold align-items-center">
+                                {{object.aggiornato|naturalday}}
+                            </td>
 
-                                <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="icon icon-sm">
-                                                <span class="fas fa-ellipsis-h icon-dark"></span>
-                                            </span>
-                                            <span class="visually-hidden">Toggle Dropdown</span>
-                                        </button>
-                                        <div class="dropdown-menu py-0">
-                                            <a class="dropdown-item rounded-top" href="{{object.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
-                                            <a class="dropdown-item" href="{{object.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
-                                            <a class="dropdown-item text-danger rounded-bottom" href="{{object.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
-                                        </div>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon icon-sm">
+                                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                                        </span>
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu py-0">
+                                        <a class="dropdown-item rounded-top" href="{{object.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
+                                        <a class="dropdown-item" href="{{object.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
+                                        <a class="dropdown-item text-danger rounded-bottom" href="{{object.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
                                     </div>
-                                </td>
-                            {% empty %}
-                                <td colspan="8" class='bg-warning'>
-                                    Nessun dato da Mostrare
-                                </td>
-                                </tr>
+                                </div>
+                            </td>
+                        {% empty %}
+                            <td colspan="8" class='bg-warning'>
+                                Nessun dato da Mostrare
+                            </td>
+                            </tr>
 
                             <!-- End of Item -->
-                            {%  endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                        {%  endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
 {% endblock %}
 
  <!-- Specific Page JS goes HERE  -->

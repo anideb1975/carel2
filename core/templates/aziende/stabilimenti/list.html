@@ -55,56 +55,60 @@
                 </a>
             </div>
         <!--  FIne reports--> {% endcomment %}
-        
-    </div>
 
-    <div class="card border-0 shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive py-4">
-                <table id="mytable" class="table table-flush  rounded">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-0 rounded-start">Descrizione</th>
-                            <th class="border-0 rounded-end">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <!-- Item -->
-                        {% for object in object_list %}
+        </div>
+
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive py-4">
+                    <table id="mytable" class="table table-flush  rounded">
+                        <thead class="thead-light">
                             <tr>
-                                <td class="fw-bold align-items-center">
-                                    <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
-                                    {{object.descrizione|capfirst}}
-                                </td>
-
-                                <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="icon icon-sm">
-                                                <span class="fas fa-ellipsis-h icon-dark"></span>
-                                            </span>
-                                            <span class="visually-hidden">Toggle Dropdown</span>
-                                        </button>
-                                        <div class="dropdown-menu py-0">
-                                            <a class="dropdown-item rounded-top" href="{{object.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
-                                            <a class="dropdown-item" href="{{object.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
-                                            <a class="dropdown-item text-danger rounded-bottom" href="{{object.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
-                                        </div>
-                                    </div>
-                                </td>
-                        {% empty %}
-                            <td colspan="2" class='bg-warning'>
-                                Nessun dato da Mostrare
-                            </td>
+                                <th class="border-0 rounded-start">#</th>
+                                <th class="border-0">Descrizione</th>
+                                <th class="border-0 rounded-end">Action</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Item -->
+                            {% for object in object_list %}
+                                <tr>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.id}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
+                                        {{object.descrizione|capfirst}}
+                                    </td>
+
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="icon icon-sm">
+                                                    <span class="fas fa-ellipsis-h icon-dark"></span>
+                                                </span>
+                                                <span class="visually-hidden">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu py-0">
+                                                <a class="dropdown-item rounded-top" href="{{object.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
+                                                <a class="dropdown-item" href="{{object.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
+                                                <a class="dropdown-item text-danger rounded-bottom" href="{{object.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                            {% empty %}
+                                <td colspan="2" class='bg-warning'>
+                                    Nessun dato da Mostrare
+                                </td>
+                                </tr>
 
                             <!-- End of Item -->
-                        {%  endfor %}
-                    </tbody>
-                </table>
+                            {%  endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 {% endblock %}
 
  <!-- Specific Page JS goes HERE  -->

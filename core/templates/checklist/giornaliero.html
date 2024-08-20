@@ -51,74 +51,74 @@
             </div>
         </div>
         <!--fine reports --> {% endcomment %}
-</div>
-        <div class="card border-0 shadow mb-4 ">
-            <div class="card-body">
-                <div class="table-responsive py-4">
-                    <table id="mytable" class="table table-flush  rounded">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="border-0 rounded-start">Operatore</th>
-                                <th class="border-0">Turno</th>
-                                <th class="border-0">Mezzo</th>
-                                <th class="border-0">Sett.</th>
-                                <th class="border-0">Creato</th>
-                                <th class="border-0">Modificato</th>
-                                <th class="border-0 rounded-end">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    </div>
+    <div class="card border-0 shadow mb-4 ">
+        <div class="card-body">
+            <div class="table-responsive py-4">
+                <table id="mytable" class="table table-flush  rounded">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-0 rounded-start">Operatore</th>
+                            <th class="border-0">Turno</th>
+                            <th class="border-0">Mezzo</th>
+                            <th class="border-0">Sett.</th>
+                            <th class="border-0">Creato</th>
+                            <th class="border-0">Modificato</th>
+                            <th class="border-0 rounded-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <!-- Item -->
-                            {% for checklist in checklists %}
-                                <tr>
-                                    <td class="fw-bold align-items-center">
-                                        <img class="avatar rounded-circle" src="{{checklist.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
-                                        {{checklist.operatore}}
-                                    </td>
-                                    <td>
-                                        <div class="small fw-bold">{{checklist.turno}}</div>
-                                    </td>
-                                    <td>
-                                        <div class="small fw-bold">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="small fw-bold">{{checklist.creato|date:'W'}}</div>
-                                    </td>
-
-                                    <td>
-                                        <div class="small fw-bold">{{checklist.creato}}</div>
-                                    </td>
-                                    <td>
-                                        <div class="small fw-bold">{{checklist.aggiornato}}</div>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="icon icon-sm">
-                                                    <span class="fas fa-ellipsis-h icon-dark"></span>
-                                                </span>
-                                                <span class="visually-hidden">Toggle Dropdown</span>
-                                            </button>
-                                            <div class="dropdown-menu py-0">
-                                                <a class="dropdown-item rounded-top" href="{{checklist.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
-                                                <a class="dropdown-item" href="{{checklist.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
-                                                <a class="dropdown-item text-danger rounded-bottom" href="{{checklist.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                            {% empty %}
-                                <td colspan="9" class='bg-warning'>
-                                    Nessun dato da Mostrare
+                        {% for checklist in checklists %}
+                            <tr>
+                                <td class="fw-bold align-items-center">
+                                    <img class="avatar rounded-circle" src="{{checklist.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
+                                    {{checklist.operatore}}
                                 </td>
-                                </tr>
+                                <td>
+                                    <div class="small fw-bold">{{checklist.turno}}</div>
+                                </td>
+                                <td>
+                                    <div class="small fw-bold">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="small fw-bold">{{checklist.creato|date:'W'}}</div>
+                                </td>
+
+                                <td>
+                                    <div class="small fw-bold">{{checklist.creato}}</div>
+                                </td>
+                                <td>
+                                    <div class="small fw-bold">{{checklist.aggiornato}}</div>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="icon icon-sm">
+                                                <span class="fas fa-ellipsis-h icon-dark"></span>
+                                            </span>
+                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu py-0">
+                                            <a class="dropdown-item rounded-top" href="{{checklist.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
+                                            <a class="dropdown-item" href="{{checklist.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
+                                            <a class="dropdown-item text-danger rounded-bottom" href="{{checklist.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
+                                        </div>
+                                    </div>
+                                </td>
+                        {% empty %}
+                            <td colspan="9" class='bg-warning'>
+                                Nessun dato da Mostrare
+                            </td>
+                            </tr>
 
                         <!-- End of Item -->
-                            {%  endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                        {%  endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}
 

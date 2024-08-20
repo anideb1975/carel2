@@ -93,9 +93,9 @@
                                            <!-- Text -->
                                         <small class="text-gray-700">
                                             {% if object.interventi_set.get.evasa == True %}
-                                            <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>Completata
+                                                <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>Completata
                                             {% else %}
-                                            <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>Sospesa
+                                                <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>Sospesa
 
                                             {% endif %}
                                         </small>
@@ -156,21 +156,21 @@
         <!-- Tasti Modifica Esci-->
             <div class="row">
                 <div class="col-sm py-4">
-                {%if object.interventi_set.get.evasa == True%}
-                <a class="btn btn-primary" href="{% url 'assistenza:interventi_detail' object.pk %}">Dettagli</a>
-                {% elif object.interventi_set.get.evasa == False %}
-                <a class="btn btn-tertiary" href="{% url 'assistenza:interventi_update' object.interventi_set.get.pk %}">Modifica</a>
-                {% else %}
-                <a class="btn btn-primary" href="{% url 'assistenza:interventi_create' object.pk %}">Intervento</a>
-                {% endif %}
-                <a href="{% url 'checklist:controlli_anomalie'%}" class="btn btn-secondary">Esci</a>
+                    {%if object.interventi_set.get.evasa == True%}
+                        <a class="btn btn-primary" href="{% url 'assistenza:interventi_detail' object.pk %}">Dettagli</a>
+                    {% elif object.interventi_set.get.evasa == False %}
+                        <a class="btn btn-tertiary" href="{% url 'assistenza:interventi_update' object.interventi_set.get.pk %}">Modifica</a>
+                    {% else %}
+                        <a class="btn btn-primary" href="{% url 'assistenza:interventi_create' object.pk %}">Intervento</a>
+                    {% endif %}
+                    <a href="{% url 'checklist:controlli_anomalie'%}" class="btn btn-secondary">Esci</a>
 
                 {% comment %} <div class="col-sm py-4">
                     <a href="{% url 'checklist:controlli_anomalie_update' object.pk %}" class="btn btn-warning">Modifica</a>
                     <a href="{% url 'checklist:controlli_anomalie'%}" class="btn btn-primary">Esci</a> {% endcomment %}
                 </div>
             </div>
-           
+
         <!-- /fine tasti modifica esci -->       
         </div>
 
