@@ -6,7 +6,7 @@
 - Create Virtual environment
   - python -m venv env
   - source ./env/bin/activate
-  - pip install -r requirements.txt
+  - pip install -r core/requirements.txt
 - Create database
   - cd core
   - python manage.py makemigrations
