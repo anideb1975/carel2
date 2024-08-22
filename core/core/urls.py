@@ -46,4 +46,5 @@ urlpatterns += [
     path('',views.HomeView.as_view(), name='home'),
     path('index/', TemplateView.as_view(template_name='index.html'), name='index'),
     path('register/', views.RegistratiView.as_view(), name='register'),
+    path('noaccess/', TemplateView.as_view(template_name='noaccess.html'), name='noaccess'),
 ]

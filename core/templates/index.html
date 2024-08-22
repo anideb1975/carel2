@@ -5,12 +5,23 @@
     <head>
         {% include 'includes/head.html' %}
     </head>
-
     <body>
         <header class="header-global">
             <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
                 <div class="container position-relative">
                     <div class="navbar-collapse collapse me-auto" id="navbar_global">
+                        <div class="navbar-collapse-header">
+                            <div class="row">
+                                <div class="col-6 collapse-brand">
+                                    <a href="/">
+                                        <img src="https://appsrv1-147a1.kxcdn.com/volt-dashboard/img/brand/light.svg" alt="Volt logo">
+                                    </a>
+                                </div>
+                                <div class="col-6 collapse-close">
+                                    <a href="#navbar_global" class="fas fa-times" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" title="close" aria-label="Toggle navigation"></a>
+                                </div>
+                            </div>
+                        </div>
                         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                             {% if user.is_authenticated %}
                                 <li class="nav-item me-2">
@@ -35,7 +46,7 @@
 
         <main>
 
-     <!-- Hero -->
+             <!-- Hero -->
             <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
                 <div class="container">
                     <div class="row">
@@ -99,5 +110,4 @@
   <!-- End Scripts -->
 
     </body>
-
 </html>

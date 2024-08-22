@@ -15,7 +15,7 @@ from view_breadcrumbs import (DetailBreadcrumbMixin,
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin   
 
-from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory,NamedFormsetsMixin
 import datetime
 
 
@@ -27,7 +27,7 @@ class UteInlineView(InlineFormSetFactory):
     #formset_class = BaseItemFormSet
     #initial = [{'name': 'example1'}, {'name', 'example2'}]
     #prefix = 'item-form'
-    factory_kwargs = {'extra': 5, 'max_num': 5,
+    factory_kwargs = {'extra': 4, 'max_num': 5,
                       'can_order': False, 'can_delete': True}
     #formset_kwargs = {'auto_id': 'my_id_%s'}
 
@@ -37,7 +37,7 @@ class UteInlineView(InlineFormSetFactory):
 
 ### Crud Aziende ###
 
-class AziendeViewCreate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,CreateBreadcrumbMixin,CreateWithInlinesView):
+class AziendeViewCreate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,CreateBreadcrumbMixin,NamedFormsetsMixin,CreateWithInlinesView):
     form_class = StabilimentiForm
     model = Stabilimenti
     inlines = [UteInlineView]

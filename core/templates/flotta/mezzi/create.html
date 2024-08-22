@@ -12,7 +12,11 @@
         <form action="" method="POST" class="w-75 border border-1 py-2 px-3">
             <h1>{{titolo}}</h1>
             {% csrf_token %}
-            {% crispy form %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-body ">
+                    {% crispy form %}
+                </div>
+              </div>
        {% comment %}  <a href="{% url 'lcs:checklist_list' %}" class="btn btn-light btn-sm rounded-1">Cancel</a> {% endcomment %}
         </form>
     </div>

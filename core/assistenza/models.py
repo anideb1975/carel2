@@ -58,8 +58,9 @@ class Aziende(models.Model):
 
 class Interventi(models.Model):
     class STATUS(Choices):
-       SI = Choice(True, _('SI'))
+       SI = Choice(True, _('Si'))
        NO = Choice(False, _('Salva e riprendi più tardi'))
+       
     operatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Operatore', help_text='Operatore')
     modificato = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='operatore',verbose_name='Operatore', help_text='Operatore')
     id_controllo = models.ForeignKey(Controlli, on_delete=models.CASCADE, verbose_name='Controllo')
