@@ -83,7 +83,7 @@
                                     <div class="small fw-bold">{{object.id_checklist.turno}}</div>
                                 </td>
                                 <td>
-                                    <div class="small fw-bold">{{object.id_mezzo.interno}}</div>
+                                    <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.id_mezzo}}">{{object.id_mezzo.interno}}</div>
                                 </td>
                                 <td class="border-0">
                                   <div class="row d-flex align-items-center">
@@ -117,10 +117,10 @@
                                   {% endif %}
                                 </td>
                                 <td>
-                                    <div class="small fw-bold">{{object.creato|naturalday}}</div>
+                                    <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.creato}}">{{object.creato|naturalday}}</div>
                                 </td>
                                 <td>
-                                    <div class="small fw-bold">{{object.aggiornato|naturalday}}</div>
+                                    <div class="small fw-bold"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.aggiornato}}">{{object.aggiornato|naturalday}}</div>
                                 </td>
                                 <td>
                                     <div class="btn-group">

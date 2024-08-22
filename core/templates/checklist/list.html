@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-
+{% load humanize %}
 {% load i18n %}
 
 {% block title %}{{titolo}}{% endblock %}
@@ -88,17 +88,17 @@
                                     <div class="small fw-bold">{{checklist.turno}}</div>
                                 </td>
                                 <td>
-                                    <div class="small fw-bold">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
+                                    <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{checklist.controlli_set.get.id_mezzo}}">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
                                 </td>
                                 <td class="text-center">
                                     <div class="small fw-bold">{{checklist.creato|date:'W'}}</div>
                                 </td>
 
                                 <td>
-                                    <div class="small fw-bold">{{checklist.creato}}</div>
+                                    <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{checklist.creato}}">{{checklist.creato|naturalday}}</div>
                                 </td>
                                 <td>
-                                    <div class="small fw-bold">{{checklist.aggiornato}}</div>
+                                    <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{checklist.aggiornato}}">{{checklist.aggiornato|naturalday}}</div>
                                 </td>
                                 <td>
                                     <div class="btn-group">
