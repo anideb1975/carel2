@@ -38,7 +38,7 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h2>CheckList</h2>
-                <h4 class="text-danger-50 text-danger">Sei sicuro di cancellare la CHECKLIST {{object}}?</h4>
+                <h4 class="text-danger-50 text-danger">Sei sicuro di cancellare controllo {{object}}?</h4>
                 <form action="{% url 'checklist:controlli_delete' object.id %}" method="POST">
                     {% csrf_token %}
                     <button href="{% url 'checklist:controlli_delete' object.id %}" class="btn btn-danger">

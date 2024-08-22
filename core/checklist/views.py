@@ -304,6 +304,11 @@ class ControlliDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestM
         context["titolo"] = "Cancella Controllo"
         return context
 
+    def form_valid(self, form):
+        object = self.object.id_checklist.id
+        chk = CheckList.objects.get(id=object)
+        chk.delete()
+        return super().form_valid(form)
 
 ### Fine  controlli ###
 

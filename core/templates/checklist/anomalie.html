@@ -122,6 +122,8 @@
                                                 <a class="dropdown-item rounded-top" href="{% url 'assistenza:interventi_detail' anomalia.interventi_set.get.pk %}"><span class="fas fa-eye me-2"></span>Dettagli</a>
                                             {% elif anomalia.interventi_set.get.evasa == False %}
                                                 <a class="dropdown-item rounded-top" href="{% url 'assistenza:interventi_update' anomalia.interventi_set.get.pk %}"><span class="fas fa-edit me-2"></span>Modifica</a>
+                                                <a class="dropdown-item rounded-top" href="{% url 'assistenza:interventi_detail' anomalia.interventi_set.get.pk %}"><span class="fas fa-eye me-2"></span>Dettagli</a>
+
                                             {%else %}
                                                 <a class="dropdown-item rounded-top" href="{% url 'assistenza:interventi_create' anomalia.pk %}"><span class="fas fa-plus me-2"></span>Intervento</a>
                                             {% endif %}

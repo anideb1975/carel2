@@ -171,7 +171,7 @@ class InterventiUpdateView(SuccessMessageMixin,UserPassesTestMixin,LoginRequired
     success_message = "Update successfully"
 
     def get_success_url(self):
-        return reverse_lazy('assistenza:interventi_detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('assistenza:interventi_list')
     
     def test_func(self):
         return self.request.user.role == "ASSISTENZA" or self.request.user.role == 'ADMIN'  or self.request.user.is_superuser 
