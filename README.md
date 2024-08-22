@@ -20,5 +20,5 @@
 
 - Access
 - First login only super user ,add account select register in your index page appropriate level for account
-- note apllication multilevel and multiuser
+- note application multilevel and multiuser with various role and access
 
