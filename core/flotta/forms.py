@@ -8,7 +8,12 @@ class CategorieForm(forms.ModelForm):
     class Meta:
         model = Categorie
         fields = ['descrizione','immagine','id_reparto']
-        
+
+        widgets = {
+            "id_reparto": forms.Select(attrs={'id': 'reparto', 'required': 'required'}),
+
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
