@@ -22,8 +22,14 @@ msg2 = """
     nella sidebar. 
 """
 
-class HomeView(LoginRequiredMixin,TemplateView):
+class HomeView(TemplateView):
     template_name = 'home.html'
+
+
+    def get (self, request, *args, **kwargs):
+        if request.user.is_anonymous:
+            return redirect("index") 
+        return super().get( request, *args, **kwargs)
     
     def get_template_names(self):
         stabilimenti = Stabilimenti.objects.all()
