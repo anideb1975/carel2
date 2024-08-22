@@ -124,10 +124,12 @@ class CheckListModifica(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMix
     form_class = CheckListForm
     model = CheckList
     inlines = [ControlliInlineView]
-    context_object_name = 'checklist'
-    success_url = reverse_lazy('checklist:checklist_list')
+    #success_url = reverse_lazy('checklist:checklist_list')
     template_name = "checklist/update.html"
     success_message = "Update successfully"
+   
+    def get_success_url(self):
+        return reverse_lazy('checklist:checklist_list')
 
     def test_func(self):
         return self.get_object().operatore == self.request.user or self.request.user.role == 'ADMIN' or  self.request.user.role != "ASSISTENZA"
@@ -142,9 +144,7 @@ class CheckListModifica(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMix
         context["titolo"] = "Modifica Checklist"
         return context
 
-    def form_valid(self, form):
-        form.instance.operatore = self.request.user
-        return super().form_valid(form)
+  
 
 
 class CheckListDelete(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,DeleteBreadcrumbMixin,DeleteView):
