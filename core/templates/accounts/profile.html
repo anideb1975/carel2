@@ -83,7 +83,6 @@
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
@@ -92,15 +91,17 @@
                                     <div class="card-body">
                                         {% if profile.role == "ASSISTENZA" %}
                                             {{profile.assistenzaprofile.azienda}}
-                                        {% else %}
-                                            {{profile.userprofile.azienda}}
+                                        {% elif  profile.role == "ADMIN"%}
+                                           ---
+                                           {% else %}
+                                           {{profile.userprofile.azienda}}
                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+            
 
                     <div class="mt-3">
 
@@ -126,7 +127,7 @@
                         <div class="card shadow border-0 text-center p-0">
                             <div class="profile-cover rounded-top" data-background="/static/img/profile_logistica.jpg"></div>
                             <div class="card-body pb-5">
-                                <img src="{{profile.avatar.url}}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
+                                <img src="{{profile.avatar.url}}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{profile}}">
                                 <h4 class="h3">
                                     {{profile.first_name }} {{profile.last_name }}
                                 </h4>
