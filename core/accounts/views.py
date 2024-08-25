@@ -88,6 +88,7 @@ class SignUpAdmin(SuccessMessageMixin,CreateView):
 
 
 
+
 class SignUpOperatore(SuccessMessageMixin,CreateView):
     form_class  = OperatoreCreationMultiForm
     success_url = reverse_lazy('login')
