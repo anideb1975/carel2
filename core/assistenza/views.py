@@ -29,7 +29,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from checklist.models import Controlli
 from assistenza.models import Interventi
-from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
 import datetime
 
 

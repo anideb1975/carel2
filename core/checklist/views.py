@@ -423,33 +423,3 @@ class CheckListMonthsArchiveView(LoginRequiredMixin,ListBreadcrumbMixin,MonthArc
         context['anni_mesi'] = zip(context['anni'],context['mesi'])
         context['anni_settimane'] = zip(context['anni'],context['settimane'])
         return context    
-    
-
-
-
-
-""" class CheckListModifica(SweetifySuccessMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateView):
-    model = CheckList
-    form_class = CheckListForm
-    success_message = 'Checklist modificata con successo!'
-    template_name = "checklist/update.html"
-    context_object_name = 'checklist'
-    success_url = reverse_lazy('checklist:checklist_list')
-    
-    def test_func(self):
-        return self.get_object().operatore == self.request.user or self.request.user.role == 'ADMIN'
-
-    def handle_no_permission(self):
-        sweetify.warning(self.request, 'Utente non autorizzato')
-        return redirect('checklist:checklist_list')
-    
-    
-    def get_context_data(self, **kwargs):
-        context = super(CheckListModifica, self).get_context_data(**kwargs)
-        context["titolo"] = "Modifica Checklist"
-        return context
-
-    def form_valid(self, form):
-        form.instance.operatore = self.request.user
-        return super().form_valid(form)     """
-
