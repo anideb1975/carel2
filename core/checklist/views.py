@@ -23,6 +23,7 @@ from django.views.generic.dates import (YearArchiveView,
 from .forms import (CheckListForm, 
                     ControlliForm,
                     AnomalieControlliForm,
+                    InlineFormSet,
                     )
 
 from .models import CheckList, Controlli
@@ -41,14 +42,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.db.models.functions import ExtractYear,ExtractMonth, ExtractDay, ExtractWeek, ExtractIsoYear
 
+
 ### Crud Checklist ####
 
 class ControlliInlineView(InlineFormSetFactory):
     model = Controlli
     form_class = ControlliForm
-    #formset_class = BaseItemFormSet
+    #formset_class = InlineFormSet
     #initial = [{'name': 'example1'}, {'name', 'example2'}]
-    #prefix = 'item-form'
+    prefix = 'form'
     factory_kwargs = {'extra': 1, 'max_num': 1,
                       'can_order': False, 'can_delete': False}
     #formset_kwargs = {'auto_id': 'my_id_%s'}

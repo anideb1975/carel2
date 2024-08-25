@@ -7,6 +7,16 @@ from crispy_forms.bootstrap import InlineRadios
 from .models import CheckList, Controlli
 
 
+class InlineFormSet(forms.BaseInlineFormSet):
+
+    def __init__(self, *args, **kwargs):
+        super(InlineFormSet, self).__init__(*args, **kwargs)
+        for form in self.forms:
+            for name in form.fields:
+                form.fields[name].widget.attrs.update({'class': 'form-check-inline'})
+
+
+
 class CheckListForm(forms.ModelForm):
     
     class Meta:
@@ -23,7 +33,7 @@ class ControlliForm(forms.ModelForm):
         exclude = ['id_checklist']
     
         widgets = {
-            'controllo_luci_lampeggiante': forms.RadioSelect,
+            'controllo_luci_lampeggiante': forms.RadioSelect(),
             'controllo_avvisatori': forms.RadioSelect,
             'controllo_sollevamento': forms.RadioSelect,
             'controllo_telaio': forms.RadioSelect,
