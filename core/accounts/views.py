@@ -85,7 +85,7 @@ class SignUpAdmin(SuccessMessageMixin,CreateView):
         context = super(SignUpAdmin, self).get_context_data(**kwargs)
         context["titolo"] = "Crea Admin"
         return context
-    
+
 
 
 class SignUpOperatore(SuccessMessageMixin,CreateView):

@@ -132,7 +132,11 @@
                                     {{profile.first_name }} {{profile.last_name }}
                                 </h4>
                                 <h5 class="fw-normal">
-                                    {{ profile.username }}
+                                    {% if request.user.is_superuser%}
+                                    <div class="text-danger">{{ profile.username }}</div>
+                                    {% else  %}
+                                    <div>{{ profile.username }}</div>
+                                    {% endif %}
                                 </h5>
                                 <p class="text-gray mb-4">
                                     {{ profile.last_login }}
