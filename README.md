@@ -21,4 +21,7 @@
 - Access
 - First login only super user ,add account select register in your index page appropriate level for account
 - note application multilevel and multiuser with various role and access
+- database
+- development version use sqlite3
+- you can change database edit settings.py and configure your preferred db example mysql or mariadb 
 
