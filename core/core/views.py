@@ -56,10 +56,7 @@ class RegistratiView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        u = context['utenti'] = User.objects.filter(is_superuser=True).exists()
-        s = context['stabilimenti'] = Stabilimenti.objects.all().exists()
-        a = context ['assistenza'] = Aziende.objects.all().exists()
-        print(a)
-        print(s)
-        print(u)
+        context['utenti'] = User.objects.filter(is_superuser=True).exists()
+        context['stabilimenti'] = Stabilimenti.objects.all().exists()
+        context ['assistenza'] = Aziende.objects.all().exists()
         return context
