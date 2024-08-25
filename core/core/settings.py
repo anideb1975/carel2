@@ -186,20 +186,22 @@ STATICFILES_DIRS = [
 # Decommentare in produzione 
 STATIC_ROOT = BASE_DIR / 'static_files'
 
+### Sessione ####
 
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
 
 #Invalidate the session after the most recent/last activity:
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
-#To set the session timeout expiry time, simply use:
-SESSION_EXPIRE_SECONDS = 350
-
 #Re-direct users to another page:
 SESSION_TIMEOUT_REDIRECT = 'index'
 
 #Expire the session when the browser closes:
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True # Invalid session
+
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60 # group by minute
+
+### fine sessione ###
 
 LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'home'
