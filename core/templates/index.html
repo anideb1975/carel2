@@ -8,12 +8,11 @@
     <body>
         <header class="header-global">
             <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
-                <div class="container position-relative">
-                    <div class="navbar-collapse collapse me-auto" id="navbar_global">
-                        <div class="navbar-collapse-header">
+                <div class="container">
+                        <div class="navbar-collapse-header collapse mr-auto" id="navbar_global"">
                             <div class="row">
                                 <div class="col-6 collapse-brand">
-                                    <a href="/">
+                                    <a href="{% url 'index' %}">
                                         <img src="{% static 'img/carel2.png' %}" alt="logo carel2">
                                     </a>
                                 </div>
@@ -37,7 +36,6 @@
                             </li>
                         </ul>
                     </div>
-                </div>
             </nav>
         </header>
 
