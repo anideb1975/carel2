@@ -27,4 +27,10 @@ urlpatterns += [
 urlpatterns += [
     path("interventi-archivio/",views.InterventiArchivioView.as_view(),name="interventi_archivio"),
     path("interventi-giornaliero/",views.InterventiTodayArchiveView.as_view(),name="interventi_giornaliero"),
+    path("interventi-anno/<int:year>/", views.InterventiYearArchiveView.as_view(), name='interventi_anno'),
+    # Example: /2012/08/
+    path("interventi-mese/<int:year>/<int:month>/", views.InterventiMonthsArchiveView.as_view(month_format="%m"),
+         name='interventi_mese'),  # Example: /2012/week/23/
+    path("interventi-settimana/<int:year>/week/<int:week>/", views.InterventiWeekArchiveView.as_view(week_format="%W"),
+         name="interventi_settimana"),
 ]

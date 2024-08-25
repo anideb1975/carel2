@@ -167,7 +167,6 @@ class InterventiUpdateView(SuccessMessageMixin,UserPassesTestMixin,LoginRequired
     model = Interventi
     form_class = UpdateInterventiForm
     template_name = "assistenza/interventi/update.html"
-    #success_url = reverse_lazy('assistenza:interventi_list')
     success_message = "Update successfully"
 
     def get_success_url(self):
@@ -217,37 +216,110 @@ class InterventiViewDelete(LoginRequiredMixin, UserPassesTestMixin,DeleteBreadcr
 
 # Vista Giornaliera
 
-class InterventiTodayArchiveView(LoginRequiredMixin,BaseBreadcrumbMixin,TodayArchiveView):
+class InterventiTodayArchiveView(LoginRequiredMixin,ListBreadcrumbMixin,TodayArchiveView):
     model = Interventi
     queryset = Interventi.objects.all()
     date_field = "creato"
     allow_future = True
     allow_empty = True
     template_name = 'assistenza/interventi/giornaliero.html'
-    crumbs = [("Giornaliero", reverse_lazy("assistenza:interventi_giornaliero"))]
+    #crumbs = [("Giornaliero", reverse_lazy("assistenza:interventi_giornaliero"))]
     
     def get_context_data(self, **kwargs):
         context = super(InterventiTodayArchiveView, self).get_context_data(**kwargs)
         context["titolo"] = "Giornaliero"
-        context["segment"] = "checklist_list"
+        context["segment"] = "assistenza"
         return context
 
 
 ### Archivio ###
 
-class InterventiArchivioView(LoginRequiredMixin,BaseBreadcrumbMixin,ArchiveIndexView):
+class InterventiArchivioView(LoginRequiredMixin,ListBreadcrumbMixin,ArchiveIndexView):
     model = Interventi
     queryset = Interventi.objects.all()
     date_field = 'creato'
     allow_future = True
     allow_empty = True
     template_name = 'assistenza/interventi/archivio.html'
-    crumbs = [("Archivio", reverse_lazy("assistenza:interventi_archivio"))]
+    #crumbs = [("Archivio", reverse_lazy("assistenza:interventi_archivio"))]
     
     def get_context_data(self, **kwargs):
         context = super(InterventiArchivioView, self).get_context_data(**kwargs)
         context["titolo"] = "Archivio"
-        context["segment"] = "checklist_list"
+        context["segment"] = "assistenza"
         return context
 
+
 ### VIsta Settimanale ###
+
+
+class InterventiWeekArchiveView(LoginRequiredMixin, ListBreadcrumbMixin, WeekArchiveView):
+    model = Interventi
+    queryset = Interventi.objects.all()
+    date_field = "creato"
+    week_format = "%W"
+    allow_future = True
+    allow_empty = True
+    template_name = 'assistenza/interventi/lista_settimana.html'
+    # crumbs = [("checklist settimana", reverse_lazy("checklist:checklist:checklist_settimana"))]
+
+    def get_context_data(self, **kwargs):
+        context = super(InterventiWeekArchiveView, self).get_context_data(**kwargs)
+        context["titolo"] = "Vista Settimana"
+        context["segment"] = "assistenza"
+        context['anni'] = Interventi.objects.dates('creato', 'year').annotate()
+        context['mesi'] = Interventi.objects.dates('creato', 'month').annotate()
+        context['settimane'] = Interventi.objects.dates('creato', 'week').annotate()
+        context['anni_mesi'] = zip(context['anni'], context['mesi'])
+        context['anni_settimane'] = zip(context['anni'], context['settimane'])
+        return context
+
+
+## Vista Annuale ###
+
+
+class InterventiYearArchiveView(LoginRequiredMixin, ListBreadcrumbMixin, YearArchiveView):
+    model = Interventi
+    queryset = Interventi.objects.all()
+    date_field = "creato"
+    make_object_list = True
+    allow_future = True
+    allow_empty = True
+    template_name = 'assistenza/interventi/lista_anno.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(InterventiYearArchiveView, self).get_context_data(**kwargs)
+        context["titolo"] = "Vista Anno"
+        context["segment"] = "assistenza"
+        context['week'] = datetime.datetime.now()
+        context['anni'] = Interventi.objects.dates('creato', 'year').annotate()
+        context['mesi'] = Interventi.objects.dates('creato', 'month').annotate()
+        context['settimane'] = Interventi.objects.dates('creato', 'week').annotate()
+        context['anni_mesi'] = zip(context['anni'], context['mesi'])
+        context['anni_settimane'] = zip(context['anni'], context['settimane'])
+        return context
+
+
+### Vista Mensile ###
+
+class InterventiMonthsArchiveView(LoginRequiredMixin, ListBreadcrumbMixin, MonthArchiveView):
+    model = Interventi
+    queryset = Interventi.objects.all()
+    date_field = "creato"
+    make_object_list = True
+    allow_future = True
+    allow_empty = True
+    template_name = 'assistenza/interventi/lista_mese.html'
+    #context_object_name = 'checklists'
+
+    def get_context_data(self, **kwargs):
+        context = super(InterventiMonthsArchiveView, self).get_context_data(**kwargs)
+        context["titolo"] = "Vista Mensile"
+        context["segment"] = "assistenza"
+        context['anni'] = Interventi.objects.dates('creato', 'year').annotate()
+        context['mesi'] = Interventi.objects.dates('creato', 'month').annotate()
+        context['settimane'] = Interventi.objects.dates('creato', 'week').annotate()
+        context['anni_mesi'] = zip(context['anni'], context['mesi'])
+        context['anni_settimane'] = zip(context['anni'], context['settimane'])
+        return context

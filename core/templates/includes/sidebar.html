@@ -160,6 +160,11 @@
              id="assistenza" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'assistenza:aziende_list' %}">
+                <span class="sidebar-text">Aziende</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'checklist:controlli_anomalie' %}">
                 <span class="sidebar-text">Anomalie</span>
               </a>
@@ -169,21 +174,34 @@
                 <span class="sidebar-text">Interventi</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'assistenza:aziende_list' %}">
-                <span class="sidebar-text">Aziende</span>
+            <li class="nav-item ">
+              {% now 'Y' as anno %}
+              <a class="nav-link" href="{% url 'assistenza:interventi_anno' anno %}">
+                <span class="sidebar-text">Anno</span>
               </a>
             </li>
-            {% comment %} <li class="nav-item ">
-              <a class="nav-link" href="{% url 'assistenza:manutenzioneordinaria_list' %}">
-                <span class="sidebar-text">Manut. Ordinaria</span>
+            <li class="nav-item ">
+              {% now 'm' as mese %}
+              <a class="nav-link" href="{% url 'assistenza:interventi_mese' anno mese %}">
+                <span class="sidebar-text">Mese</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              {% now 'W' as settimana %}
+              <a class="nav-link" href="{% url 'assistenza:interventi_settimana' anno settimana %}">
+                <span class="sidebar-text">Settimana</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'assistenza:interventi_giornaliero' %}">
+                <span class="sidebar-text">Giornaliero</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'assistenza:manutenzionestraordinaria_list' %}">
-                <span class="sidebar-text">Manut. Straordinaria</span>
+              <a class="nav-link" href="{% url 'assistenza:interventi_archivio' %}">
+                <span class="sidebar-text">Archivio</span>
               </a>
-            </li> {% endcomment %}
+            </li>
 
           </ul>
         </div>
