@@ -26,7 +26,7 @@ class MezziInlineView(InlineFormSetFactory):
     #formset_class = BaseItemFormSet
     #initial = [{'name': 'example1'}, {'name', 'example2'}]
     #prefix = 'item-form'
-    factory_kwargs = {'extra': 5, 'max_num': 5,
+    factory_kwargs = {'extra': 1, 'max_num': None,
                       'can_order': False, 'can_delete': True}
     #formset_kwargs = {'auto_id': 'my_id_%s'}
 

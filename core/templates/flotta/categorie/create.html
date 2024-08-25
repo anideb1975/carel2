@@ -18,14 +18,7 @@
                     {{ form|crispy }}
                 </div>
               </div>
-            {% for formset in inlines %}
-            <h2 class="h5 mb-2">Mezzi</h2>
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                    {{formset|crispy}}
-                </div>
-              </div>
-              {% endfor %}
+              {% include 'partials/inline_formset.html' with child='Mezzi' %}
             <div class="mt-3">
                 <button class="btn btn-primary" type="submit">Salva</button>
             </div>

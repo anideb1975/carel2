@@ -15,10 +15,13 @@
         <form action="" method="POST" class="w-75 border border-1 py-2 px-3" enctype="multipart/form-data">
             <h1>{{titolo}}</h1>
             {% csrf_token %}
-            {{form|crispy}}
+            <div class="card shadow-sm mb-4">
+                <div class="card-body ">
+                    {{ form|crispy }}
+                </div>
+              </div>
             Ute
             {% for formset in inlines %}
-            <h2 class="h5 mb-2">Ute</h2>
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     {{formset|crispy}}
