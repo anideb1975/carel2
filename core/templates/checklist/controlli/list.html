@@ -86,35 +86,35 @@
                                     <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.id_mezzo}}">{{object.id_mezzo.interno}}</div>
                                 </td>
                                 <td class="border-0">
-                                  <div class="row d-flex align-items-center">
-                                      <div class="col-12 col-xl-2 px-0">
-                                          <div class="small font-weight-bold">{{object.percentuale_ok}}%</div>
-                                      </div>
-                                      <div class="col-12 col-xl-10 px-0 px-xl-1">
-                                          <div class="progress progress-lg mb-0">
-                                              <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{object.get_ok}}" aria-valuemin="0" aria-valuemax="{{object.get_num_controlli}}" style="width: {{object.percentuale_ok}}%;"></div>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 col-xl-2 px-0">
+                                            <div class="small font-weight-bold">{{object.percentuale_ok}}%</div>
+                                        </div>
+                                        <div class="col-12 col-xl-10 px-0 px-xl-1">
+                                            <div class="progress progress-lg mb-0">
+                                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{object.get_ok}}" aria-valuemin="0" aria-valuemax="{{object.get_num_controlli}}" style="width: {{object.percentuale_ok}}%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                   <div class="row d-flex align-items-center">
-                                      <div class="col-12 col-xl-2 px-0">
-                                          <div class="small font-weight-bold">{{object.percentuale_ko}}%</div>
-                                      </div>
-                                      <div class="col-12 col-xl-10 px-0 px-xl-1">
-                                          <div class="progress progress-lg mb-0">
-                                              <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{object.get_ko}}" aria-valuemin="0" aria-valuemax="{{object.get_num_controlli}}" style="width: {{object.percentuale_ko}}%;"></div>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 col-xl-2 px-0">
+                                            <div class="small font-weight-bold">{{object.percentuale_ko}}%</div>
+                                        </div>
+                                        <div class="col-12 col-xl-10 px-0 px-xl-1">
+                                            <div class="progress progress-lg mb-0">
+                                                <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{object.get_ko}}" aria-valuemin="0" aria-valuemax="{{object.get_num_controlli}}" style="width: {{object.percentuale_ko}}%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                              </td>
-                                 <td>
-                                  {% if not  object.anomalie %}
-                                    ---
-                                  {% else %}
-                                  <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.anomalie}}">{{object.anomalie|truncatechars:20}}</div>
-                                  {% endif %}
+                                </td>
+                                <td>
+                                    {% if not  object.anomalie %}
+                                        ---
+                                    {% else %}
+                                        <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.anomalie}}">{{object.anomalie|truncatechars:20}}</div>
+                                    {% endif %}
                                 </td>
                                 <td>
                                     <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{object.creato}}">{{object.creato|naturalday}}</div>

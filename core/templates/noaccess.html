@@ -1,12 +1,12 @@
 {% extends "layouts/base-fullscreen.html" %}
 
-{% block title %} Page Lock {% endblock %} 
+{% block title %} Page Lock {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-{% load static %}
+    {% load static %}
     <main>
         <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
             <div class="container">
@@ -18,16 +18,16 @@
                                 <h1 class="h3">Accesso Negato</h1>
                                 <p class="text-gray">Torna al login</p>
                             </div>
-                                <div class="d-grid mt-5">
+                            <div class="d-grid mt-5">
                                     {% comment %} <button type="submit" class="btn btn-gray-800">Unlock</button> {% endcomment %}
-                                    <a href="{% url 'login' %}" class="btn btn-gray-800">Login</a>
-                                </div>
-                            </form>
-                        </div>
+                                <a href="{% url 'login' %}" class="btn btn-gray-800">Login</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     </main>
 
 {% endblock content %}
