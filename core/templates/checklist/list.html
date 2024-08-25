@@ -88,7 +88,11 @@
                                     <div class="small fw-bold">{{checklist.turno}}</div>
                                 </td>
                                 <td>
-                                    <div class="small fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="{{checklist.controlli_set.get.id_mezzo}}">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
+                                    {% if checklist.controlli_set.get.anomalie%}
+                                    <div class="small fw-bold text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="{{checklist.controlli_set.get.id_mezzo}}">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
+                                    {% else %}
+                                    <div class="small fw-bold text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="{{checklist.controlli_set.get.id_mezzo}}">{{checklist.controlli_set.get.id_mezzo.interno}}</div>
+                                    {% endif %}
                                 </td>
                                 <td class="text-center">
                                     <div class="small fw-bold">{{checklist.creato|date:'W'}}</div>
