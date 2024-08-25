@@ -23,7 +23,7 @@ class MarelliWizard(LoginRequiredMixin,UserPassesTestMixin,SessionWizardView):
 
 
     def test_func(self):
-        return  self.request.user.is_superuser
+        return  self.request.user.is_superuser or self.request.user.role == "ADMIN"
 
     def handle_no_permission(self):
         messages.warning(self.request, "Not Authorized")

@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 import sweetify
 from aziende.models import Stabilimenti
 from accounts.models import User
-
+from assistenza.models import Aziende
 
 
 msg1 = """
@@ -14,6 +14,7 @@ msg1 = """
     per iniziare a usare l'applicazione devi popolare il database
     con dei dati, puoi usare il tasto WIZARD presente nella tua SIDEBAR per velocizzare
     la procedura (CONSIGLIATO).
+    ATTENZIONE (se non popoli il databese non potrai registrare nuovi utenti)
 """
 
 msg2 = """
@@ -32,8 +33,9 @@ class HomeView(TemplateView):
         return super().get( request, *args, **kwargs)
     
     def get_template_names(self):
-        stabilimenti = Stabilimenti.objects.all()
-        if not stabilimenti:
+        stabilimenti = Stabilimenti.objects.all().exists()
+        assistenza = Aziende.objects.all().exists()
+        if not stabilimenti or not assistenza:
             args1 = dict(title='Info1', icon='info', text= msg1 , persistent="Next")
             args2 = dict(title='Info2', icon='info', text=msg2,  persistent="Close")
             sweetify.multiple(self.request, args1, args2)
@@ -50,8 +52,14 @@ class HomeView(TemplateView):
 
 class RegistratiView(TemplateView):
     template_name = 'registrati.html'
-    
+
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['utenti'] = User.objects.get(role='ADMIN') 
+        u = context['utenti'] = User.objects.filter(is_superuser=True).exists()
+        s = context['stabilimenti'] = Stabilimenti.objects.all().exists()
+        a = context ['assistenza'] = Aziende.objects.all().exists()
+        print(a)
+        print(s)
+        print(u)
         return context

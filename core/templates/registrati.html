@@ -32,7 +32,7 @@
                         </div>
 
                                  <!-- Card Admin-->
-                        {% if not utenti  %}
+                        {% if utenti == False or stabilimenti == False or aziende == False %}
                             <div class="card border-0 shadow">
                                 <div class="card-body">
                                     <div class="row d-block d-xl-flex align-items-center">
