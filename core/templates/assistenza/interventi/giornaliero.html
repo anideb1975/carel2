@@ -59,7 +59,8 @@
                     <table id="mytable" class="table table-flush  rounded">
                         <thead class="thead-light">
                             <tr>
-                                <th class="border-0 rounded-start">Operatore</th>
+                                <th class="border-0 rounded-start">#</th>
+                                <th class="border-0">Operatore</th>
                                 <th class="border-0">Azienda</th>
                                 <th class="border-0">Controllo</th>
                                 <th class="border-0">Ore</th>
@@ -73,6 +74,9 @@
                             <!-- Item -->
                             {% for object in object_list %}
                                 <tr>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.id}}
+                                    </td>
                                     <td class="fw-bold align-items-center">
                                         <img class="avatar rounded-circle" src="{{object.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
                                         {{object.operatore}}
@@ -119,7 +123,7 @@
                                     </div>
                                 </td>
                             {% empty %}
-                                <td colspan="4" class='bg-warning'>
+                                <td colspan="9" class='bg-warning'>
                                     Nessun dato da Mostrare
                                 </td>
                                 </tr>

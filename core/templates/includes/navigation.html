@@ -31,7 +31,11 @@
               <img class="avatar rounded-circle" alt="Image placeholder"
                    src="{{request.user.avatar_thumbnail.url}}">
               <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
+                {%  if request.user.is_superuser %}
+                <span class="mb-0 font-small fw-bold  text-danger">{{request.user.username}}</span>
+                {% else %}
                 <span class="mb-0 font-small fw-bold text-gray-900">{{request.user.username}}</span>
+                {% endif %}
               </div>
             </div>
           </a>
