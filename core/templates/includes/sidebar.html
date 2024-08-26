@@ -15,9 +15,9 @@
           </div>
       </div>
       <div class="collapse-close d-md-none">
-          <a href="#sidebarMenu" class="fas fa-times" data-toggle="collapse"
+          <a href="{{request.get_full_path}}" class="fas fa-times" data-toggle="collapse"
               data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
-              aria-label="Toggle navigation"></a>
+              aria-label="Toggle navigation" ></a>
       </div>
       </div>
       <ul class="nav flex-column pt-3 pt-md-0">
@@ -312,3 +312,9 @@
       </ul>
   </div>
 </nav>
+
+<script>
+function closeNav() {
+  document.getElementById("mySidebar").visibility = "hidden";
+}
+</script>
