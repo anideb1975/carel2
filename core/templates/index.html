@@ -1,24 +1,45 @@
+{% load static%}
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 
-    <head>
-        {% include 'includes/head.html' %}
-        {% block extrastyle %}
-        {% endblock extrastyle %}
-        {% block extrahead %}
-        {% endblock extrahead %}
-    </head>
-    <body>
-        <header class="header-global">
-            <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
-                <div class="container">
-                    <div class="navbar-collapse-header collapse mr-auto" id="navbar_global">
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Primary Meta Tags -->
+{% include 'includes/head.html' %}
+    {% block extrastyle %}
+      <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    {% endblock extrastyle %}
+    {% block extrahead %}
+    {% endblock extrahead %}
+
+<!-- Fontawesome -->
+<link type="text/css" href="https://appsrv1-147a1.kxcdn.com/volt-dashboard/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+<!-- Volt CSS -->
+<link type="text/css" href="https://appsrv1-147a1.kxcdn.com/volt-dashboard/css/volt.css" rel="stylesheet">
+
+<!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+</head>
+
+<body>
+
+    <header class="header-global">
+
+        <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
+            <div class="container position-relative">
+                <div class="navbar-collapse collapse mr-auto" id="navbar_global">
+                    <div class="navbar-collapse-header">
                         <div class="row">
                             <div class="col-6 collapse-brand">
-                                <a href="{% url 'index' %}">
+                                 <a href="{% url 'index' %}">
                                     <img src="{% static 'img/carel2.png' %}" alt="logo carel2">
                                 </a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <a href="#navbar_global" class="fas fa-times" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" title="close" aria-label="Toggle navigation"></a>
                             </div>
                         </div>
                     </div>
@@ -40,41 +61,46 @@
                         </li>
                     </ul>
                 </div>
-            </nav>
-        </header>
-
-        <main>
-
-             <!-- Hero -->
-            <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <div class="bootstrap-big-icon d-none d-lg-block">
-                                <img src="{% static 'assets/img/logistica.jpg' %}" width="700" height="622" class="d-block my-1" viewBox="0 0 118 94" role="img" alt="Mockup presentation">
-                            </div>
-                            <h1 class="fw-bolder">Carel2</h1>
-                            <h2 class="lead fw-normal text-muted mb-5">
-                                Project
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="home-pattern" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4"><path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path></svg></figure>
-            </section>
-            <div class="section pt-0">
-                <div class="container mt-n10 mt-lg-n12 z-2">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <!-- <img src="/static/img/mockup.png" alt="Carel2"> -->
-                             <img src="/static/img/profile_logistica.jpg" alt="Carel2">
-                        </div>
-                    </div>
+                <div class="d-flex align-items-center ml-auto">
+                    <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
             </div>
-        </main>
+        </nav>
 
-        <footer class="footer py-6 bg-primary text-white">
+    </header>
+
+   <main>
+
+     <!-- Hero -->
+     <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 text-center">
+                  <div class="bootstrap-big-icon d-none d-lg-block">
+                      <img src="{% static 'img/profile_logistica.jpg' %}"  width="700" height="622" class="d-block my-1" viewBox="0 0 118 94" role="img" alt="Mockup presentation">
+                  </div>
+                  <h1 class="fw-bolder">Carel2</h1>
+                  <h2 class="lead fw-normal text-muted mb-5">
+                      Project
+                  </h2>
+              </div>
+          </div>
+      </div>
+      <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="home-pattern" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4"><path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path></svg></figure>
+  </section>
+  <div class="section pt-0">
+      <div class="container mt-n10 mt-lg-n12 z-2">
+          <div class="row justify-content-center">
+              <div class="col-12">
+                  <img src="{% static 'img/profile_logistica.jpg' %}" alt="Magneti Marelli">
+              </div>
+          </div>
+      </div>
+  </div>
+  </main>
+     <footer class="footer py-6 bg-primary text-white">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -88,7 +114,7 @@
                     </div>
                     <div class="col-12 col-md-4 mb-5 mb-lg-0">
 
-                        <p class="text-muted font-small m-0"></p>
+                        <p class="text-muted font-small m-0">Carel2</p>
                     </div>
                 </div>
                 <hr class="bg-gray my-5">
@@ -103,11 +129,6 @@
                 </div>
             </div>
         </footer>
-
-
-  <!-- Scripts -->
-        {% include 'includes/scripts.html' %}
-  <!-- End Scripts -->
-
-    </body>
+{% include 'includes/scripts_index.html' %}
+</body>
 </html>
