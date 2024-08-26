@@ -100,7 +100,7 @@
                                     </td>
                                 {% endif %}
                                 <td>
-                                    <div class="small fw-bold">{{anomalia.anomalie|truncatechars:25}}</div>
+                                    <div class="small fw-bold " data-bs-toggle="tooltip" data-bs-placement="top" title="{{anomalia.anomalie}}">{{anomalia.anomalie|truncatechars:25}}</div>
                                 </td>
                                 <td>
                                     <div class="small fw-bold">{{anomalia.id_checklist.creato|naturalday}}</div>
