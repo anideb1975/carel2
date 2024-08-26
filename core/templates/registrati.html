@@ -9,7 +9,7 @@
 
 {% block content %}
     {% load static %}
-    <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+    <section class="mt-4 mb-4 align-items-center">
         <div class="container">
             <div class="row justify-content-center form-bg-image">
                 <div class="col-12 d-flex align-items-center justify-content-center">
@@ -55,6 +55,28 @@
                                 </div>
                             </div>
                         {% else %}
+                        <!-- admin card -->
+                        <div class="card border-0 shadow mb-4">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                                <div class="icon icon-shape icon-md icon-shape-primary rounded"><a href="{% url 'accounts:admin_create' %}"><img src="{% static 'img/admin.png' %}" alt='Operatore' ></a></div>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">Registrati</h2>
+                                                <h3 class="mb-1">Amministratore</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">Registrati</h2>
+                                                <h3 class="fw-extrabold mb-2">Admin</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 <!--/fine Card Admin-->
 
                                 <!-- Card Operatore-->

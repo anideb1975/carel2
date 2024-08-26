@@ -44,6 +44,9 @@ from view_breadcrumbs import (DetailBreadcrumbMixin,
 )
    
 from .models import (Admin, Operatore, Responsabile, Assistenza)   
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        UserPassesTestMixin,
+)
 
 ### Cambia Password ##
 
@@ -75,12 +78,12 @@ class SignUpUser(SuccessMessageMixin,CreateView):
         context["titolo"] = "Crea Utente"
         return context
 
-class SignUpAdmin(SuccessMessageMixin,CreateView):
+class SignUpAdmin(CreateView):
     form_class = CustomAdminCreationForm
     success_url = reverse_lazy('login')
     template_name = 'accounts/create.html'
     success_message = "Created successfully"
-    
+
     def get_context_data(self, **kwargs):
         context = super(SignUpAdmin, self).get_context_data(**kwargs)
         context["titolo"] = "Crea Admin"
