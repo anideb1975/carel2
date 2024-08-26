@@ -1,288 +1,314 @@
-<nav id="sidebarMenu" class="sidebar  d-lg-block bg-gray-800 text-white collapse" data-simplebar>
-  <div class="sidebar-inner px-4 pt-3">
-    <ul class="nav flex-column pt-3 pt-md-0">
-      <!--  wizard -->
-      <li class="nav-item">
-        <a href="{% url 'wizard:wizard' %}" class="nav-link d-flex align-items-center">
-          <span class="sidebar-icon">
-            <i class="fa-solid fa-hat-wizard"></i>
-          </span>
-          <span class="mt-1 ms-1 sidebar-text">Wizard</span>
-        </a>
-      </li>
-      <!-- fine wizard -->
-      <!--  Home -->
-      <li class="nav-item">
-        <a href="{% url 'home' %}" class="nav-link d-flex align-items-center">
-          <span class="sidebar-icon">
-            <i class="fa-solid fa-house"></i>
-          </span>
-          <span class="mt-1 ms-1 sidebar-text">Home</span>
-        </a>
-      </li>
-      <!-- fine Home -->
 
-      <!-- Utenti -->
-      <li class="nav-item {% if 'user' in segment %} active {% endif %}">
-        <span
-          class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-          data-bs-toggle="collapse" data-bs-target="#utenti">
-          <span>
+<nav id="sidebarMenu" class="sidebar d-md-block bg-primary text-white collapse px-4">
+  <div class="sidebar-sticky pt-3 mx-auto">
+      <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+      <div class="d-flex align-items-center">
+          <div class="user-avatar lg-avatar mr-4">
+          <img src="{{request.user.avatar_thumbnail.url}}" class="card-img-top rounded-circle border-white" alt="{{request.user.username}}">
+          </div>
+          <div class="d-block">
+          <h2 class="h6">
+            {{request.user.username}}
+          </h2>
+          <a href="{% url 'logout' %}" class="btn btn-secondary text-dark btn-xs">
+              <span class="mr-2"><span class="fas fa-sign-out-alt"></span></span>Sign Out</a>
+          </div>
+      </div>
+      <div class="collapse-close d-md-none">
+          <a href="#sidebarMenu" class="fas fa-times" data-toggle="collapse"
+              data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
+              aria-label="Toggle navigation"></a>
+      </div>
+      </div>
+      <ul class="nav flex-column pt-3 pt-md-0">
+        <li class="nav-item active ">
+          <a href="{% url 'home' %}" class="nav-link">
+          <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+          <span>Home</span>
+          </a>
+      </li>
+        <!--  wizard -->
+        <li class="nav-item">
+          <a href="{% url 'wizard:wizard' %}" class="nav-link d-flex align-items-center">
             <span class="sidebar-icon">
-              <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-hat-wizard"></i>
             </span>
-            <span class="sidebar-text">Utenti</span>
-          </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </span>
-        </span>
-        <div class="multi-level collapse {% if 'user' in segment %} show {% endif %} " role="list"
-             id="utenti" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:user_list' %}">
-                <span class="sidebar-text">Utenti</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:admin_list' %}">
-                <span class="sidebar-text">Admin</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:operatore_list' %}">
-                <span class="sidebar-text">Operatori</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:responsabile_list' %}">
-                <span class="sidebar-text">Responsabili</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:assistenza_list' %}">
-                <span class="sidebar-text">Assistenza</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-        <!-- fine Utenti  -->
-
-        <!-- Aziende -->
-      <li class="nav-item {% if 'page-' in segment %} active {% endif %}">
-        <span
-          class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-          data-bs-toggle="collapse" data-bs-target="#aziende">
-          <span>
+            <span class="mt-1 ms-1 sidebar-text">Wizard</span>
+          </a>
+        </li>
+        <!-- fine wizard -->
+        <!--  Home -->
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link d-flex align-items-center">
             <span class="sidebar-icon">
-              <i class="fa-solid fa-industry"></i>
+              <i class="fa-solid fa-house"></i>
             </span>
-            <span class="sidebar-text">Aziende</span>
-          </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </span>
-        </span>
-        <div class="multi-level collapse {% if 'page-' in segment %} show {% endif %} " role="list"
-             id="aziende" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'aziende:stabilimenti_list' %}">
-                <span class="sidebar-text">Stabilimenti</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'aziende:ute_list' %}">
-                <span class="sidebar-text">Ute</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'aziende:reparti_list' %}">
-                <span class="sidebar-text">Reparti</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-        <!-- fine Aziende  -->
-
-        <!--FLotta  -->
-      <li class="nav-item {% if 'tables-bootstrap-' in segment %} active {% endif %}">
-        <span
-          class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-          data-bs-toggle="collapse" data-bs-target="#flotta">
-          <span>
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-truck-ramp-box"></i>
+            <span class="mt-1 ms-1 sidebar-text">Home</span>
+          </a>
+        </li>
+        <!-- fine Home -->
+  
+        <!-- Utenti -->
+        <li class="nav-item {% if 'user' in segment %} active {% endif %}">
+          <span
+            class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#utenti">
+            <span>
+              <span class="sidebar-icon">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <span class="sidebar-text">Utenti</span>
             </span>
-            <span class="sidebar-text">Flotta</span>
-          </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </span>
-        </span>
-        <div class="multi-level collapse {% if 'tables-bootstrap-' in segment %} show {% endif %}"
-             role="list" id="flotta" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'flotta:categorie_list' %}">
-                <span class="sidebar-text">Categorie</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'flotta:mezzi_list' %}">
-                <span class="sidebar-text">Mezzi</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <!--fine Flotta  -->
-
-      <!-- Assistenza -->
-      <li class="nav-item">
-        <span
-          class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-          data-bs-toggle="collapse" data-bs-target="#assistenza">
-          <span>
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-list"></i>
+            <span class="link-arrow">
+              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
             </span>
-            <span class="sidebar-text">Assistenza</span>
           </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </span>
-        </span>
-        <div class="multi-level collapse {% if 'assistenza' in segment %} show {% endif %} " role="list"
-             id="assistenza" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'assistenza:aziende_list' %}">
-                <span class="sidebar-text">Aziende</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'checklist:controlli_anomalie' %}">
-                <span class="sidebar-text">Anomalie</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'assistenza:interventi_list' %}">
-                <span class="sidebar-text">Interventi</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              {% now 'Y' as anno %}
-              <a class="nav-link" href="{% url 'assistenza:interventi_anno' anno %}">
-                <span class="sidebar-text">Anno</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              {% now 'm' as mese %}
-              <a class="nav-link" href="{% url 'assistenza:interventi_mese' anno mese %}">
-                <span class="sidebar-text">Mese</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              {% now 'W' as settimana %}
-              <a class="nav-link" href="{% url 'assistenza:interventi_settimana' anno settimana %}">
-                <span class="sidebar-text">Settimana</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="{% url 'assistenza:interventi_giornaliero' %}">
-                <span class="sidebar-text">Giornaliero</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'assistenza:interventi_archivio' %}">
-                <span class="sidebar-text">Archivio</span>
-              </a>
-            </li>
-
-          </ul>
-        </div>
-      </li>
-      <!-- fine Assistenza -->
-      <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
-      <!-- lcs -->
-
-      <li class="nav-item">
-        <span
-          class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-          data-bs-toggle="collapse" data-bs-target="#lcs">
-          <span>
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-list"></i>
+          <div class="multi-level collapse {% if 'user' in segment %} show {% endif %} " role="list"
+               id="utenti" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:user_list' %}">
+                  <span class="sidebar-text">Utenti</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:admin_list' %}">
+                  <span class="sidebar-text">Admin</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:operatore_list' %}">
+                  <span class="sidebar-text">Operatori</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:responsabile_list' %}">
+                  <span class="sidebar-text">Responsabili</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:assistenza_list' %}">
+                  <span class="sidebar-text">Assistenza</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+          <!-- fine Utenti  -->
+  
+          <!-- Aziende -->
+        <li class="nav-item {% if 'page-' in segment %} active {% endif %}">
+          <span
+            class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#aziende">
+            <span>
+              <span class="sidebar-icon">
+                <i class="fa-solid fa-industry"></i>
+              </span>
+              <span class="sidebar-text">Aziende</span>
             </span>
-            <span class="sidebar-text">LCS</span>
+            <span class="link-arrow">
+              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </span>
           </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          <div class="multi-level collapse {% if 'page-' in segment %} show {% endif %} " role="list"
+               id="aziende" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'aziende:stabilimenti_list' %}">
+                  <span class="sidebar-text">Stabilimenti</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'aziende:ute_list' %}">
+                  <span class="sidebar-text">Ute</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'aziende:reparti_list' %}">
+                  <span class="sidebar-text">Reparti</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+          <!-- fine Aziende  -->
+  
+          <!--FLotta  -->
+        <li class="nav-item {% if 'tables-bootstrap-' in segment %} active {% endif %}">
+          <span
+            class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#flotta">
+            <span>
+              <span class="sidebar-icon">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+              </span>
+              <span class="sidebar-text">Flotta</span>
+            </span>
+            <span class="link-arrow">
+              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </span>
           </span>
-        </span>
-        <div class="multi-level collapse {% if 'checklist_list' in segment %} show {% endif %} " role="list"
-             id="lcs" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'checklist:checklist_list' %}">
-                <span class="sidebar-text">Checklist</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'checklist:controlli_list' %}">
-                <span class="sidebar-text">Controlli</span>
-              </a>
-            </li>
-
-            <li class="nav-item ">
-              {% now 'Y' as anno %}
-              <a class="nav-link" href="{% url 'checklist:checklist_anno' anno %}">
-                <span class="sidebar-text">Anno</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              {% now 'm' as mese %}
-              <a class="nav-link" href="{% url 'checklist:checklist_mese' anno mese %}">
-                <span class="sidebar-text">Mese</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              {% now 'W' as settimana %}
-              <a class="nav-link" href="{% url 'checklist:checklist_settimana' anno settimana %}">
-                <span class="sidebar-text">Settimana</span>
-              </a>
-            </li>
-
-            <li class="nav-item ">
-              <a class="nav-link" href="{% url 'checklist:checklist_giornaliero' %}">
-                <span class="sidebar-text">Giornaliero</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'checklist:checklist_archivio' %}">
-                <span class="sidebar-text">Archivio</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <!--/ lcs -->
-
-      <!-- Logout -->
-      <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
-      <li class="nav-item">
-        <a
-          href="{% url 'logout' %}"
-          class="nav-link d-flex align-items-center">
-          <span class="sidebar-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
-          <span>Logout</span>
-        </a>
-      </li>
-      <!-- fine logout -->
-    </ul>
+          <div class="multi-level collapse {% if 'tables-bootstrap-' in segment %} show {% endif %}"
+               role="list" id="flotta" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'flotta:categorie_list' %}">
+                  <span class="sidebar-text">Categorie</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'flotta:mezzi_list' %}">
+                  <span class="sidebar-text">Mezzi</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!--fine Flotta  -->
+  
+        <!-- Assistenza -->
+        <li class="nav-item">
+          <span
+            class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#assistenza">
+            <span>
+              <span class="sidebar-icon">
+                <i class="fa-solid fa-list"></i>
+              </span>
+              <span class="sidebar-text">Assistenza</span>
+            </span>
+            <span class="link-arrow">
+              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </span>
+          </span>
+          <div class="multi-level collapse {% if 'assistenza' in segment %} show {% endif %} " role="list"
+               id="assistenza" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'assistenza:aziende_list' %}">
+                  <span class="sidebar-text">Aziende</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'checklist:controlli_anomalie' %}">
+                  <span class="sidebar-text">Anomalie</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'assistenza:interventi_list' %}">
+                  <span class="sidebar-text">Interventi</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                {% now 'Y' as anno %}
+                <a class="nav-link" href="{% url 'assistenza:interventi_anno' anno %}">
+                  <span class="sidebar-text">Anno</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                {% now 'm' as mese %}
+                <a class="nav-link" href="{% url 'assistenza:interventi_mese' anno mese %}">
+                  <span class="sidebar-text">Mese</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                {% now 'W' as settimana %}
+                <a class="nav-link" href="{% url 'assistenza:interventi_settimana' anno settimana %}">
+                  <span class="sidebar-text">Settimana</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="{% url 'assistenza:interventi_giornaliero' %}">
+                  <span class="sidebar-text">Giornaliero</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'assistenza:interventi_archivio' %}">
+                  <span class="sidebar-text">Archivio</span>
+                </a>
+              </li>
+  
+            </ul>
+          </div>
+        </li>
+        <!-- fine Assistenza -->
+        <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+        <!-- lcs -->
+  
+        <li class="nav-item">
+          <span
+            class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#lcs">
+            <span>
+              <span class="sidebar-icon">
+                <i class="fa-solid fa-list"></i>
+              </span>
+              <span class="sidebar-text">LCS</span>
+            </span>
+            <span class="link-arrow">
+              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </span>
+          </span>
+          <div class="multi-level collapse {% if 'checklist_list' in segment %} show {% endif %} " role="list"
+               id="lcs" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'checklist:checklist_list' %}">
+                  <span class="sidebar-text">Checklist</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'checklist:controlli_list' %}">
+                  <span class="sidebar-text">Controlli</span>
+                </a>
+              </li>
+  
+              <li class="nav-item ">
+                {% now 'Y' as anno %}
+                <a class="nav-link" href="{% url 'checklist:checklist_anno' anno %}">
+                  <span class="sidebar-text">Anno</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                {% now 'm' as mese %}
+                <a class="nav-link" href="{% url 'checklist:checklist_mese' anno mese %}">
+                  <span class="sidebar-text">Mese</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                {% now 'W' as settimana %}
+                <a class="nav-link" href="{% url 'checklist:checklist_settimana' anno settimana %}">
+                  <span class="sidebar-text">Settimana</span>
+                </a>
+              </li>
+  
+              <li class="nav-item ">
+                <a class="nav-link" href="{% url 'checklist:checklist_giornaliero' %}">
+                  <span class="sidebar-text">Giornaliero</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'checklist:checklist_archivio' %}">
+                  <span class="sidebar-text">Archivio</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!--/ lcs -->
+  
+        <!-- Logout -->
+        <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
+        <li class="nav-item">
+          <a
+            href="{% url 'logout' %}"
+            class="nav-link d-flex align-items-center">
+            <span class="sidebar-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+            <span>Logout</span>
+          </a>
+        </li>
+        <!-- fine logout -->
+      </ul>
   </div>
 </nav>

@@ -1,5 +1,5 @@
 {% load static %}
-
+{% comment %} 
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
   <a class="navbar-brand me-lg-5" href="{% url 'index' %}">
     <img class="navbar-brand-dark" src="{% static 'img/carel2.png' %}" alt="logo carel2" /> <img
@@ -11,4 +11,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
+</nav> {% endcomment %}
+
+<nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
+  <a class="navbar-brand mr-lg-5" href="{% url 'home' %}">
+    <img class="navbar-brand-dark" src="{% static 'img/carel2.png' %}" alt="logo carel2" /> <img class="navbar-brand-light" src="{% static 'img/carel2.png' %}" alt="logo carel2" />
+  </a>
+  <div class="d-flex align-items-center">
+    <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+  </div>
 </nav>
+
+<div class="container-fluid bg-soft">
+  <div class="row">
+      <div class="col-12">
