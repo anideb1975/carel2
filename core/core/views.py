@@ -60,3 +60,16 @@ class RegistratiView(TemplateView):
         context['stabilimenti'] = Stabilimenti.objects.all().exists()
         context ['assistenza'] = Aziende.objects.all().exists()
         return context
+    
+
+
+def permission_denied(request, exception=None, template_name='403.html'):
+    return render(request, '403.html')
+
+
+def not_found(request, exception=None, template_name='404.html'):
+    return render(request, '404.html')
+
+
+def server_error(request, exception=None, template_name='500.html'):
+    return render(request, '500.html')

@@ -35,3 +35,4 @@ urlpatterns += [
     path("checklist-mese/<int:year>/<int:month>/",views.CheckListMonthsArchiveView.as_view(month_format="%m"),name='checklist_mese'),# Example: /2012/week/23/
     path("checklist-settimana/<int:year>/week/<int:week>/",views.CheckListWeekArchiveView.as_view(week_format = "%W"),name="checklist_settimana"),
 ]
+

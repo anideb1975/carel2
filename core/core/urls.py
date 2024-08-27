@@ -16,22 +16,24 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from . import views
-
+from django.views.static import serve  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:
-    urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+]
 
 urlpatterns += [
     path('accounts/', include('accounts.urls')),
@@ -48,3 +50,8 @@ urlpatterns += [
     path('register/', views.RegistratiView.as_view(), name='register'),
     path('noaccess/', TemplateView.as_view(template_name='noaccess.html'), name='noaccess'),
 ]
+
+
+handler403 = views.permission_denied
+handler404 = views.not_found
+handler500 = views.server_error
