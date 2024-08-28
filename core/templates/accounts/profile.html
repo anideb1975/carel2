@@ -133,9 +133,9 @@
                                 </h4>
                                 <h5 class="fw-normal">
                                     {% if request.user.is_superuser%}
-                                    <div class="text-danger">{{ profile.username }}</div>
+                                        <div class="text-danger">{{ profile.username }}</div>
                                     {% else  %}
-                                    <div>{{ profile.username }}</div>
+                                        <div>{{ profile.username }}</div>
                                     {% endif %}
                                 </h5>
                                 <p class="text-gray mb-4">

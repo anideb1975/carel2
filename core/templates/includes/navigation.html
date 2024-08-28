@@ -32,9 +32,9 @@
                    src="{{request.user.avatar_thumbnail.url}}">
               <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                 {%  if request.user.is_superuser %}
-                <span class="mb-0 font-small fw-bold  text-danger">{{request.user.username}}</span>
+                  <span class="mb-0 font-small fw-bold  text-danger">{{request.user.username}}</span>
                 {% else %}
-                <span class="mb-0 font-small fw-bold text-gray-900">{{request.user.username}}</span>
+                  <span class="mb-0 font-small fw-bold text-gray-900">{{request.user.username}}</span>
                 {% endif %}
               </div>
             </div>
@@ -97,7 +97,7 @@
               </svg>
               Change Password
             </a>
-            <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+            <a class="dropdown-item d-flex align-items-center" href="#logout" data-bs-toggle="modal" data-bs-target="#logout">
               <svg class="dropdown-icon text-danger me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                    xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -109,7 +109,7 @@
           {% else %}
             {% if request.user.is_authenticated %}
               <div role="separator" class="dropdown-divider my-1"></div>
-              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+              <a class="dropdown-item d-flex align-items-center" href="#logout" data-bs-toggle="modal" data-bs-target="#logout">
                 <svg class="dropdown-icon text-danger me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

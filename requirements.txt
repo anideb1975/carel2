@@ -3,7 +3,7 @@ contourpy==1.2.1
 crispy-bootstrap5==2024.2
 cycler==0.12.1
 diff-match-patch==20230430
-Django==4.2
+Django==5.0
 django-admin-model-list-order==0.0.4
 django-appconf==1.0.6
 django-betterforms==2.0.0
