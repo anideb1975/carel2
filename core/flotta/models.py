@@ -16,7 +16,7 @@ def mezzi_directory_path(instance, filename):
 class Categorie(models.Model):
     descrizione = models.CharField(max_length=100, verbose_name='Descrizione',help_text='Inserire la Categoria di Mezzi')
     id_reparto = models.ForeignKey(Reparti, on_delete=models.CASCADE,verbose_name='Reparto',help_text='Reparto')
-    immagine =models.ImageField(upload_to=categoria_directory_path ,default='/static/img/categoria/img/categorie.jpeg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
+    immagine =models.ImageField(upload_to=categoria_directory_path ,default='categoria/img/categorie.jpeg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
     immagine_thumbnail = ImageSpecField(source='immagine',
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
@@ -31,7 +31,7 @@ class Categorie(models.Model):
 
     def get_immagine(self):
         if not self.immagine:
-            return '/static/img/categoria/img/categorie.jpeg'
+            return 'categoria/img/categorie.jpeg'
         return self.immagine.url
 
     def immagine_tag(self):
@@ -54,7 +54,7 @@ class Mezzi(models.Model):
     interno = models.CharField(max_length=5, verbose_name='Interno del Mezzo',help_text='Inserire un Identificativo univoco, Es. CR1',unique=True)
     descrizione  = models.CharField(max_length=100,verbose_name='Descrizione',help_text='Descrizione del Mezzo')
     matricola   = models.CharField(max_length=20, unique=True,verbose_name='Matricola Mezzo',help_text='Inserire numero matricola ( presente sul mezzo)')
-    immagine =models.ImageField(upload_to=mezzi_directory_path ,default='/static/img/mezzi/img/carrello.jpg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
+    immagine =models.ImageField(upload_to=mezzi_directory_path ,default='mezzi/img/carrello.jpg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
     immagine_thumbnail = ImageSpecField(source='immagine',
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
@@ -74,7 +74,7 @@ class Mezzi(models.Model):
 
     def get_immagine(self):
         if not self.immagine:
-            return '/static/img/mezzi/img/carrello.jpg'
+            return 'mezzi/img/carrello.jpg'
         return self.immagine.url
 
     def immagine_tag(self):

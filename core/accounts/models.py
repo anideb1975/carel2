@@ -37,7 +37,7 @@ class User(AbstractUser):
     last_name= models.CharField(max_length=100,verbose_name='Cognome')
     squadra = models.PositiveSmallIntegerField(choices=Squadra.choices,verbose_name='Squadra',default=Squadra.ADMIN)
     role = models.CharField(max_length=50, choices=Role.choices,verbose_name='Ruolo')
-    avatar = models.ImageField(upload_to=user_directory_path ,default='/static/img/operatore/operatore.png', null=True, blank=True)
+    avatar = models.ImageField(upload_to=user_directory_path ,default='operatore/operatore.png', null=True, blank=True)
     avatar_thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
@@ -53,7 +53,7 @@ class User(AbstractUser):
 
     def get_avatar(self):
         if not self.avatar:
-            return '/static/avatar/img/operatore/operatore.png'
+            return 'operatore/operatore.png'
         return self.avatar.url
 
     def avatar_tag(self):
