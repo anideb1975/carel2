@@ -16,7 +16,7 @@ def assistenza_directory_path(instance, filename):
 
 class Aziende(models.Model):
     descrizione = models.CharField("Azienda Assistenza",max_length=250,help_text='Azienda che fornisce assistenza e manutenzione',unique=True)
-    immagine =models.ImageField(upload_to=assistenza_directory_path,default='assistenza/img/assistenza.jpeg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
+    immagine =models.ImageField(upload_to=assistenza_directory_path,default='/static/assistenza/img/assistenza.jpeg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
     immagine_thumbnail = ImageSpecField(source='immagine',
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
@@ -49,7 +49,7 @@ class Aziende(models.Model):
     
     def get_immagine(self):
         if not self.immagine:
-            return 'assistenza/img/assistenza.jpeg'
+            return '/static/assistenza/img/assistenza.jpeg'
         return self.immagine.url
 
     def immagine_tag(self):

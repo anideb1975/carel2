@@ -11,7 +11,7 @@ def aziende_directory_path(instance, filename):
 
 class Stabilimenti(models.Model):
     descrizione = models.CharField(max_length=250,help_text='Stabilimento')
-    immagine =models.ImageField(upload_to=aziende_directory_path,default='aziende/img/aziende.png', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
+    immagine =models.ImageField(upload_to=aziende_directory_path,default='/static/aziende/img/aziende.png', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
     immagine_thumbnail = ImageSpecField(source='immagine',
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
@@ -28,7 +28,7 @@ class Stabilimenti(models.Model):
         
     def get_immagine(self):
         if not self.immagine:
-            return '/media/aziende/img/aziende.png'
+            return '/static/aziende/img/aziende.png'
         return self.immagine.url
 
     def immagine_tag(self):
