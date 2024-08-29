@@ -4,6 +4,6 @@ from . import views
 app_name='wizard'
 
 urlpatterns = [
-   path('wizard/',views.MarelliWizard.as_view(),name='wizard')
+   path('wizard/',views.CarelWizard.as_view(),name='wizard'),
 ]
 

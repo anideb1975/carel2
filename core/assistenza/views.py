@@ -41,7 +41,7 @@ class AziendeViewCreate(LoginRequiredMixin,UserPassesTestMixin,CreateBreadcrumbM
     template_name = 'assistenza/aziende/create.html'
     
     def test_func(self):
-        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser 
+        return  self.request.user.role == 'ADMIN' or self.request.user.is_superuser or self.request.role == "ASSISTENZA"
 
     def handle_no_permission(self):
         messages.warning(self.request, "Not Authorized")

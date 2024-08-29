@@ -8,7 +8,7 @@ class StabilimentoWizard(forms.ModelForm):
     
     class Meta:
         model = Stabilimenti
-        fields = ('descrizione',)
+        fields = ('descrizione','immagine','email')
 
         widgets = {
             'descrizione': forms.TextInput(attrs={'placeholder': 'Stabilimento'}),
@@ -60,9 +60,11 @@ class AssistenzaWizard(forms.ModelForm):
     
     class Meta:
         model = Aziende
-        fields =  ('descrizione','email')
+        fields =  ('id','descrizione','email',)
 
         widgets = {
             'descrizione': forms.TextInput(attrs={'placeholder': 'Azienda Assistenza'}),
             'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
         }
+
+

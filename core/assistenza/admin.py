@@ -8,6 +8,7 @@ class AziendeAdmin(admin.ModelAdmin):
     readonly_fields = ['immagine_tag']
     list_display = ['immagine_tag','descrizione','email']
     list_display_links = ['descrizione','immagine_tag']
+    filter_horizontal = ['id_stabilimento']
 
 
 

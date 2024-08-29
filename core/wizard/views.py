@@ -16,7 +16,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 import os
 
-class MarelliWizard(LoginRequiredMixin,UserPassesTestMixin,SessionWizardView):
+from assistenza.models import Aziende
+
+
+class CarelWizard(LoginRequiredMixin,UserPassesTestMixin,SessionWizardView):
     file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'photos'))
     template_name = 'wizard/wizard.html'
     form_list = [StabilimentoWizard,UteWizard,RepartiWizard,CategorieWizard,MezziWizard,AssistenzaWizard]
@@ -52,8 +55,13 @@ class MarelliWizard(LoginRequiredMixin,UserPassesTestMixin,SessionWizardView):
         assistenza_form = form_list[5]
         assistenza = assistenza_form.save(commit=False)
         assistenza.save()
+        assistenza.id_stabilimento.add(stabilimento)
+        assistenza.save()
         
         
         return render(self.request, 'wizard/done.html', {
             'form_data': [form.cleaned_data for form in form_list],
         })
+
+
+

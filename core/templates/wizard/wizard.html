@@ -37,8 +37,8 @@
                                 {% endif %}
                             </table>
                             {% if wizard.steps.prev %}
-                                <button class="btn btn-secondary rounded-1" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
-                                <button class="btn btn-tertiary rounded-1" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+                                <button class="btn btn-secondary rounded-1" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "Inizio" %}</button>
+                                <button class="btn btn-tertiary rounded-1" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "Indietro" %}</button>
                             {% endif %}
                             <button type="submit" class="btn btn-primary rounded-1">Salva</button>
                         </form>

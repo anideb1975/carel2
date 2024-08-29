@@ -12,6 +12,11 @@ class AziendeForm(forms.ModelForm):
         model = Aziende
         fields = '__all__'
 
+        widgets = {
+                'id_stabilimento': forms.CheckboxSelectMultiple()  
+            }
+
+
 
 class InterventiForm(forms.ModelForm):
 

@@ -8,19 +8,20 @@ from flotta.models import Mezzi
 from checklist.models import Controlli
 from django_utils.choices import Choice, Choices
 from django.utils.translation import gettext_lazy as _
-
+from aziende.models import Stabilimenti
 
 def assistenza_directory_path(instance, filename):
     return 'assistenza/azienda_{0}/{1}'.format(instance.descrizione, filename)
 
 
 class Aziende(models.Model):
-    descrizione = models.CharField(max_length=250,help_text='Stabilimento')
+    descrizione = models.CharField("Azienda Assistenza",max_length=250,help_text='Azienda che fornisce assistenza e manutenzione',unique=True)
     immagine =models.ImageField(upload_to=assistenza_directory_path,default='assistenza/img/assistenza.jpeg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
     immagine_thumbnail = ImageSpecField(source='immagine',
                                       processors=[ResizeToFill(40, 40)],
                                       format='JPEG',
                                       options={'quality': 60})
+    id_stabilimento = models.ManyToManyField(Stabilimenti, verbose_name='Stabilimenti Serviti')
     email = models.EmailField(max_length=100, unique=True)
     creato = models.DateTimeField(auto_now_add=True)
     aggiornato = models.DateTimeField(auto_now=True)
