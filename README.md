@@ -12,31 +12,31 @@ Application for the checklist of industrial vehicles and external assistance.
 
 * Create Virtual environment
   
-  ```
-  git clone https://github.com/anideb1975/carel2.git
-  ```
-  ```
-  cd carel2
-  ```
-  ```
-  python -m venv env
-  ```
+```
+git clone https://github.com/anideb1975/carel2.git
+```
+```
+cd carel2
+```
+```
+python -m venv env
+```
 - or
-    
-  ```
-  virtualenv env
-  ```
-  ```
-  source ./env/bin/activate
-  ```
-  ```
-  pip install -r requirements.txt
-  ```
+  
+```
+virtualenv env
+```
+```
+source ./env/bin/activate
+```
+```
+pip install -r requirements.txt
+```
 
 * Create database
- ```
+```
 cd core
- ```
+```
 ```
 python manage.py makemigrations
 ```
