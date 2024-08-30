@@ -10,12 +10,11 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from assistenza.models import Aziende
 from aziende.models import Stabilimenti
-
+from django.conf import settings
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'accounts/avatar_{0}/{1}'.format(instance.username, filename)
-
 
 class Squadra(models.IntegerChoices):
         SQUADRA_A =  1, "SQUADRA A"
