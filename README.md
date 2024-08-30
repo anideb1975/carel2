@@ -7,10 +7,17 @@
 
 * Create Virtual environment
   ```
-  cd Carels2
+  git clone https://github.com/anideb1975/carel2.git
+  ```
+  ```
+  cd carel2
   ```
   ```
   python -m venv env
+  ```
+  - or
+  ```
+  virtualenv env
   ```
   ```
   source ./env/bin/activate
