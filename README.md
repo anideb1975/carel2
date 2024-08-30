@@ -20,24 +20,24 @@
   ```
 
 * Create database
-  ```
-  cd core
-  ```
-  ```
-   python manage.py makemigrations
-  ```
-  ```
-  python manage.py migrate
-  ```
+ ```
+cd core
+ ```
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
 
 * Create superuser
-* ```
-   python manage.py createsuperuser
-  ```
+```
+python manage.py createsuperuser
+```
 
 * Run the application
- ```
-  python manage.py runserver
+```
+python manage.py runserver
 ```
 
 - Access
