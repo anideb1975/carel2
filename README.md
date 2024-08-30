@@ -6,7 +6,9 @@
 ## Installation and Run
 
 * Create Virtual environment
-  - python -m venv env
+  ```
+  python -m venv env
+  ```
   - source ./env/bin/activate
   - pip install -r requirements.txt
 
@@ -37,8 +39,6 @@
   - python manage.py collectstatic
 
 ## Authors
-
-Write by names 
 
 anideb1975 
 
