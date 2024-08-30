@@ -30,3 +30,4 @@
   - remember run
   - python manage.py collectstatic
 
+![screenshot](carel2_screenshot/index.png)
