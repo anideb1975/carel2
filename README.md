@@ -31,3 +31,13 @@
   - python manage.py collectstatic
 
 ![screenshot](carel2_screenshot/index.png)
+
+![screenshot](carel2_screenshot/home.png)
+
+![screenshot](carel2_screenshot/login.png)
+
+![screenshot](carel2_screenshot/profile.png)
+
+![screenshot](carel2_screenshot/settimgs.png)
+
+![screenshot](carel2_screenshot/checklist.png)
