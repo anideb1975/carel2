@@ -7,21 +7,38 @@
 
 * Create Virtual environment
   ```
+  cd Carels2
+  ```
+  ```
   python -m venv env
   ```
-  - source ./env/bin/activate
-  - pip install -r requirements.txt
+  ```
+  source ./env/bin/activate
+  ```
+  ```
+  pip install -r requirements.txt
+  ```
 
 * Create database
-  - cd core
-  - python manage.py makemigrations
-  - python manage.py migrate
+  ```
+  cd core
+  ```
+  ```
+   python manage.py makemigrations
+  ```
+  ```
+  python manage.py migrate
+  ```
 
 * Create superuser
-  - python manage.py createsuperuser
+* ```
+   python manage.py createsuperuser
+  ```
 
 * Run the application
-  - python manage.py runserver
+ ```
+  python manage.py runserver
+```
 
 - Access
   - First login only super user
@@ -36,7 +53,9 @@
 
 * Production
   - remember run
-  - python manage.py collectstatic
+ ```
+python manage.py collectstatic
+```
 
 ## Authors
 
