@@ -80,6 +80,11 @@ Any advise for common problems or issues.
 
 This project is licensed under the  GPL License - see the LICENSE.md file for details
 
+## Version History
+
+* 1.0
+    * Initial Release
+
 
 ![screenshot](carel2_screenshot/home.png)
 
