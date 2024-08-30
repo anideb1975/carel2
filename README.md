@@ -68,7 +68,13 @@ python manage.py collectstatic
 
 ## Authors
 
-anideb1975 
+anideb1975
+
+
+## Help
+
+Any advise for common problems or issues.
+
 
 ## License
 
