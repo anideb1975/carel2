@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal top fade" id="logout" tabindex="-1" aria-labelledby="logout" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-center d-flex justify-content-center">
+        <div class="modal-content w-75">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <img src="{{request.user.avatar.url}}" alt="avatar" class="rounded-circle position-absolute top-0 start-50 translate-middle h-50" />
+                <form action="{% url 'logout' %}" method="post">
+                    <div>
+                        <h5 class="pt-5 my-3">Hi! {{request.user.get_full_name}}</h5>
+
+                        {% csrf_token %}
+
+                        <!-- Submit button -->
+                        <div class="mt-3">
+                            <button class="btn btn-secondary" type="submit">Log Out</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
