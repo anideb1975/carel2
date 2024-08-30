@@ -102,6 +102,6 @@ Inspiration, code snippets, etc.
 
 ![screenshot](carel2_screenshot/profile.png)
 
-![screenshot](carel2_screenshot/settimgs.png)
+![screenshot](carel2_screenshot/settings.png)
 
 ![screenshot](carel2_screenshot/checklist.png)
