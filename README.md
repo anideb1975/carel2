@@ -72,7 +72,7 @@ python manage.py runserver
 python manage.py collectstatic
 ```
 
-## Authors
+## Author
 
 anideb1975
 
@@ -90,6 +90,7 @@ This project is licensed under the  LGPL-2.1 License - see the LICENSE.md file f
 
 * 1.0
     * Initial Release
+      
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
