@@ -1,3 +1,6 @@
+![screenshot](carel2_screenshot/index.png)
+
+
 # Django Carel2 Project
 
 ## Installation and Run
@@ -30,7 +33,7 @@
   - remember run
   - python manage.py collectstatic
 
-![screenshot](carel2_screenshot/index.png)
+
 
 ![screenshot](carel2_screenshot/home.png)
 
