@@ -10,11 +10,11 @@ Application for the checklist of industrial vehicles and external assistance.
 
 ## Installation and Run
 
-* Create Virtual environment
-  
+* Clone repository
 ```
 git clone https://github.com/anideb1975/carel2.git
 ```
+* Create Virtual environment
 ```
 cd carel2
 ```
