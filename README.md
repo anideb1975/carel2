@@ -2,7 +2,7 @@
 
 # Project Title
 
-# Django Carel2 Project
+Django Carel2 Project
 
 ## Description
 
