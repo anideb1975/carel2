@@ -38,7 +38,7 @@
 
 ## License
 
-This project is licensed under the  anideb1975 License - see the LICENSE.md file for details
+This project is licensed under the  GPL License - see the LICENSE.md file for details
 
 
 ![screenshot](carel2_screenshot/home.png)
