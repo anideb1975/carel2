@@ -163,7 +163,7 @@
                     {% else %}
                         <a class="btn btn-primary" href="{% url 'assistenza:interventi_create' object.pk %}">Intervento</a>
                     {% endif %}
-                    <a href="{% url 'checklist:controlli_anomalie'%}" class="btn btn-secondary">Esci</a>
+                    <a href="{% url 'checklist:anomalie_list'%}" class="btn btn-secondary">Esci</a>
 
                 {% comment %} <div class="col-sm py-4">
                     <a href="{% url 'checklist:controlli_anomalie_update' object.pk %}" class="btn btn-warning">Modifica</a>

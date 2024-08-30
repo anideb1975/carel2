@@ -21,10 +21,10 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-     path("anomalie-list/",views.AnomalieListView.as_view(),name="controlli_anomalie"),
-     path("anomalie-detail/<int:pk>/",views.AnomalieDetailView.as_view(),name="controlli_anomalie_detail"),
-     path("anomalie-update/<int:pk>/",views.AnomalieUpdateView.as_view(),name="controlli_anomalie_update"),
-     path("anomalie-delete/<int:pk>/",views.AnomalieDeleteView.as_view(),name="controlli_anomalie_delete"),
+     path("anomalie-list/",views.AnomalieListView.as_view(),name="anomalie_list"),
+     path("anomalie-detail/<int:pk>/",views.AnomalieDetailView.as_view(),name="anomalie_detail"),
+     path("anomalie-update/<int:pk>/",views.AnomalieUpdateView.as_view(),name="anomalie_update"),
+     path("anomalie-delete/<int:pk>/",views.AnomalieDeleteView.as_view(),name="anomalie_delete"),
 ]
 
 urlpatterns += [

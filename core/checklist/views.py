@@ -23,10 +23,10 @@ from django.views.generic.dates import (YearArchiveView,
 from .forms import (CheckListForm, 
                     ControlliForm,
                     AnomalieControlliForm,
-                    InlineFormSet,
                     )
 
 from .models import CheckList, Controlli
+from .models import Controlli as Anomalie
 
 from view_breadcrumbs import (DetailBreadcrumbMixin, 
                               ListBreadcrumbMixin, 
@@ -175,12 +175,12 @@ class CheckListDelete(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin
 ###  Anomalie ###
 
 class AnomalieListView(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
-    model = Controlli
+    model = Anomalie
     template_name = 'checklist/anomalie.html'
     context_object_name = 'anomalie'
 
     def get_queryset(self):
-        return Controlli.objects.exclude(anomalie='').exclude(anomalie=None).all().order_by('-creato')
+        return Anomalie.objects.exclude(anomalie='').exclude(anomalie=None).all().order_by('-creato')
     
     def get_context_data(self, **kwargs):
         context = super(AnomalieListView, self).get_context_data(**kwargs)
@@ -188,9 +188,11 @@ class AnomalieListView(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
         context['segment'] = "assistenza"
         return context
 
-class AnomalieDetailView(LoginRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
-    model = Controlli
+class AnomalieDetailView(LoginRequiredMixin, DetailBreadcrumbMixin, DeleteView):
+    model = Anomalie
     template_name = 'checklist/detail_anomalie.html'
+    #crumbs = [("checklist settimana", reverse_lazy("checklist:checklist:checklist_settimana"))]
+
 
     def get_context_data(self, **kwargs):
         context = super(AnomalieDetailView, self).get_context_data(**kwargs)
@@ -198,7 +200,7 @@ class AnomalieDetailView(LoginRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
         return context
 
 class AnomalieUpdateView(SuccessMessageMixin,LoginRequiredMixin, UserPassesTestMixin,UpdateBreadcrumbMixin, UpdateView):
-    model = Controlli
+    model = Anomalie
     form_class = AnomalieControlliForm
     success_url = reverse_lazy('checklist:controlli_list')
     template_name = 'checklist/update_anomalie.html'
@@ -221,7 +223,7 @@ class AnomalieUpdateView(SuccessMessageMixin,LoginRequiredMixin, UserPassesTestM
         return super().form_valid(form)    
 
 class AnomalieDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,DeleteBreadcrumbMixin,DeleteView):
-    model = Controlli
+    model = Anomalie
     form_class = AnomalieControlliForm
     template_name = "checklist/delete_anomalia.html"
     context_object_name = 'checklist'
