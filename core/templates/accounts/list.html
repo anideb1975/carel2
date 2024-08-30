@@ -9,64 +9,73 @@
 
 
 {% block content %}
-
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <h3 class="h2 mb-1">{{titolo}}</h3>
+    <div class="py-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h3 class="h2 mb-1">{{titolo}}</h3>
+            </div>
         </div>
-    </div>
 
-    <div class="card border-0 shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive py-4">
-                <table id="mytable" class="table table-flush  rounded">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-0 rounded-start">Username</th>
-                            <th class="border-0">Nome</th>
-                            <th class="border-0">Cognome</th>
-                            <th class="border-0">Ruolo</th>
-                            <th class="border-0">Squadra</th>
-                            <th class="border-0 rounded-end">Attivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Item -->
-                        {% for object in object_list %}
+        <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div>
+                <a href="{% url 'accounts:admin_create' %}" class="btn btn-secondary d-inline-flex align-items-center me-2">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    {{titolo}}
+                </a>
+            </div>
+        </div>-->
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive py-4">
+                    <table id="mytable" class="table table-flush  rounded">
+                        <thead class="thead-light">
                             <tr>
-                                <td class="fw-bold align-items-center">
-                                    <img class="avatar rounded-circle" src='{{object.avatar_thumbnail.url}}'>
-                                    {{object.username}}
-                                </td>
-                                <td class="fw-bold align-items-center">
-                                    {{object.first_name}}
-                                </td>
-                                <td class="fw-bold align-items-center">
-                                    {{object.last_name}}
-                                </td>
-                                <td class="fw-bold align-items-center">
-                                    {{object.role}}
-                                </td>
-                                <td class="fw-bold align-items-center">
-                                    {{object.get_squadra_display}}
-                                </td>
-                                <td>
-                                    {% if object.is_active == True %}
-                                        <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
-                                    {% else %}
-                                        <i class="fa-solid fa-circle-check" style="color: #ff1605;"></i>
-                                    {% endif %}
-                                </td>
-                        {% empty %}
-                            <td colspan="5" class='bg-warning'>
-                                Nessun dato da Mostrare
-                            </td>
+                                <th class="border-0 rounded-start">Username</th>
+                                <th class="border-0">Nome</th>
+                                <th class="border-0">Cognome</th>
+                                <th class="border-0">Ruolo</th>
+                                <th class="border-0">Squadra</th>
+                                <th class="border-0 rounded-end">Attivo</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                    <!-- Item -->
+                            {% for object in object_list %}
+                                <tr>
+                                    <td class="fw-bold align-items-center">
+                                        <img class="avatar rounded-circle" src='{{object.avatar_thumbnail.url}}'>
+                                        {{object.username}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.first_name}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.last_name}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.role}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.get_squadra_display}}
+                                    </td>
+                                    <td>
+                                        {% if object.is_active == True %}
+                                            <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-circle-check" style="color: #ff1605;"></i>
+                                        {% endif %}
+                                    </td>
+                            {% empty %}
+                                <td colspan="5" class='bg-warning'>
+                                    Nessun dato da Mostrare
+                                </td>
+                                </tr>
 
                     <!-- End of Item -->
-                        {%  endfor %}
-                    </tbody>
-                </table>
+                            {%  endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
