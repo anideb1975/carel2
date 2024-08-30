@@ -78,7 +78,7 @@ class Interventi(models.Model):
         ordering = ["-creato"]
 
     def __str__(self):
-        return f"{self.id_controllo}"
+        return f"{self.operatore}"
     
     def get_absolute_url(self):
         return reverse('assistenza:interventi_detail', args=[self.pk])

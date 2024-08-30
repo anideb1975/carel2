@@ -178,6 +178,8 @@ class AnomalieListView(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
     model = Anomalie
     template_name = 'checklist/anomalie.html'
     context_object_name = 'anomalie'
+    #crumbs = [("checklist settimana", reverse_lazy("checklist:checklist:checklist_settimana"))]
+
 
     def get_queryset(self):
         return Anomalie.objects.exclude(anomalie='').exclude(anomalie=None).all().order_by('-creato')
