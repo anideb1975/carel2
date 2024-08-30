@@ -78,7 +78,7 @@ Any advise for common problems or issues.
 
 ## License
 
-This project is licensed under the  GPL License - see the LICENSE.md file for details
+This project is licensed under the  LGPL-2.1 License - see the LICENSE.md file for details
 
 ## Version History
 
