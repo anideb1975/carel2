@@ -56,6 +56,7 @@ python manage.py runserver
 
 - Access
   - First login only super user
+  
 - Add account
   - select register in your index page
   - create appropriate level for account
@@ -67,7 +68,7 @@ python manage.py runserver
 
 * Production
   - remember run
- ```
+```
 python manage.py collectstatic
 ```
 
