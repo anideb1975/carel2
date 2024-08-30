@@ -1,7 +1,12 @@
 ![screenshot](carel2_screenshot/index.png)
 
+# Project Title
 
 # Django Carel2 Project
+
+## Description
+
+Application for the checklist of industrial vehicles and external assistance.
 
 ## Installation and Run
 
