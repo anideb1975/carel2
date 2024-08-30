@@ -84,7 +84,10 @@ This project is licensed under the  GPL License - see the LICENSE.md file for de
 
 * 1.0
     * Initial Release
+## Acknowledgments
 
+Inspiration, code snippets, etc.
+* work in progress
 
 ![screenshot](carel2_screenshot/home.png)
 
