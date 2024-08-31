@@ -7,6 +7,7 @@ import sweetify
 from aziende.models import Stabilimenti
 from accounts.models import User
 from assistenza.models import Aziende
+from view_breadcrumbs import BaseBreadcrumbMixin
 
 
 msg1 = """
@@ -23,9 +24,9 @@ msg2 = """
     nella sidebar. 
 """
 
-class HomeView(TemplateView):
+class HomeView(BaseBreadcrumbMixin,TemplateView):
     template_name = 'home.html'
-
+    crumbs = [("Home Page", reverse_lazy("home"))]
 
     def get (self, request, *args, **kwargs):
         if request.user.is_anonymous:
