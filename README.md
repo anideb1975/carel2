@@ -58,7 +58,7 @@ python manage.py runserver
   - First login only super user
 
 - Register
- - after populating the database   it is possible to register as other users with different visibility.
+  - After populating the database   it is possible to register as other users with different visibility.
   
 - Add account
   - select register in your index page
