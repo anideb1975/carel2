@@ -15,7 +15,7 @@ msg1 = """
     per iniziare a usare l'applicazione devi popolare il database
     con dei dati, puoi usare il tasto WIZARD presente nella tua SIDEBAR per velocizzare
     la procedura (CONSIGLIATO).
-    ATTENZIONE (se non popoli il databese non potrai registrare nuovi utenti)
+    ATTENZIONE (se non popoli il database non potrai registrare nuovi utenti)
 """
 
 msg2 = """

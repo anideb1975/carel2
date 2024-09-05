@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     "admin_model_list_order",
     "imagekit",
     'sweetify',
-   
+    'django_filters',
     
 ]
 

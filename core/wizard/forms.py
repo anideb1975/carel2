@@ -14,6 +14,11 @@ class StabilimentoWizard(forms.ModelForm):
             'descrizione': forms.TextInput(attrs={'placeholder': 'Stabilimento'}),
         }
 
+        labels = {
+            "descrizione": "Stabilimento",
+            
+        }
+
 class UteWizard(forms.ModelForm):
     
     class Meta:
@@ -22,6 +27,11 @@ class UteWizard(forms.ModelForm):
 
         widgets = {
             'descrizione': forms.TextInput(attrs={'placeholder': 'Ute'}),
+        }
+
+        labels = {
+            "descrizione": "Ute di Stabilimento",
+            
         }
 
 class RepartiWizard(forms.ModelForm):
@@ -34,6 +44,11 @@ class RepartiWizard(forms.ModelForm):
             'descrizione': forms.TextInput(attrs={'placeholder': 'Reparto'}),
         }                
 
+        labels = {
+            "descrizione": "Reparto",
+            
+        }
+
 class CategorieWizard(forms.ModelForm):
     
     class Meta:
@@ -42,6 +57,11 @@ class CategorieWizard(forms.ModelForm):
 
         widgets = {
             'descrizione': forms.TextInput(attrs={'placeholder': 'Categoria Mezzi'}),
+        }
+
+        labels = {
+            "descrizione": "Categorie di Mezzi",
+            
         }  
 
 class MezziWizard(forms.ModelForm):
@@ -54,6 +74,12 @@ class MezziWizard(forms.ModelForm):
             'interno': forms.TextInput(attrs={'placeholder': 'Interno'}),
             'descrizione': forms.TextInput(attrs={'placeholder': 'Descrizione'}),
             'matricola': forms.TextInput(attrs={'placeholder': 'Matricola'}),
+        }
+        labels = {
+            "descrizione": "Descrizone del Mezzo",
+            "interno": "Identificativo univoco del Mezzo",
+            "matricola": "Matricola del Mezzo"
+            
         }         
 
 class AssistenzaWizard(forms.ModelForm):

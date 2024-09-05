@@ -41,6 +41,8 @@ import datetime
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.db.models.functions import ExtractYear,ExtractMonth, ExtractDay, ExtractWeek, ExtractIsoYear
+from .filter import ChecklistFilter, ControlliFilter
+from django_filters.views import FilterView
 
 
 ### Crud Checklist ####
@@ -85,11 +87,12 @@ class CheckListCrea(SuccessMessageMixin,LoginRequiredMixin,CreateBreadcrumbMixin
         return super().form_valid(form)
     
    
-class CheckListLista(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
+class CheckListLista(LoginRequiredMixin,ListBreadcrumbMixin,FilterView):
     model = CheckList
     template_name = "checklist/list.html"
     context_object_name = 'checklists'
     qs = None
+    filterset_class = ChecklistFilter
     
     
     def get_queryset(self):
@@ -252,9 +255,10 @@ class AnomalieDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMi
 
 ###  Controlli ###
 
-class ControlliListView(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
+class ControlliListView(LoginRequiredMixin,ListBreadcrumbMixin,FilterView):
     model = Controlli
     template_name = 'checklist/controlli/list.html'
+    filterset_class = ControlliFilter
     
     def get_context_data(self, **kwargs):
         context = super(ControlliListView, self).get_context_data(**kwargs)
