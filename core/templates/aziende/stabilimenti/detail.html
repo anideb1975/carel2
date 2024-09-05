@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-
+{% load humanize %}
 {% load i18n %}
 
 {% block title %}{{titolo}}{% endblock %}
@@ -43,10 +43,11 @@
                         <table id="mytable" class="table table-flush  rounded">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="border-0 rounded-start">Azienda</th>
+                                    <th class="border-0 rounded-start">#</th>
                                     <th class="border-0 rounded">Ute</th>
                                     <th class="border-0 rounded">Creato</th>
                                     <th class="border-0 rounded">Aggiornato</th>
+                                    <th class="border-0 rounded-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,17 +55,33 @@
                                 {% for obj in object.ute_set.all %}
                                     <tr>
                                         <td class="fw-bold align-items-center">
-                                            <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
-                                            {{object.descrizione|capfirst}}
+                                            {{obj.id}}
                                         </td>
+                                       
                                         <td class="fw-bold align-items-center">
+                                            <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
                                             {{obj.descrizione|capfirst}}
                                         </td>
                                         <td class="fw-bold align-items-center">
-                                            {{obj.creato}}
+                                            {{obj.creato|naturalday}}
                                         </td>
                                         <td class="fw-bold align-items-center">
-                                            {{obj.aggiornato}}
+                                            {{obj.aggiornato|naturalday}}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="icon icon-sm">
+                                                        <span class="fas fa-ellipsis-h icon-dark"></span>
+                                                    </span>
+                                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu py-0">
+                                                    <a class="dropdown-item rounded-top" href="{{obj.get_absolute_url}}"><span class="fas fa-eye me-2"></span>Dettagli</a>
+                                                    <a class="dropdown-item" href="{{obj.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
+                                                    <a class="dropdown-item text-danger rounded-bottom" href="{{obj.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a>
+                                                </div>
+                                            </div>
                                         </td>
                                 {% empty %}
                                     <td colspan="4" class='bg-warning'>

@@ -32,7 +32,7 @@ class CheckList(models.Model):
     class Meta:
         verbose_name = 'Checklist'
         verbose_name_plural = 'Checklists'
-        ordering = ["-creato"]     
+        
     
     def __str__(self):
         return f"{self.operatore.username}"

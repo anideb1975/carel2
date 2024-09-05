@@ -27,13 +27,13 @@ class UteInlineView(InlineFormSetFactory):
     #initial = [{'name': 'example1'}, {'name', 'example2'}]
     #prefix = 'item-form'
     prefix = 'form'
-    factory_kwargs = {'extra': 1, 'max_num': 10,
+    factory_kwargs = {'extra': 3, 'max_num': 10,
                       'can_order': False, 'can_delete': True}
     #formset_kwargs = {'auto_id': 'my_id_%s'}
 
 
 ### Fine ###
-
+autocomplete='off'
 
 ### Crud Aziende ###
 
@@ -77,6 +77,8 @@ class AziendeViewUpdate(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMix
         context = super(AziendeViewUpdate, self).get_context_data(**kwargs)
         context["titolo"] = "Aggiorna Stabilimenti"
         return context 
+    
+    
 
     
 class AziendeViewList(LoginRequiredMixin,ListBreadcrumbMixin,ListView):

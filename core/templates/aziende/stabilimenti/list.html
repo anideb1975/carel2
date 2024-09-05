@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-
+{% load humanize %}
 {% load i18n %}
 
 {% block title %}{{titolo}}{% endblock %}
@@ -66,6 +66,8 @@
                             <tr>
                                 <th class="border-0 rounded-start">#</th>
                                 <th class="border-0">Descrizione</th>
+                                <th class="border-0">Creato</th>
+                                <th class="border-0">Aggiornato</th>
                                 <th class="border-0 rounded-end">Action</th>
                             </tr>
                         </thead>
@@ -79,6 +81,12 @@
                                     <td class="fw-bold align-items-center">
                                         <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
                                         {{object.descrizione|capfirst}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.creato|naturalday}}
+                                    </td>
+                                    <td class="fw-bold align-items-center">
+                                        {{object.aggiornato|naturalday}}
                                     </td>
 
                                     <td>

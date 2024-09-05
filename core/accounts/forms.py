@@ -27,8 +27,20 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ['username','squadra','first_name','last_name','avatar']
 
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Cognome'}),
+           
+        }
+
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
+            self.fields['password1'].help_text = 'Password'
+            self.fields['password1'].widget.attrs = {'placeholder':'Password'}
+            self.fields['password2'].help_text = 'Conferma password'
+            self.fields['password2'].widget.attrs = {'placeholder':'Conferma Password'}
             self.helper = FormHelper()
             self.helper.layout = Layout(
                 Row(
@@ -73,9 +85,21 @@ class CustomAdminCreationForm(UserCreationForm):
         model = Admin
         fields = ['username','squadra','first_name','last_name','avatar']
 
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Cognome'}),
+           
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['squadra'].choices = Squadra.choices[5:6]
+        self.fields['password1'].help_text = 'Password'
+        self.fields['password1'].widget.attrs = {'placeholder':'Password'}
+        self.fields['password2'].help_text = 'Conferma password'
+        self.fields['password2'].widget.attrs = {'placeholder':'Conferma Password'}
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -126,10 +150,22 @@ class OperatoreCreationForm(UserCreationForm):
     class Meta:
         model = Operatore
         fields = ['username','squadra','first_name','last_name','avatar']
+
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Cognome'}),
+           
+        }
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['squadra'].choices = Squadra.choices[0:4]
+        self.fields['password1'].help_text = 'Password'
+        self.fields['password1'].widget.attrs = {'placeholder':'Password'}
+        self.fields['password2'].help_text = 'Conferma password'
+        self.fields['password2'].widget.attrs = {'placeholder':'Conferma Password'}
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -180,10 +216,22 @@ class ResponsabileCreationForm(UserCreationForm):
     class Meta:
         model = Responsabile
         fields = ['username','squadra','first_name','last_name']
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Cognome'}),
+           
+        }
+
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['squadra'].choices = Squadra.choices[0:4]
+        self.fields['password1'].help_text = 'Password'
+        self.fields['password1'].widget.attrs = {'placeholder':'Password'}
+        self.fields['password2'].help_text = 'Conferma password'
+        self.fields['password2'].widget.attrs = {'placeholder':'Conferma Password'}
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -232,10 +280,22 @@ class AssistenzaCreationForm(UserCreationForm):
     class Meta:
         model = Assistenza
         fields = ['username','first_name','last_name','squadra']
+
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Cognome'}),
+           
+        }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['squadra'].choices = Squadra.choices[4:5]
+        self.fields['password1'].help_text = 'Password'
+        self.fields['password1'].widget.attrs = {'placeholder':'Password'}
+        self.fields['password2'].help_text = 'Conferma password'
+        self.fields['password2'].widget.attrs = {'placeholder':'Conferma Password'}
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(

@@ -30,7 +30,7 @@
             <div class="text-center text-md-center mb-4 mt-md-0">
               <h1 class="mb-0 h3">Sign in to our platform</h1>
             </div>
-            <form method="post" class="mt-4">
+            <form method="post" class="mt-4" autocomplete='off'>
               {% csrf_token %}
 
               {% if form.non_field_errors %}

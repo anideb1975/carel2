@@ -48,6 +48,7 @@
     {% block extra_js %}
       <script>
         let table = new DataTable('#mytable', {
+          order: [[0, 'desc']],
           columnDefs: [{
             "defaultContent": "-",
             "targets": "_all"

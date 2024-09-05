@@ -43,7 +43,12 @@ class MezziForm(forms.ModelForm):
     
     class Meta:
         model = Mezzi
-        fields = ['interno','descrizione','immagine','matricola','id_categoria']
+        fields = ['id_categoria','interno','descrizione','immagine','matricola']
+
+        widgets = {
+            "id_categoria": forms.Select(attrs={'id': 'reparto', 'required': 'required'}),
+
+        }    
         
         
     def __init__(self, *args, **kwargs):

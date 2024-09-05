@@ -18,10 +18,10 @@
 
             <form action="" method="POST">
               {% csrf_token %}
-              <button href="{% url 'aziende:aziende_delete' object.id %}" class="btn btn-danger rounded-1">
+              <button href="{% url 'aziende:ute_delete' object.id %}" class="btn btn-danger rounded-1">
                 Yes, Delete
               </button>
-              <a href="{% url 'aziende:aziende_list' %}" class="btn btn-light rounded-1">
+              <a href="{% url 'aziende:ute_list' %}" class="btn btn-light rounded-1">
                 Cancel
               </a>
             </form>

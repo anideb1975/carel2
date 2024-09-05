@@ -89,13 +89,15 @@ class CheckListLista(LoginRequiredMixin,ListBreadcrumbMixin,ListView):
     model = CheckList
     template_name = "checklist/list.html"
     context_object_name = 'checklists'
+    qs = None
+    
     
     def get_queryset(self):
         if (self.request.user.role == "ADMIN" or self.request.user.role == "RESPONSABILE"):
-            qs = CheckList.objects.all()
+            self.qs = CheckList.objects.all()
         else:
-            qs = CheckList.objects.filter(operatore=self.request.user)    
-        return qs
+            self.qs = CheckList.objects.filter(operatore=self.request.user)   
+        return self.qs
      
     
     def get_context_data(self, **kwargs):

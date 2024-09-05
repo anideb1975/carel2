@@ -125,6 +125,7 @@
 
                                             {%else %}
                                                 <a class="dropdown-item rounded-top" href="{% url 'assistenza:interventi_create' anomalia.pk %}"><span class="fas fa-plus me-2"></span>Intervento</a>
+                                                <a class="dropdown-item rounded-top" href="{% url 'checklist:anomalie_detail' anomalia.pk %}"><span class="fas fa-eye me-2"></span>Dettagli</a>
                                             {% endif %}
                                         {% comment %} <a class="dropdown-item" href="{{checklist.get_update_url}}"><span class="fas fa-edit me-2"></span>Modifica</a>
                                         <a class="dropdown-item text-danger rounded-bottom" href="{{checklist.get_delete_url}}"><span class="fas fa-trash-alt me-2"></span>Cancella</a> {% endcomment %}

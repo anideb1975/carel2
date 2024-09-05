@@ -49,7 +49,7 @@ class Stabilimenti(models.Model):
 
 class Ute(models.Model):
     descrizione = models.CharField(max_length=200,help_text='Ute da creare  Es: Ute1')
-    id_stabilimento = models.ForeignKey(Stabilimenti, on_delete=models.CASCADE,verbose_name='Stabilimento',help_text='Stabilimento')
+    id_stabilimento = models.ForeignKey(Stabilimenti, on_delete=models.PROTECT,verbose_name='Stabilimento',help_text='Stabilimento')
     creato = models.DateTimeField(auto_now_add=True)
     aggiornato = models.DateTimeField(auto_now=True)
     
