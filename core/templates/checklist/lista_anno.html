@@ -14,9 +14,7 @@
 
         <div class="card shadow-sm">
             <div class="card-body">
-                {% for date in date_list %}
-                    <h3 class="h2 mb-1">{{titolo}} {{ date|date:'Y'}}</h3>
-                {% endfor %}
+                <h3 class="h2 mb-1">{{titolo}} {{ year|date:"Y" }}</h3>
             </div>
         </div>
 

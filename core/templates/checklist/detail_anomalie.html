@@ -17,162 +17,162 @@
                         <div class="row d-block d-xl-flex align-items-center">
                             <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                 <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><span><img src="{{object.id_mezzo.immagine.url}}"></span></div>
-                            <div class="d-sm-none">
-                                <h2 class="h5">{{object.id_checklist}}</h2>
-                                <h3 class="mb-1">{{object.id_mezzo}}</h3>
+                                <div class="d-sm-none">
+                                    <h2 class="h5">{{object.id_checklist}}</h2>
+                                    <h3 class="mb-1">{{object.id_mezzo}}</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h6 class="mb-1">{{object.id_mezzo.id_categoria}}</h6>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h6 class="mb-1">{{object.id_mezzo.id_categoria}}</h6>
+                                </div>
+                                <small>{{object.id_mezzo.interno}}</small>
                             </div>
-                            <small>{{object.id_mezzo.interno}}</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <!-- / fine controlli card -->
        <!-- Dettagli -->
-    <div class="py-4">
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card card-body shadow-sm bg-white border-gray-300 p-0 p-md-4">
-                    <div class="card-header border-bottom p-3">
-                        <h2 class="h2">{{titolo}}</h2><span class="fw-bold">{{object.id_mezzo}}</span>
-                    </div>
-                    <div class="card-body px-0 py-0">
-                        <ul class="list-group">
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Operatore
-                                        </h3>
+        <div class="py-4">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card card-body shadow-sm bg-white border-gray-300 p-0 p-md-4">
+                        <div class="card-header border-bottom p-3">
+                            <h2 class="h2">{{titolo}}</h2><span class="fw-bold">{{object.id_mezzo}}</span>
+                        </div>
+                        <div class="card-body px-0 py-0">
+                            <ul class="list-group">
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Operatore
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            <img class="avatar rounded-circle" src="{{object.id_checklist.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
-                                            {{object.id_checklist}} - {{object.id_checklist.operatore.get_squadra_display}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                <img class="avatar rounded-circle" src="{{object.id_checklist.operatore.avatar_thumbnail.url}}" height=35px, width=35px>
+                                                {{object.id_checklist}} - {{object.id_checklist.operatore.get_squadra_display}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Azienda
-                                        </h3>
+                                </li>
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Azienda
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {{object.id_checklist.operatore.userprofile.azienda}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                {{object.id_checklist.operatore.userprofile.azienda}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Turno
-                                        </h3>
+                                </li>
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Turno
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {{object.id_checklist.turno}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                {{object.id_checklist.turno}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Evasa
-                                        </h3>
+                                </li>
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Evasa
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {% if object.interventi_set.get.evasa == True %}
-                                                <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>Completata
-                                            {% else %}
-                                                <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>Sospesa
+                                            <small class="text-gray-700">
+                                                {% if object.interventi_set.get.evasa == True %}
+                                                    <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>Completata
+                                                {% else %}
+                                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>Sospesa
 
-                                            {% endif %}
-                                        </small>
+                                                {% endif %}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
 
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Creato
-                                        </h3>
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Creato
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {{object.id_checklist.creato}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                {{object.id_checklist.creato}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Modificato
-                                        </h3>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Modificato
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {{object.id_checklist.aggiornato}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                {{object.id_checklist.aggiornato}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <!-- Anomalie -->
-        <div class="row">
-            <div class="col-sm">
-                <h3 class="h2 mb-1">Anomalie</h3>
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div class="small mb-3">
-                            {% if object.anomalie %}
-                                {{ object.anomalie }}
-                            {% else %}
-                                Nessuna Anomalia Segnalata
-                            {% endif %}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+         <!-- Anomalie -->
+            <div class="row">
+                <div class="col-sm">
+                    <h3 class="h2 mb-1">Anomalie</h3>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="small mb-3">
+                                {% if object.anomalie %}
+                                    {{ object.anomalie }}
+                                {% else %}
+                                    Nessuna Anomalia Segnalata
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <!-- /fine Anomalie-->
 
 
         <!-- Tasti Modifica Esci-->
-            <div class="row">
-                <div class="col-sm py-4">
-                    {%if object.interventi_set.get.evasa == True%}
-                        <a class="btn btn-primary" href="{% url 'assistenza:interventi_detail' object.pk %}">Dettagli</a>
-                    {% elif object.interventi_set.get.evasa == False %}
-                        <a class="btn btn-tertiary" href="{% url 'assistenza:interventi_update' object.interventi_set.get.pk %}">Modifica</a>
-                    {% else %}
-                        <a class="btn btn-primary" href="{% url 'assistenza:interventi_create' object.pk %}">Intervento</a>
-                    {% endif %}
-                    <a href="{% url 'checklist:anomalie_list'%}" class="btn btn-secondary">Esci</a>
+                <div class="row">
+                    <div class="col-sm py-4">
+                        {%if object.interventi_set.get.evasa == True%}
+                            <a class="btn btn-primary" href="{% url 'assistenza:interventi_detail' object.pk %}">Dettagli</a>
+                        {% elif object.interventi_set.get.evasa == False %}
+                            <a class="btn btn-tertiary" href="{% url 'assistenza:interventi_update' object.interventi_set.get.pk %}">Modifica</a>
+                        {% else %}
+                            <a class="btn btn-primary" href="{% url 'assistenza:interventi_create' object.pk %}">Intervento</a>
+                        {% endif %}
+                        <a href="{% url 'checklist:anomalie_list'%}" class="btn btn-secondary">Esci</a>
 
                 {% comment %} <div class="col-sm py-4">
                     <a href="{% url 'checklist:controlli_anomalie_update' object.pk %}" class="btn btn-warning">Modifica</a>
                     <a href="{% url 'checklist:controlli_anomalie'%}" class="btn btn-primary">Esci</a> {% endcomment %}
+                    </div>
                 </div>
-            </div>
 
         <!-- /fine tasti modifica esci -->       
-        </div>
+            </div>
 
 
 {% endblock %}

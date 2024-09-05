@@ -17,134 +17,134 @@
                         <div class="row d-block d-xl-flex align-items-center">
                             <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                 <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><span><img src="{{object.immagine.url}}"></span></div>
-                            <div class="d-sm-none">
-                                <h2 class="h5">{{object.descrizione}}</h2>
-                                <h3 class="mb-1">{{object.telefono}}</h3>
+                                <div class="d-sm-none">
+                                    <h2 class="h5">{{object.descrizione}}</h2>
+                                    <h3 class="mb-1">{{object.telefono}}</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h6 class="mb-1">{{object.descrizione}}</h6>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h6 class="mb-1">{{object.descrizione}}</h6>
+                                </div>
+                                <small>{{object.email}}</small>
                             </div>
-                            <small>{{object.email}}</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <!-- / fine stabilimenti card -->
        <!-- CheckList-->
-    <div class="py-4">
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card card-body shadow-sm bg-white border-gray-300 p-0 p-md-4">
-                    <div class="card-header border-bottom p-3">
-                        <h2 class="h2">{{titolo}}</h2><span class="fw-bold">{{object}}</span>
-                    </div>
-                    <div class="card-body px-0 py-0">
-                        <ul class="list-group">
+        <div class="py-4">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card card-body shadow-sm bg-white border-gray-300 p-0 p-md-4">
+                        <div class="card-header border-bottom p-3">
+                            <h2 class="h2">{{titolo}}</h2><span class="fw-bold">{{object}}</span>
+                        </div>
+                        <div class="card-body px-0 py-0">
+                            <ul class="list-group">
 
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Email
-                                        </h3>
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Email
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            <a href="mailto:{{object.email}}">{{object.email}}</a>
-                                        </small>
+                                            <small class="text-gray-700">
+                                                <a href="mailto:{{object.email}}">{{object.email}}</a>
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Creato
-                                        </h3>
+                                </li>
+                                <li class="list-group-item border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Creato
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {{object.creato}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                {{object.creato}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item ">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="h6 mb-1">
-                                            Modificato
-                                        </h3>
+                                </li>
+                                <li class="list-group-item ">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="h6 mb-1">
+                                                Modificato
+                                            </h3>
                                            <!-- Text -->
-                                        <small class="text-gray-700">
-                                            {{object.aggiornato}}
-                                        </small>
+                                            <small class="text-gray-700">
+                                                {{object.aggiornato}}
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                                </li>
+                            </ul>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
-            <div class="row py-4">
-                <div class="col-sm-12">
-                    <div class="card border-0 shadow mb-4 ">
-                        <div class="card-body">
-                            <div class="table-responsive py-4">
-                                <table id="mytable" class="table table-flush  rounded">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th class="border-0 rounded-start">Azienda</th>
-                                            <th class="border-0 rounded">Email</th>
-                                            <th class="border-0 rounded">Creato</th>
-                                            <th class="border-0 rounded">Aggiornato</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                <!-- Item -->
-                                        {% for obj in object.id_stabilimento.all %}
+                <div class="row py-4">
+                    <div class="col-sm-12">
+                        <div class="card border-0 shadow mb-4 ">
+                            <div class="card-body">
+                                <div class="table-responsive py-4">
+                                    <table id="mytable" class="table table-flush  rounded">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <td class="fw-bold align-items-center">
-                                                    <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
-                                                    {{obj.descrizione|capfirst}}
-                                                </td>
-                                                <td class="fw-bold align-items-center">
-                                                    {{obj.email}}
-                                                </td>
-                                                <td class="fw-bold align-items-center">
-                                                    {{obj.creato}}
-                                                </td>
-                                                <td class="fw-bold align-items-center">
-                                                    {{obj.aggiornato}}
-                                                </td>
-                                        {% empty %}
-                                            <td colspan="4" class='bg-warning'>
-                                                Nessun dato da Mostrare
-                                            </td>
+                                                <th class="border-0 rounded-start">Azienda</th>
+                                                <th class="border-0 rounded">Email</th>
+                                                <th class="border-0 rounded">Creato</th>
+                                                <th class="border-0 rounded">Aggiornato</th>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                <!-- Item -->
+                                            {% for obj in object.id_stabilimento.all %}
+                                                <tr>
+                                                    <td class="fw-bold align-items-center">
+                                                        <img class="avatar rounded-circle" src="{{object.get_immagine}}" height=35px, width=35px>
+                                                        {{obj.descrizione|capfirst}}
+                                                    </td>
+                                                    <td class="fw-bold align-items-center">
+                                                        {{obj.email}}
+                                                    </td>
+                                                    <td class="fw-bold align-items-center">
+                                                        {{obj.creato}}
+                                                    </td>
+                                                    <td class="fw-bold align-items-center">
+                                                        {{obj.aggiornato}}
+                                                    </td>
+                                            {% empty %}
+                                                <td colspan="4" class='bg-warning'>
+                                                    Nessun dato da Mostrare
+                                                </td>
+                                                </tr>
 
                                 <!-- End of Item -->
-                                        {%  endfor %}
-                                    </tbody>
-                                </table>
+                                            {%  endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
         <!-- Tasti Modifica Esci-->
-            <div class="row">
-                <div class="col-sm py-4">
-                    <a href="{% url 'assistenza:aziende_update' object.pk %}" class="btn btn-warning">Modifica</a>
-                    <a href="{% url 'assistenza:aziende_list'%}" class="btn btn-primary">Esci</a>
+                <div class="row">
+                    <div class="col-sm py-4">
+                        <a href="{% url 'assistenza:aziende_update' object.pk %}" class="btn btn-warning">Modifica</a>
+                        <a href="{% url 'assistenza:aziende_list'%}" class="btn btn-primary">Esci</a>
+                    </div>
                 </div>
-            </div>
         <!-- /fine tasti modifica esci -->       
-        </div>
+            </div>
 {% endblock %}
 
 <!-- Specific Page JS goes HERE  -->

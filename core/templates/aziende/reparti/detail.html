@@ -17,76 +17,76 @@
                         <div class="row d-block d-xl-flex align-items-center">
                             <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                 <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><span><img src="{{object.id_ute.id_stabilimento.immagine.url}}"></span></div>
-                            <div class="d-sm-none">
-                                <h2 class="h5">{{object}}</h2>
+                                <div class="d-sm-none">
+                                    <h2 class="h5">{{object}}</h2>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h6 class="mb-1">{{object}}</h6>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h6 class="mb-1">{{object}}</h6>
+                                </div>
+                                <small>{{object.id_stabilimento}}</small>
                             </div>
-                            <small>{{object.id_stabilimento}}</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <!-- / fine stabilimenti card -->
 
-    <div class="row py-4">
-        <div class="col-sm-12">
-            <div class="card border-0 shadow mb-4 ">
-                <div class="card-body">
-                    <div class="table-responsive py-4">
-                        <table id="mytable" class="table table-flush  rounded">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="border-0 rounded-start">Reparto</th>
-                                    <th class="border-0 rounded">Categorie</th>
-                                    <th class="border-0 rounded">Creato</th>
-                                    <th class="border-0 rounded">Aggiornato</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        <!-- Item -->
-                                {% for obj in object.categorie_set.all %}
+        <div class="row py-4">
+            <div class="col-sm-12">
+                <div class="card border-0 shadow mb-4 ">
+                    <div class="card-body">
+                        <div class="table-responsive py-4">
+                            <table id="mytable" class="table table-flush  rounded">
+                                <thead class="thead-light">
                                     <tr>
-                                        <td class="fw-bold align-items-center">
-                                            {{object.descrizione|capfirst}}
-                                        </td>
-                                        <td class="fw-bold align-items-center">
-                                            {{obj.descrizione|capfirst}}
-                                        </td>
-                                        <td class="fw-bold align-items-center">
-                                            {{obj.creato}}
-                                        </td>
-                                        <td class="fw-bold align-items-center">
-                                            {{obj.aggiornato}}
-                                        </td>
-                                {% empty %}
-                                    <td colspan="4" class='bg-warning'>
-                                        Nessun dato da Mostrare
-                                    </td>
+                                        <th class="border-0 rounded-start">Reparto</th>
+                                        <th class="border-0 rounded">Categorie</th>
+                                        <th class="border-0 rounded">Creato</th>
+                                        <th class="border-0 rounded">Aggiornato</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                        <!-- Item -->
+                                    {% for obj in object.categorie_set.all %}
+                                        <tr>
+                                            <td class="fw-bold align-items-center">
+                                                {{object.descrizione|capfirst}}
+                                            </td>
+                                            <td class="fw-bold align-items-center">
+                                                {{obj.descrizione|capfirst}}
+                                            </td>
+                                            <td class="fw-bold align-items-center">
+                                                {{obj.creato}}
+                                            </td>
+                                            <td class="fw-bold align-items-center">
+                                                {{obj.aggiornato}}
+                                            </td>
+                                    {% empty %}
+                                        <td colspan="4" class='bg-warning'>
+                                            Nessun dato da Mostrare
+                                        </td>
+                                        </tr>
 
                         <!-- End of Item -->
-                                {%  endfor %}
-                            </tbody>
-                        </table>
+                                    {%  endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Tasti Modifica Esci-->
-    <div class="row">
-        <div class="col-4">
-            <a href="{% url 'aziende:reparti_list'%}" class="btn btn-primary">Esci</a>
+        <div class="row">
+            <div class="col-4">
+                <a href="{% url 'aziende:reparti_list'%}" class="btn btn-primary">Esci</a>
+            </div>
         </div>
-    </div>
     <!-- /fine tasti modifica esci -->       
 
 {% endblock %}
