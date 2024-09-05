@@ -53,7 +53,7 @@ class Categorie(models.Model):
 class Mezzi(models.Model):
     interno = models.CharField(max_length=5, verbose_name='Interno del Mezzo',help_text='Inserire un Identificativo univoco, Es. CR1',unique=True)
     descrizione  = models.CharField(max_length=100,verbose_name='Descrizione',help_text='Descrizione del Mezzo')
-    matricola   = models.CharField(max_length=20, unique=True,verbose_name='Matricola Mezzo',help_text='Inserire numero matricola ( presente sul mezzo)')
+    matricola   = models.CharField(max_length=20, default='000000000',null= True, blank=True,verbose_name='Matricola Mezzo',help_text='Inserire numero matricola ( presente sul mezzo)')
     immagine =models.ImageField(upload_to=mezzi_directory_path ,default='mezzi/img/carrello.jpg', null=True, blank=True,help_text='Caricare un Immagine (opzionale)')
     immagine_thumbnail = ImageSpecField(source='immagine',
                                       processors=[ResizeToFill(40, 40)],
